@@ -1,0 +1,30 @@
+/* --- Form Elements --- */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+.form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.input-field {
+  width: 100%;
+  background: var(--bg-app);
+  border: 1px solid var(--border);
+  padding: 12px;
+  color: var(--text-main);
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent-bg);
+}

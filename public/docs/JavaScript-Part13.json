@@ -1,0 +1,236 @@
+{
+  "title": "JavaScript Full Course: Part 13",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Elzero Web School curriculum.",
+  "links": [
+    "https://youtu.be/gIGGhFlGgLI?si=h3SzxBzNgsnu5gqD"
+  ],
+  "sections": [
+    {
+      "title": "124. Loop Control: Break, Continue, and Label (التحكم في التكرار)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "للتحكم في مسار اللوب، الجافا سكريبت بتقدم 3 أدوات:\n*   **`break`**: بتعمل إيقاف فوري للوب وتخرج منه تماماً. بنستخدمها لما نكون بندور على حاجة وأول ما نلاقيها بنوقف البحث عشان نوفر موارد الجهاز.\n*   **`continue`**: بتعمل تخطي (`Skip`) للدورة الحالية بس وتكمل الدورة اللي بعدها. مثلاً لو بنلوب على مصفوفة فيها أرقام وحروف، نقدر نستخدم `continue` عشان نتجاهل أي رقم ونطبع الحروف بس. (ترتيب الكود مهم جداً هنا عشان متطبعش العنصر قبل ما تعمل تخطي).\n*   **`Label`**: دي عبارة عن اسم مميز (`Identifier`) بنديه للوب. بتفيدنا جداً في الـ `Nested loops`، لإن الـ `break` العادية بتوقف اللوب الداخلي بس. لكن بالـ `Label`، نقدر وإحنا جوه اللوب الداخلي نوقف اللوب الرئيسي الخارجي بالكامل."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`break` Statement:</strong> Terminates the current loop completely and transfers program control to the statement following the terminated loop.",
+            "<strong>`continue` Statement:</strong> Terminates execution of the statements in the current iteration of the current loop, and continues execution of the loop with the next iteration.",
+            "<strong>`Label` Statement:</strong> Provides a statement with an identifier that you can refer to using a `break` or `continue` statement, highly useful for controlling outer loops from within inner loops."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let products = [\"Keyboard\", \"Mouse\", 10, 20, \"Pen\", \"Monitor\", \"iPhone\"];\n\n// 1. Using continue to skip numbers\nfor (let i = 0; i < products.length; i++) {\n    if (typeof products[i] === \"number\") {\n        continue; // Skips 10 and 20\n    }\n    console.log(products[i]);\n}\n\n// 2. Using break to stop entirely at \"Pen\"\nfor (let i = 0; i < products.length; i++) {\n    if (products[i] === \"Pen\") {\n        break; // Stops the loop entirely\n    }\n    console.log(products[i]);\n}\n\n// 3. Using Labels with Nested Loops\nlet colors = [\"Red\", \"Green\", \"Black\"];\n\nmainLoop: // This is the Label\nfor (let i = 0; i < products.length; i++) {\n    console.log(products[i]);\n    \n    nestedLoop:\n    for (let j = 0; j < colors.length; j++) {\n        console.log(`- ${colors[j]}`);\n        if (colors[j] === \"Green\") {\n            // This stops the OUTER loop immediately\n            break mainLoop; \n        }\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "125. While and Do...While Loops (حلقات `While` و `Do...While`)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "*   **`while` `Loop`**: حلقة الـ `while` بتشبه الـ `for` بس طريقة كتابتها مختلفة. بنعرف متغير البداية بره اللوب خالص، وبنحط جوه الأقواس الشرط بس. وأهم حاجة مننساش نحط سطر التحديث (`i++`) جوه بلوك الكود، وإلا الشرط هيفضل متحقق للأبد والمتصفح هيهنج (`Infinite Loop`).\n*   **`do...while` `Loop`**: الدالة دي بتتميز بحاجة واحدة؛ إنها بتنفذ الكود \"مرة واحدة على الأقل\" حتى لو الشرط كان `false` من أول لحظة. بتعمل الفعل الأول (`do`)، وبعدين بتنزل تحت تختبر الشرط (`while`). لو `true` بتكمل، لو `false` بتقف بعد ما تكون طبعت أول نتيجة بالفعل."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`while` Loop:</strong> A control flow statement that allows code to be executed repeatedly based on a given boolean condition. Initialization happens outside, and the increment happens inside the block.",
+            "<strong>`do...while` Loop:</strong> A loop that executes its block of code at least once before evaluating its condition at the bottom of the loop."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let products = [\"Keyboard\", \"Mouse\", \"Pen\", \"Monitor\"];\n\n// 1. while Loop\nlet i = 0; // Initialization outside\nwhile (i < products.length) { // Condition\n    console.log(products[i]);\n    i++; // Crucial: Increment inside to prevent infinite loop\n}\n\n// 2. do...while Loop\nlet j = 0;\ndo {\n    // This will execute once even if j is somehow initialized to 10\n    console.log(j);\n    j++;\n} while (j < 0); // Condition is false, but '0' was already printed"
+        }
+      ]
+    },
+    {
+      "title": "126. Functions - Introduction (مقدمة عن الدوال `Functions`)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الدالة (`Function`) هي واحدة من أهم مفاهيم البرمجة. هي عبارة عن بلوك من الكود بيقوم بوظيفة محددة، بنكتبه مرة واحدة ونقدر نستدعيه وننفذه (`Call`/`Invoke`) في أي وقت وفي أي مكان. المفهوم ده بيطبق مبدأ شهير اسمه `DRY` (`Don`'`t Repeat Yourself`) عشان ميخليناش نكرر نفس الكود بايدينا. في دوال مبنية جوه اللغة (`Built-in`) زي `console.log`، وفي دوال إحنا بننشئها بنفسنا (`User-defined`). الدالة ممكن تاخد (`Parameters`) ودي بتمثل \"معامل التجربة\" أو المتغير اللي هنطبق عليه الكود. ولما نيجي نستدعي الدالة، بنمرر القيمة الفعلية للمتغير ده واللي بنسميها (`Arguments`)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Function`:</strong> A reusable block of code designed to perform a particular task. Executed when \"called\" or \"invoked\".",
+            "<strong>`DRY Principle`:</strong> \"Don't Repeat Yourself\". A software development principle aimed at reducing repetition of software patterns by using abstractions like functions.",
+            "<strong>`Parameters vs Arguments`:</strong> Parameters are the variables listed as part of the function definition. Arguments are the actual values passed to the function when it is invoked."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Function Definition with parameters (userName, age)\nfunction sayHello(userName, age) {\n    if (age < 20) {\n        console.log(`App is not suitable for you.`);\n    } else {\n        console.log(`Hello ${userName}, your age is ${age}.`);\n    }\n}\n\n// Function Invocation with arguments\nsayHello(\"Osama\", 38); // Outputs: Hello Osama, your age is 38.\nsayHello(\"Ahmed\", 18); // Outputs: App is not suitable for you."
+        }
+      ]
+    },
+    {
+      "title": "127. Functions - Return (إرجاع القيم `Return`)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في الأمثلة اللي فاتت الدالة كانت بتطبع النتيجة في الكونسول مباشرة، لكن احترافياً الدالة المفروض تعمل العملية الحسابية وترجع (`Return`) النتيجة بس، عشان نقدر نخزن النتيجة دي في متغير ونستعملها بعدين زي ما إحنا عايزين. كلمة `return` بتعمل إيقاف فوري للدالة (`Interrupt`/`Stop Execution`)؛ يعني أي كود هتكتبه تحت الـ `return` جوه الدالة يعتبر كود ميت ومستحيل المتصفح يوصله (`Unreachable Code`). كمان في نقطة خطيرة جداً اسمها (`ASI` - `Automatic Semicolon Insertion`): لو نزلت سطر بعد كلمة `return` بدون ما تفتح أقواس، الجافا سكريبت هتحط أوتوماتيك فاصلة منقوطة وتنهي الدالة، وهترجعلك `undefined`. ممكن نستخدم `return` كأداة قوية جداً جوه الـ `Loops` في الدوال عشان نوقف الدالة واللوب بالكامل عند شرط معين."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`return` Statement:</strong> Ends function execution and specifies a value to be returned to the function caller.",
+            "<strong>`Unreachable Code`:</strong> Code situated after a `return` statement in a function, which will never be executed by the interpreter.",
+            "<strong>`ASI (Automatic Semicolon Insertion)`:</strong> A JavaScript feature where the compiler automatically inserts semicolons at line breaks if they are missing, which can break `return` statements if the value is placed on a new line without parentheses."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "function calc(num1, num2) {\n    // Returns the result instead of logging it\n    return num1 + num2;\n    \n    // This code is unreachable and will never execute\n    console.log(\"This will not run\"); \n}\n\n// Storing the returned value in a variable\nlet result = calc(10, 20);\nconsole.log(result + 100); // 130\n\n\nfunction generateNumbers(start, end) {\n    for (let i = start; i <= end; i++) {\n        if (i === 15) {\n            // Halts the entire function and loop execution immediately\n            return `Interrupting at ${i}`; \n        }\n        console.log(i);\n    }\n}\nconsole.log(generateNumbers(10, 20)); \n// Logs 10, 11, 12, 13, 14, then returns \"Interrupting at 15\""
+        }
+      ]
+    },
+    {
+      "title": "128. Default Function Parameters (القيم الافتراضية للمعاملات)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لو عندنا دالة بتطلب تمرير معامل (زي السن)، والمستخدم استدعى الدالة ونسى يكتب السن، الجافا سكريبت هترجعله `undefined`. عشان نعالج ده، بنحط \"قيم افتراضية\" (`Default Values`). الطريقة القديمة كانت بتعتمد على إننا نختبر جوه الدالة لو المعامل قيمته `undefined`، أو نستخدم معامل `||` عشان لو مفيش قيمة نحط قيمة بديلة. لكن تحديثات `ES6` وفرت طريقة أنضف وأسهل بكتير؛ بنقدر نكتب القيمة الافتراضية مباشرة جوه أقواس الدالة جنب المعامل بعلامة `=`, بحيث لو المستخدم مدخلش قيمة، الدالة تاخد القيمة الافتراضية دي وتشتغل بيها."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Default Parameters`:</strong> An ES6 feature that allows named parameters to be initialized with default values if no value or `undefined` is passed to the function."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// The modern ES6 way to set default parameters\nfunction showInfo(userName = \"Unknown\", age = \"Unknown\") {\n    return `Hello ${userName}, your age is ${age}`;\n}\n\nconsole.log(showInfo(\"Osama\", 38)); // Hello Osama, your age is 38\nconsole.log(showInfo(\"Ahmed\"));     // Hello Ahmed, your age is Unknown\nconsole.log(showInfo());            // Hello Unknown, your age is Unknown\n\n// The Old Way (Prior to ES6)\nfunction showInfoOld(userName, age) {\n    // Using logical OR as a fallback\n    age = age || \"Unknown\"; \n    return `Hello ${userName}, your age is ${age}`;\n}"
+        }
+      ]
+    },
+    {
+      "title": "129. Rest Parameters (معاملات التجميع `Rest Parameters`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "أحياناً بنعمل دالة بتجمع أرقام مع بعضها، بس المشكلة إننا مش عارفين المستخدم هيمرر كام رقم بالظبط (ممكن 2، وممكن 10). عشان نخلي الدالة تقبل أي عدد غير محدد من المعاملات (`Arguments`)، بنستخدم تقنية الـ `Rest Parameter` عن طريق إضافة تلات نقط `...` قبل اسم المعامل جوه الأقواس. الحركة دي بتاخد كل الأرقام اللي المستخدم كتبها وتجمعها كلها وتحطها جوه مصفوفة (`Array`) كاملة. وبكده نقدر نستخدم الـ `Loop` جوه الدالة عشان نلف على الأرقام دي ونجمعها مع بعض. فيه شرطين مهمين جداً لاستخدام الـ `Rest Parameter`: مينفعش تستخدم أكتر من واحد في نفس الدالة، ولازم دايماً يكون هو \"آخر\" معامل موجود بين الأقواس."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Rest Parameters (`...`)`:</strong> A syntax that allows a function to accept an indefinite number of arguments as an array, providing a way to represent variadic functions in JavaScript.",
+            "<strong>`Variadic Function`:</strong> A function of indefinite arity, meaning one which accepts a variable number of arguments."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// The ...numbers parameter collects all passed arguments into an array\nfunction calcSum(...numbers) {\n    let result = 0;\n    \n    // Iterating through the generated array\n    for (let i = 0; i < numbers.length; i++) {\n        result += numbers[i];\n    }\n    \n    return `Final Result: ${result}`;\n}\n\nconsole.log(calcSum(10, 20, 30)); // Final Result: 60\nconsole.log(calcSum(10, 20, 10, 30, 50)); // Final Result: 120\n\n// Rest parameter MUST be the last parameter\nfunction showData(userName, ...skills) {\n    console.log(`User: ${userName}`);\n    console.log(`Skills: ${skills.join(\" | \")}`);\n}\nshowData(\"Osama\", \"HTML\", \"CSS\", \"JS\", \"React\");"
+        }
+      ]
+    },
+    {
+      "title": "143. Creating Objects with `new Object()` (إنشاء الكائنات بطريقة `new`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب أسامة وضح إن بالإضافة للطريقة المعتادة لإنشاء الكائنات باستخدام الأقواس المعقوفة `{}`، عندنا طريقة تانية وهي استخدام الكلمة المفتاحية `new` مع `Object()`. عن طريق الطريقة دي، بننشئ كائن جديد وفاضي تماماً. بعد كده بنقدر نضيف الخواص (`Properties`) أو الدوال (`Methods`) للكائن ده بشكل منفصل باستخدام طريقة النقطة (`Dot Notation`) أو الأقواس (`Bracket Notation`). النتيجة النهائية بتكون مطابقة تماماً للكائن اللي بيتم إنشاؤه بالطريقة العادية، ونقدر نعدل على بياناته بكل سهولة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`new Object()`:</strong> A constructor method used to explicitly create a new, empty object wrapper. Properties and methods can be assigned to it dynamically after initialization."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Method 1: Literal Notation (The usual way)\nlet userLiteral = { age: 38 };\n\n// Method 2: new Object() Constructor\nlet user = new Object();\n\n// Adding properties and methods after creation\nuser.age = 38;\nuser[\"country\"] = \"Egypt\"; // Using Bracket Notation\n\nuser.sayHello = function() {\n    return \"Hello\";\n};\n\nconsole.log(user.age); // 38\nconsole.log(user.sayHello()); // \"Hello\""
+        }
+      ]
+    },
+    {
+      "title": "144. The `this` Keyword (الكلمة المفتاحية `this`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "كلمة `this` من أهم الكلمات في الجافا سكريبت، وقيمتها بتتغير بناءً على السياق (`Context`) اللي بتُستخدم فيه. لو استخدمتها في النطاق العام (`Global Scope`)، هتشاور على كائن النافذة الأساسي `Window` الخاص بالمتصفح. لو استخدمتها جوه دالة تابعة لحدث معين (زي الضغط على زرار)، كلمة `this` هتعود على العنصر اللي بيملك الحدث ده (`Owner`)، يعني هتشاور على الزرار نفسه. الميزة الكبرى لـ `this` بتظهر جوه الكائنات؛ لما بنستخدمها جوه دالة (`Method`) تابعة لكائن، بتعود أوتوماتيكياً على الكائن ده نفسه، وده بيسمح لنا نوصل لخواصه التانية جوه الدالة من غير ما نحتاج نكتب اسم الكائن صراحةً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`this` Keyword:</strong> A special keyword in JavaScript that refers to the object it belongs to. Its value depends entirely on the context in which it is invoked (e.g., global object, element owner, or parent object).",
+            "<strong>`Global Context`:</strong> When used alone or inside a standard global function, `this` refers to the global object (the `window` in a browser)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Setup for Event Context -->\n<button id=\"myBtn\">Click Me</button>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// 1. Global Context\nconsole.log(this === window); // true\n\n// 2. Event Context (this refers to the element that received the event)\ndocument.getElementById(\"myBtn\").onclick = function() {\n    console.log(this.id); // \"myBtn\"\n};\n\n// 3. Object Method Context\nlet user = {\n    age: 38,\n    ageInDays: function() {\n        // 'this' refers to the 'user' object itself\n        return this.age * 365; \n    }\n};\n\nconsole.log(user.ageInDays()); // 13870"
+        }
+      ]
+    },
+    {
+      "title": "145. `Object.create()` Method (إنشاء كائن من نموذج `Object.create`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دالة `Object.create` بتسمح لنا ننشئ كائن جديد باستخدام كائن تاني موجود بالفعل عشان يشتغل كنموذج مبدئي (`Prototype`). الكائن الجديد بيكون فاضي في الظاهر، لكنه متصل بالنموذج في الخلفية وبيقدر يقرأ ويستخدم كل خواصه ودواله. لو غيرنا حاجة في النموذج الأصلي، الكائن الجديد هيتأثر بالتغيير ده فوراً. لكن لو ضفنا أو عدلنا خاصية في الكائن الجديد بنفس اسم خاصية موجودة في النموذج، الكائن الجديد هيستخدم قيمته هو ويتجاهل قيمة النموذج (العملية دي بتسمى `Shadowing`). هنا بتظهر عبقرية استخدام كلمة `this`؛ لإنها بتضمن إن الدوال بتتعامل مع بيانات الكائن الفعلي اللي بنستدعيها منه، مش بيانات النموذج الأصلي."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Object.create(proto)`:</strong> A method that creates a new object, using an existing object as the prototype of the newly created object.",
+            "<strong>`Prototype Chain`:</strong> The mechanism by which objects inherit features from one another. If a property is not found on the object itself, JS looks up the prototype chain."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// The Prototype Object\nlet user = {\n    age: 40,\n    doubleAge: function() {\n        // Using 'this' ensures it calculates the age of the caller object\n        return this.age * 2; \n    }\n};\n\n// Creating a new object using 'user' as the prototype\nlet copyObj = Object.create(user);\n\n// Inherits the value from the prototype\nconsole.log(copyObj.age); // 40\n\n// Overriding the property in the new object (Shadowing)\ncopyObj.age = 50; \n\nconsole.log(copyObj.age); // 50 (Uses its own property)\nconsole.log(copyObj.doubleAge()); // 100 (The method uses the new object's 'this')\nconsole.log(user.age); // 40 (The original prototype remains unaffected)"
+        }
+      ]
+    },
+    {
+      "title": "146. `Object.assign()` Method (دمج الكائنات `Object.assign`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دالة `Object.assign` بتُستخدم لنسخ الخواص من كائن مصدر أو أكتر (`Source Objects`) وتجميعها في كائن هدف (`Target Object`). لو في خاصية متكررة بنفس الاسم في كذا كائن مصدر، الدالة هتاخد قيمة آخر خاصية تقابلها وتعمل إحلال (`Overwrite`) للقيم القديمة. الميزة القوية إننا نقدر نمرر كائن فاضي `{}` كـ `Target` مبدئي، ونبدأ ندمج فيه الكائنات التانية ونكتب خواص جديدة جواه مباشرة وإحنا بننشئه، عشان نطلع في النهاية بكائن جديد تماماً ومستقل بيجمع بين كل البيانات."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Object.assign(target, ...sources)`:</strong> A method used to copy the values of all enumerable own properties from one or more source objects to a target object. It returns the modified target object."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let obj1 = { prop1: 1, prop2: 2 };\nlet obj2 = { prop2: 200, prop3: 3 }; // Notice prop2 is repeated\n\n// Creating a new combined object\n// Target is {}, followed by source objects, and directly inline properties\nlet finalObj = Object.assign({}, obj1, obj2, { prop4: 4 });\n\nconsole.log(finalObj);\n/* Output: \n{\n    prop1: 1,\n    prop2: 200, // obj2 overwrote obj1's prop2 value\n    prop3: 3,\n    prop4: 4\n}\n*/"
+        }
+      ]
+    }
+  ]
+}

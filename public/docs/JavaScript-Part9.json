@@ -1,0 +1,244 @@
+{
+  "title": "JavaScript Full Course: Part 9",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Elzero Web School curriculum.",
+  "links": [
+    "https://youtu.be/gIGGhFlGgLI?si=h3SzxBzNgsnu5gqD"
+  ],
+  "sections": [
+    {
+      "title": "84. Elzero Web School Introduction & Browser Console (مقدمة وأدوات المطورين)",
+      "icon": "fa-solid fa-terminal",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب أسامة الزيرو بدأ الكورس بتوضيح إن الجافا سكريبت لغة بتشتغل على ناحية العميل (`Client-side`) جوه المتصفح، وكمان مؤخراً بقت بتشتغل على ناحية السيرفر (`Server-side`). لغة الجافا سكريبت هي المسؤولة عن إضافة التفاعلية للصفحات (`Interactivity`) زي التحقق من البيانات لحظياً، أو تغيير محتوى الصفحة، أو التلاعب بالـ `DOM`. عشان نكتب ونختبر الكود، المتصفح بيوفر لنا أدوات المطورين (`Chrome Developer Tools`) واللي نقدر نفتحها عن طريق (`F12` أو `Ctrl`+`Shift`+`I`). من أهم التابات فيها هي الـ (`Console`). الكونسول ده مش مجرد شاشة بنطبع فيها رسايل؛ ده بيئة تفاعلية (`Environment`) بنقدر نكتب فيها كود جافا سكريبت ويتم تنفيذه فوراً. كمان الكونسول هو المكان اللي بيتم فيه تسجيل الأخطاء (`Errors`) والتحذيرات (`Warnings`) والمعلومات (`Info`) عشان يساعد المطور يعرف البرنامج بتاعه ماشي صح ولا لأ. المدرب وضح إننا بنستخدم كائن أساسي في المتصفح اسمه `window` جواه دوال جاهزة زي `window.close()` أو `window.alert()` نقدر نستدعيها من الكونسول عشان نتأكد إننا شغالين صح."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Client-side`:</strong> Scripts that run on the user's web browser, dictating how the page behaves and responds to the user.",
+            "<strong>`Server-side`:</strong> Scripts that run on the web server to process requests, interact with databases, and send data to the client.",
+            "<strong>`Chrome Developer Tools (DevTools)`:</strong> A set of web developer tools built directly into the Google Chrome browser.",
+            "<strong>`Console`:</strong> A tool within DevTools used by developers to log messages, interact with the JavaScript running on the page, and debug errors."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Commands that can be executed directly inside the Chrome Console\n\n// Testing basic math output\n100 * 200 // Returns 20000 instantly\n\n// Accessing the window object properties/methods\nwindow.alert(\"Test Alert from Console\");\nwindow.close(); // Closes the current browser tab"
+        }
+      ]
+    },
+    {
+      "title": "85. Where to Put JavaScript Code (المكان السليم لوضع الكود)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب ناقش إشكالية مكان وضع كود الجافا سكريبت في صفحة الـ `HTML`. المتصفح بيقرأ الصفحة سطر بسطر (`Line by Line`). لو حطينا كود الجافا سكريبت في الـ `<head>` وطلبنا منه يغير لون عنصر معين في الصفحة، المتصفح هيطلع خطأ (`Error`) لإن الكود اشتغل قبل ما العنصر نفسه يتخلق ويظهر في الصفحة، وبالتالي الكود هيشوف العنصر على إنه `null`. عشان نحل ده، أفضل ممارسة (`Best Practice`) هي إننا نحط وسم الـ `<script>` في نهاية الصفحة تماماً، قبل قفلة وسم الـ `<body>` مباشرة. بالطريقة دي، بنضمن إن كل عناصر الـ `HTML` حملت تماماً الأول، والكود هيقدر يوصلها من غير مشاكل. لو كنا مضطرين جداً نحط الكود في الـ `<head>`، لازم نستخدم حدث (`Event`) اسمه `window.onload`، وده وظيفته إنه يوقف تنفيذ كود الجافا سكريبت ويقوله \"استنى لحد ما الصفحة تحمل بالكامل\"، وبعدين نفذ الكود."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`null`:</strong> A special value representing the intentional absence of any object value. It is returned when JS tries to target a DOM element that hasn't been rendered yet.",
+            "<strong>`window.onload`:</strong> An event handler that fires only after the entire page (including all dependent resources like stylesheets and images) has finished loading.",
+            "<strong>`Best Practice (Script Placement)`:</strong> Placing the `<script>` tag at the very end of the HTML body to prevent render-blocking and ensure DOM elements are fully loaded."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Structure -->\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Page Title</title>\n    <!-- Method 1: If placed in the head, you MUST wait for the window to load -->\n    <script>\n        window.onload = function() {\n            // This safely runs ONLY after the <h1> is created below\n            document.querySelector(\"h1\").style.color = \"blue\";\n        }\n    </script>\n</head>\n<body>\n    <h1>Page Title</h1>\n\n    <!-- Method 2: BEST PRACTICE - Place script at the end of the body -->\n    <script>\n        // No window.onload needed here, the element already exists\n        document.querySelector(\"h1\").style.color = \"blue\";\n    </script>\n</body>\n</html>"
+        }
+      ]
+    },
+    {
+      "title": "86. Comments (التعليقات في الكود)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "التعليقات (`Comments`) بتعتبر سطور جوه الكود المتصفح بيتجاهلها تماماً ومش بينفذها كأوامر برمجية. بنستخدم التعليقات لعدة أسباب: أولاً، توضيح الكود وشرح فكرته عشان لو مطور تاني بيقرأ الكود يفهمه بسرعة، أو حتى عشانك إنت لو رجعت للكود بعد شهور. ثانياً، بنستخدمها عشان نوقف أجزاء معينة من الكود مؤقتاً (`Execution Prevention`) وقت التجارب بدل ما نمسحها ونرجع نكتبها تاني. عندنا نوعين من التعليقات: تعليق السطر الواحد (`Single-line`) وبيتعمل بعلامتين `//`، وتعليق متعدد السطور (`Multi-line`) وبيتعمل بـ `/* ... */` عشان نكتب فيه شرح مفصل على كذا سطر. المدرب وضح كمان إن من أفضل الممارسات (`Best Practices`) إنك متكتبش تعليق على كل سطر كود بديهي وواضح، لكن استخدمها بس لما يكون الكود معقد أو فيه أكتر من فكرة محتاجة توضيح."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Comments`:</strong> Non-executable lines of code used to explain logic or temporarily disable code execution.",
+            "<strong>`Single-line Comment (`//`)`:</strong> A comment that spans only a single line.",
+            "<strong>`Multi-line Comment (`/* */`)`:</strong> A comment block that can span multiple lines, useful for detailed explanations."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// This is a single-line comment explaining the next variable\nlet userName = \"Osama\";\n\n/* \n   This is a multi-line comment.\n   It can span across several lines.\n   Useful for detailing complex functions or configurations.\n*/\n\n// Preventing code execution temporarily:\n// console.log(\"This will not print to the console\");"
+        }
+      ]
+    },
+    {
+      "title": "87. Output Methods (طرق إظهار وطباعة البيانات)",
+      "icon": "fa-solid fa-terminal",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب شرح تلات طرق أساسية نقدر نطلع بيهم نتايج أو بيانات باستخدام الجافا سكريبت. الطريقة الأولى هي `window.alert()` ودي بتطلع نافذة منبثقة (`Pop-up`) للمستخدم، بس المدرب نبه إن استخدامها في المواقع الحديثة مبقاش مفضل لإنها بتعطل تحميل باقي الصفحة ومزعجة للمستخدم. الطريقة التانية هي `document.write()` ودي بتكتب النص أو عنصر الـ `HTML` جوه الصفحة مباشرة، وبرضه دي طريقة قديمة ومش بتستخدم حالياً في التطبيقات الحقيقية لإننا بنستبدلها بإنشاء العناصر ديناميكياً. الطريقة التالتة والأهم هي `console.log()`، ودي بتطبع الرسايل في (الكونسول) الخاص بأدوات المطورين (`DevTools`)، ودي تعتبر الصديق الصدوق لأي مطور عشان بيختبر بيها الكود وبيكتشف الأخطاء من غير ما المستخدم العادي يشوفها."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`window.alert()`:</strong> A method that displays an alert box with a specified message and an OK button. It pauses code execution until dismissed.",
+            "<strong>`document.write()`:</strong> A method that writes a string of text or HTML to a document stream.",
+            "<strong>`console.log()`:</strong> A method used to log messages or variables to the web console, primarily for debugging purposes."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Method 1: Alert (Blocking and annoying, rarely used in production)\nwindow.alert(\"Hello from JS Alert!\");\n\n// Method 2: Document Write (Writes directly to the HTML page)\ndocument.write(\"<h1>Hello Page</h1>\");\n\n// Method 3: Console Log (Best practice for debugging)\nconsole.log(\"Hello Console!\");"
+        }
+      ]
+    },
+    {
+      "title": "88. Console Methods and Web API (الكونسول وواجهة `Web API`)",
+      "icon": "fa-solid fa-terminal",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الكونسول مش مجرد مكان لطباعة الرسايل العادية بـ `log`، ده بيحتوي على خواص (`Methods`) متقدمة جداً للتعامل مع البيانات. المدرب شرح `console.error` اللي بتطبع رسالة خطأ باللون الأحمر وبتوضحلك السطر اللي حصلت فيه المشكلة. وكمان `console.table` اللي بتاخد مجموعة بيانات (زي مصفوفة فيها أسماء) وتعرضها في شكل جدول منظم جداً بيسهل قراءتها. المدرب كمان وضح ميزة خرافية وهي إنك تقدر تنسق رسايل الكونسول باستخدام الـ `CSS` عن طريق علامة `%c` (`Directive`) وتلون الكلمات. في نهاية الدرس، المدرب وضح معلومة متقدمة جداً؛ وهي إن الكونسول والـ (`Window`) مش جزء من لغة الجافا سكريبت نفسها، إنما هما جزء من حاجة اسمها (`Web API`) دي واجهات برمجية المتصفح بيقدمها عشان الجافا سكريبت تقدر تتفاعل معاها وتستخدمها."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`console.error()`:</strong> Outputs an error message to the Web Console, typically styled with a red icon and text.",
+            "<strong>`console.table()`:</strong> Displays tabular data as a table in the console.",
+            "<strong>`Web API`:</strong> Application Programming Interfaces built into the web browser (not core JavaScript) that JS can access to perform tasks like manipulating the DOM or logging to the console."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Basic logging and Errors\nconsole.log(\"Standard log message\");\nconsole.error(\"This represents a customized error message\");\n\n// Tabular data\nconst friends = [\"Osama\", \"Ahmed\", \"Sayed\"];\nconsole.table(friends); // Displays the array nicely in a table format\n\n// Styling the console output using the %c directive\nconsole.log(\n    \"Hello from %cJS %cFile\", \n    \"color: red; font-size: 20px;\", // Styles the first %c (JS)\n    \"color: blue; font-weight: bold;\" // Styles the second %c (File)\n);"
+        }
+      ]
+    },
+    {
+      "title": "89. ECMAScript (ES6) Overview (معايير `ECMAScript`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عشان نفهم تطور الجافا سكريبت، المدرب شبه الموضوع بشركات بتشغل الموظفين على مزاجها، لحد ما جه \"مكتب العمل\" حط معايير (`Standards`) وقوانين صارمة تمشي عليها كل الشركات. \"مكتب العمل\" ده في لغتنا هو منظمة (`ECMA`)، ودي منظمة عالمية بتحط المعايير للغات البرمجة عشان المطورين يمشوا عليها. في سنة 2015 صدر تحديث ضخم جداً اسمه (`ECMAScript` 6) أو (`ES6`)، التحديث ده جاب مميزات وطرق كتابة جديدة خلت الجافا سكريبت قوية جداً وشبيهة باللغات المتقدمة زي البايثون. المدرب طمن المطورين إن حتى لو المتصفحات القديمة مش بتدعم المعايير الحديثة دي، في أدوات (`Transpilers`) زي `Babel` بتترجم الكود الحديث المكتوب بـ `ES6` لـ (`Legacy Code`) أو كود قديم يقدر أي متصفح يقرأه، فبالتالي نكتب بالحديث وإحنا مطمنين."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`ECMAScript (ES)`:</strong> A standardized scripting language specification that JavaScript implements.",
+            "<strong>`ES6 (ECMAScript 2015)`:</strong> A major update to JavaScript that introduced significant new syntax and features.",
+            "<strong>`Transpiler`:</strong> A tool that reads source code written in one programming language (or version) and produces equivalent code in another language (e.g., converting ES6 back to ES5 for old browser compatibility)."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "90. Data Types (أنواع البيانات)",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لغة الجافا سكريبت بتتعامل مع أنواع مختلفة من البيانات، وكل نوع له استخدام. لمعرفة نوع أي بيانات بنستخدم أداة (`Operator`) اسمها `typeof`. المدرب شرح الأنواع من خلال مثال عملي لبيانات مدرسة: اسم الطالب يعتبر نص (`String`) ولازم يتكتب بين علامات تنصيص. عمر الطالب أو مرتب المدرس يعتبر رقم (`Number`) سواء كان صحيح أو فيه كسور. هل الطالب حضر النهارده؟ ده بيعبر عنه بـ (`Boolean`) اللي هو إما `true` (نعم) أو `false` (لا). لو عندنا قائمة بأرقام أو أسماء مجموعة طلاب، بنحطها في مصفوفة (`Array`)، ولو عايزين نوصف طالب ببياناته المتعددة (اسمه، سنه، بلده) بنستخدم الكائن (`Object`). عندنا كمان أنواع بتعبر عن الفراغ: `undefined` ودي بتظهر لو عندنا متغير بس لسه مدينالوش أي قيمة، و `null` ودي قيمة إحنا بنكتبها بنفسنا عشان نعبر إن الحقل ده \"فارغ تماماً\". من غرائب الجافا سكريبت إن الـ `typeof null` بترجع `object` ودي مشكلة قديمة معروفة في اللغة، وكمان المصفوفات (`Arrays`) الجافا سكريبت بتعتبرها في الأصل `object`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`typeof` Operator:</strong> Used to determine the data type of a given value or variable.",
+            "<strong>`String`:</strong> Text data enclosed in quotes.",
+            "<strong>`Number`:</strong> Numeric data (both integers and floating-point numbers).",
+            "<strong>`Array`:</strong> An ordered list of values (returns \"object\" when using `typeof`).",
+            "<strong>`Object`:</strong> A collection of key-value pairs representing entity properties.",
+            "<strong>`Boolean`:</strong> A logical entity representing `true` or `false`.",
+            "<strong>`Undefined`:</strong> A variable that has been declared but has not yet been assigned a value.",
+            "<strong>`Null`:</strong> The intentional absence of any object value (returns \"object\" via `typeof`)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "console.log(typeof \"Osama\"); // \"string\"\nconsole.log(typeof 5000); // \"number\"\nconsole.log(typeof 99.5); // \"number\"\nconsole.log(typeof); // \"object\" (Array)\nconsole.log(typeof { name: \"Osama\", age: 17 }); // \"object\"\nconsole.log(typeof true); // \"boolean\"\nconsole.log(typeof false); // \"boolean\"\nconsole.log(typeof undefined); // \"undefined\"\nconsole.log(typeof null); // \"object\" (A known JS quirk)"
+        }
+      ]
+    },
+    {
+      "title": "91. Variables (المتغيرات)",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المتغيرات (`Variables`) هي عبارة عن \"حاويات\" بنخزن جواها البيانات عشان نقدر نستدعيها أو نعدلها في أي مكان في النظام. المدرب شبهها بتكليف الموظفين بمهمة؛ بندي للمتغير اسم، وبنستخدم علامة `=` (`Assignment Operator`) عشان نعين له القيمة. العملية دي بتتكون من مرحلتين: الإعلان عن المتغير (`Declaration`) باستخدام الكلمة المفتاحية زي `var` أو `let`، وتعيين القيمة (`Initialization`). من أهم مميزات المتغيرات إننا لو استخدمنا المتغير ده في 50 مكان في الموقع، وحبينا نغير القيمة، هنغيرها بس في سطر الإعلان الرئيسي، والـ 50 مكان هيتحدثوا أوتوماتيكياً. الجافا سكريبت تعتبر لغة (`Loosely Typed`)، يعني وإنت بتنشئ المتغير مش محتاج تحدد نوعه (مش لازم تقوله إن ده رقم أو ده نص) المتصفح بيفهم لوحده بناءً على القيمة اللي إنت بتديها له."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Variable`:</strong> A named container used for storing data values.",
+            "<strong>`Declaration`:</strong> The act of announcing a variable to the system using a keyword (`var`, `let`, `const`).",
+            "<strong>`Assignment Operator (`=`)`:</strong> Used to assign a specific value to a declared variable.",
+            "<strong>`Loosely Typed Language`:</strong> A language where variables are not bound to a specific data type and can change types dynamically."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Variable Declaration and Assignment\nvar user = \"Osama\";\nvar age = 38;\n\n// Reassigning a variable (Updates everywhere it is used)\nuser = \"Sayed\";\n\n// Declaring multiple variables in one line\nvar car = \"BMW\", color = \"Black\", price = 50000;\n\nconsole.log(user); // \"Sayed\"\n\n// Accessing a dynamically generated global variable from an HTML ID\n// (If HTML has: <div id=\"hello\">Hello</div>)\nhello.innerHTML = \"Option\";"
+        }
+      ]
+    },
+    {
+      "title": "92. Identifiers & Naming Conventions (قواعد تسمية المتغيرات)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "اسم المتغير بنسميه (`Identifier`)، واللغة بتفرض علينا شوية قوانين صارمة عشان نسميه. أولاً، ممنوع تماماً استخدام المسافات (`Spaces`) جوه اسم المتغير. ثانياً، مينفعش الاسم يبدأ برقم، لكن ممكن الرقم يكون في نص أو آخر الكلمة. ثالثاً، ممنوع استخدام أي رموز خاصة (`Special Characters`) زي `@` أو `#`، باستثناء رمزين بس هما المسموح بيهم: علامة الدولار `$` والشرطة السفلية `_` (`Underscore`)، ودول نقدر نبدأ بيهم أو نحطهم في أي مكان. رابعاً، لغة الجافا سكريبت حساسة لحالة الأحرف (`Case-Sensitive`)، يعني متغير اسمه `ahmed` يختلف تماماً عن متغير اسمه `Ahmed`. خامساً، ممنوع نستخدم \"الكلمات المحجوزة\" (`Reserved Keywords`) اللي تخص اللغة نفسها زي كلمات `var` أو `if` أو `function`. أما بالنسبة لشكل الكتابة (`Naming Convention`) الأفضل والأكثر شيوعاً فهو طريقة الـ (`Camel Case`)، وهي إننا نكتب أول كلمة بحروف صغيرة، وأول حرف من كل كلمة تيجي بعدها يكون كابيتال (زي `userName` أو `profilePicture`)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Identifier`:</strong> The name given to variables, functions, or objects in code.",
+            "<strong>`Case-Sensitive`:</strong> The language distinguishes between uppercase and lowercase letters (e.g., `user` is different from `User`).",
+            "<strong>`Reserved Keywords`:</strong> Words inherently used by the programming language that cannot be used as identifier names (e.g., `return`, `var`, `function`).",
+            "<strong>`Camel Case (`camelCase`)`:</strong> A naming convention where the first word is entirely lowercase, and each subsequent word begins with an uppercase letter without spaces."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Valid identifiers\nlet userName = \"Osama\"; // Camel Case (Best Practice)\nlet _user = \"Ahmed\";    // Starting with underscore is allowed\nlet $price = 50;        // Starting with dollar sign is allowed\nlet user123 = \"Sayed\";  // Numbers are allowed if not at the beginning\n\n// Invalid identifiers (Will throw Syntax Errors)\n// let 123user = \"Error\";    // Cannot start with a number\n// let user name = \"Error\";  // Cannot contain spaces\n// let user@name = \"Error\";  // Special characters not allowed\n// let function = \"Error\";   // Cannot use reserved keywords"
+        }
+      ]
+    },
+    {
+      "title": "93. `var` vs `let` vs `const` (مقارنة طرق إنشاء المتغيرات)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب عمل مقارنة قوية بين المتغير القديم `var` وبين المتغيرات الحديثة من `ES6` وهي `let` و `const`.\n*   **إعادة الإعلان (`Redeclaration`):** لو استخدمت `var` لإنشاء متغير، تقدر ترجع في السطر اللي بعده تنشئ نفس المتغير بـ `var` تاني وتدي له قيمة جديدة من غير ما المتصفح يعترض، وده بيعمل كوارث ومشاكل لو الكود طويل لإنك ممكن تمسح متغير قديم بالغلط. لكن `let` و `const` بيمنعوا ده تماماً وبيطلعوا لك (`Error`) عشان ينبهوك.\n*   **الوصول قبل الإعلان (`Access before declaration`):** لو حاولت تطبع متغير `var` قبل ما تنشئه، الجافا سكريبت هترجع لك قيمة `undefined` (يعني متغير مبهم موجود بس ملوش قيمة). لكن مع `let` و `const` بيطلع لك (`Error`) صريح يفهمك المشكلة ويقولك مينفعش تستخدمه قبل ما تنشئه.\n*   **نطاق النافذة (`Global Scope` / `Window Object`):** أي متغير بيتم إنشاؤه بـ `var` بيترمي أوتوماتيكياً جوه كائن النافذة الأساسي (`Window Object`)، وده بيعمل زحمة ومشاكل (`Global Scope Pollution`). لكن `let` و `const` بيحتفظوا بخصوصيتهم ومش بيندمجوا في الـ `Window`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Redeclaration`:</strong> Declaring a variable that has already been declared in the same scope. Allowed by `var`, strictly forbidden by `let` and `const`.",
+            "<strong>`Hoisting / Access before initialization`:</strong> Attempting to access a variable before its code execution reaches its declaration. `var` yields `undefined`, while `let/const` throw a `ReferenceError`.",
+            "<strong>`Global Scope Pollution`:</strong> The undesirable effect of attaching too many variables to the global `window` object, which `var` does automatically."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// 1. Redeclaration\nvar a = 1;\nvar a = 2; // Allowed, silently overwrites\nlet b = 1;\n// let b = 2; // Throws SyntaxError: Identifier 'b' has already been declared\n\n// 2. Access before declaration\nconsole.log(c); // undefined\nvar c = 10;\n// console.log(d); // Throws ReferenceError: Cannot access 'd' before initialization\nlet d = 20;\n\n// 3. Window Object Pollution (run in browser console to see)\nvar globalVar = \"I am in the window object\";\nlet blockVar = \"I am NOT in the window object\";\n// console.log(window.globalVar); // Outputs: \"I am in the window object\"\n// console.log(window.blockVar);  // Outputs: undefined"
+        }
+      ]
+    }
+  ]
+}

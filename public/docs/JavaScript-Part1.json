@@ -1,0 +1,305 @@
+{
+  "title": "JavaScript Full Course: Part 1",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "1. Introduction and Environment Setup (مقدمة وإعداد بيئة العمل)",
+      "icon": "fa-solid fa-laptop-code",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر لغة الجافا سكريبت لغة برمجة أساسية تُستخدم لإنشاء صفحات ويب ديناميكية وتفاعلية، وهي بتشتغل مباشرة على أي متصفح ويب زي جوجل كروم أو سفاري. من خلال استخدام الجافا سكريبت، بنقدر نستجيب لأفعال المستخدم ونتفاعل مع مدخلاته لما بيتعامل مع الموقع بتاعنا. عشان نبدأ نكتب كود، بنحتاج ننشئ مجلد جديد للمشروع جوه محرر أكواد زي \"`VS Code`\"، والمجلد ده لازم يحتوي على تلات ملفات أساسية: ملف الـ `HTML` اللي بيمثل الهيكل الأساسي للصفحة (وغالباً بيتسمى `index.html`)، وملف الـ `CSS` اللي بيتحكم في المظهر والألوان، وملف الـ `JavaScript` اللي بيكون مسؤول عن التفاعل والحركة. بيتم ربط ملف الـ `CSS` بملف الـ `HTML` عن طريق وسم الـ `<link>` في الـ `Head`، بينما بيتم ربط ملف الجافا سكريبت عن طريق وسم الـ `<script>` وبيتحط في نهاية وسم الـ `<body>` عشان نضمن إن كل عناصر الصفحة تحمل الأول قبل ما يتم تنفيذ أي كود جافا سكريبت، وده بيحمينا من أي أخطاء. كمان من الضروري تثبيت إضافة اسمها \"`Live Server`\" عشان الصفحة تعمل تحديث تلقائي بمجرد ما نحفظ أي تغييرات في الملفات."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`JavaScript`:</strong> A programming language used to create dynamic and interactive web pages that run on a web browser.",
+            "<strong>`VS Code`:</strong> A recommended text editor used for writing and managing code files.",
+            "<strong>`Live Server`:</strong> An extension in VS Code that automatically refreshes the web browser whenever file changes are saved."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- Initial HTML Setup -->\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <title>My Website</title>\n    <!-- Linking CSS -->\n    <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n<body>\n    \n    <!-- HTML elements go here -->\n\n    <!-- Linking JavaScript at the bottom of the body -->\n    <script src=\"index.js\"></script>\n</body>\n</html>"
+        }
+      ]
+    },
+    {
+      "title": "2. Basic Output and Comments (المخرجات الأساسية والتعليقات)",
+      "icon": "fa-solid fa-terminal",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لإخراج وعرض نصوص برمجية، الجافا سكريبت بتوفر لنا أكتر من طريقة. الطريقة الأولى هي استخدام دالة للطباعة في شاشة المطورين (`Console`)، وبنقدر نكتب النص باستخدام علامات التنصيص المزدوجة أو الفردية أو علامة الـ (`Backticks`) واللي بتُعرف باسم الـ (`Template Literal`) وبتكون مفيدة جداً بعدين في دمج المتغيرات. الطريقة التانية لإخراج البيانات هي عمل نافذة تنبيه منبثقة بتظهر للمستخدم على الشاشة. بالنسبة للتعليقات، فهي عبارة عن نصوص مش بتظهر في المخرجات النهائية ولا بيتم تنفيذها، لكن بنستخدمها كملاحظات لينا أو للمطورين التانيين. بنقدر نعمل تعليق لسطر واحد باستخدام شرطتين مايلين، أو تعليق لعدة سطور باستخدام شرطة مايلة ونجمة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`console.log()`:</strong> A method used to output text or data to the developer tools console.",
+            "<strong>`Template Literal`:</strong> A string enclosed in backticks (`) that allows for flexible text output and variable insertion.",
+            "<strong>`window.alert()`:</strong> A method used to display a popup alert box with a specific message on the web page.",
+            "<strong>`Comments`:</strong> Lines in the code ignored by the browser, used purely as notes for developers (single-line or multi-line)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Basic console output using backticks\nconsole.log(`Hello`);\nconsole.log(`I like pizza`);\n\n// Basic alert popup\nwindow.alert(`This is an alert`);\nwindow.alert(`I like pizza`);\n\n// This is a single-line comment\n\n/*\nThis is a multi-line comment.\nAnything that comes after will be a comment.\nThey are hidden and used for notes.\n*/"
+        }
+      ]
+    },
+    {
+      "title": "3. Basic DOM Manipulation (التعامل الأساسي مع عناصر الصفحة)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "علشان نضيف نصوص أو نعدل على محتوى موجود في صفحة الـ `HTML` باستخدام الجافا سكريبت، لازم الأول نحدد العنصر ده. بنعمل ده عن طريق إعطاء العنصر مُعرف فريد (`ID`) في ملف الـ `HTML`. بعدين في ملف الجافا سكريبت، بندخل على المستند الأساسي للصفحة وبنستخدم دالة بتجيب العنصر ده بناءً على المُعرف بتاعه. بعد ما بنمسك العنصر، بنقدر نغير خاصية المحتوى النصي الخاص بيه ونساويه بأي نص إحنا حابينه، سواء كان كلمة أو جملة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`document.getElementById()`:</strong> A method that accesses the DOM to select and return an HTML element based on its unique ID.",
+            "<strong>`textContent`:</strong> A property of an HTML element that allows you to get or set the text inside it."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Elements with IDs -->\n<h1 id=\"myH1\"></h1>\n<p id=\"myP\"></p>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// JavaScript DOM Manipulation\ndocument.getElementById(\"myH1\").textContent = \"Hello\";\ndocument.getElementById(\"myP\").textContent = \"I like pizza\";"
+        }
+      ]
+    },
+    {
+      "title": "4. Variables and Data Types (المتغيرات وأنواع البيانات)",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر المتغيرات زي الصندوق أو الحاوية اللي بنخزن جواها قيمة معينة، والمتغير بيتصرف كأنه القيمة دي بالظبط. إنشاء المتغير بيتم على خطوتين: الإعلان عنه (`Declaration`) وتعيين قيمته (`Assignment`). بنستخدم كلمة `let` عشان نعلن عن المتغير، ولازم اسم المتغير يكون فريد، لو حاولنا نعلن عن نفس الاسم مرتين هيحصل خطأ. بنقدر نعمل الخطوتين في سطر واحد لو إحنا عارفين القيمة مسبقاً. بالنسبة لأنواع البيانات الأساسية، عندنا الأرقام (`Numbers`) واللي بتشمل الأرقام الصحيحة والعشرية وبنقدر نستخدمها في العمليات الحسابية. وعندنا النصوص (`Strings`) وهي سلسلة من الحروف ممكن تحتوي على أرقام بس بتتعامل كنص ومش بتدخل في حسابات. النوع التالت هو القيم المنطقية (`Booleans`) واللي بتكون إما صح أو خطأ (`true`/`false`) وبتستخدم كإشارات (`Flags`) في البرمجة عشان نتأكد من حالة معينة زي هل المستخدم متصل بالإنترنت أم لا. عشان نطبع نوع البيانات الخاص بأي متغير بنستخدم كلمة `typeof`، وعشان ندمج المتغيرات دي جوه نصوص بنستخدم الـ `Template Literals` عن طريق وضع المتغير جوه أقواس بعلامة الدولار. أخيرًا، بنقدر نستخدم المتغيرات دي لتحديث محتوى عناصر الـ `HTML` بسهولة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Variable`:</strong> A container that stores a value; the variable behaves as if it were the value it contains.",
+            "<strong>`Declaration`:</strong> The first step of creating a variable, usually done using the `let` keyword.",
+            "<strong>`Assignment`:</strong> The process of giving a declared variable a specific value.",
+            "<strong>`Number`:</strong> A data type representing numeric values (e.g., 25, 10.99), used in math expressions.",
+            "<strong>`String`:</strong> A data type representing a series of characters enclosed in quotes.",
+            "<strong>`Boolean`:</strong> A data type representing a logical entity that can only be `true` or `false`.",
+            "<strong>`typeof`:</strong> A keyword used to return the data type of a variable."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Declaration and Assignment\nlet x; // Declaration\nx = 100; // Assignment\nlet y = 123; // Declaration and Assignment together\n\n// Numbers\nlet age = 25;\nlet price = 10.99;\nlet gpa = 2.1;\nconsole.log(typeof age); // outputs: number\n\n// Strings\nlet firstName = \"Bro\";\nlet favoriteFood = \"pizza\";\nlet email = \"bro123@gmail.com\";\nconsole.log(typeof firstName); // outputs: string\n\n// Booleans\nlet online = true;\nlet forSale = true;\nlet isStudent = false;\nconsole.log(typeof online); // outputs: boolean\n\n// Template Literals with Variables\nconsole.log(`You are ${age} years old`);\nconsole.log(`The price is $${price}`);\nconsole.log(`Your GPA is: ${gpa}`);\nconsole.log(`Bro is online: ${online}`);\n\n// Updating DOM using variables\n// Assuming HTML has elements with IDs: p1, p2, p3\nlet fullName = \"Bro Code\";\ndocument.getElementById(\"p1\").textContent = `Your name is ${fullName}`;\ndocument.getElementById(\"p2\").textContent = `You are ${age} years old`;\ndocument.getElementById(\"p3\").textContent = `Enrolled: ${isStudent}`;"
+        }
+      ]
+    },
+    {
+      "title": "5. Arithmetic Operators (المعاملات الحسابية)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في أي معادلة رياضية في البرمجة بنتعامل مع قيم ومتغيرات بنسميها (`Operands`) وعلامات حسابية بنسميها (`Operators`). العمليات الأساسية بتشمل الجمع، الطرح، الضرب، والقسمة. وعندنا عملية الأسس اللي بنمثلها بنجمتين مزدوجتين. كمان عندنا معامل باقي القسمة (`Modulus`) واللي بيمثل بعلامة النسبة المئوية، وده بيدينا الباقي من أي عملية قسمة، وبيكون مفيد جداً لمعرفة إذا كان الرقم زوجي (الباقي صفر) أو فردي (الباقي واحد). بدل ما نكتب اسم المتغير مرتين عشان نحدث قيمته، بنستخدم طرق مختصرة اسمها (`Augmented Assignment Operators`) زي الزيادة المباشرة. ولو حابين نزود أو ننقص المتغير بواحد بس، بنستخدم معاملات الزيادة (`Increment`) والنقصان (`Decrement`). وأخيراً، في المعادلات المعقدة لازم نمشي على ترتيب الأولوية (`Operator Precedence`): الأقواس الأول، ثم الأسس، ثم الضرب والقسمة وباقي القسمة، وأخيراً الجمع والطرح من اليسار لليمين."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Operands`:</strong> Values or variables involved in an arithmetic expression (e.g., 11, x, 5).",
+            "<strong>`Operators`:</strong> Mathematical symbols like addition (+), subtraction (-), multiplication (*), and division (/).",
+            "<strong>`Exponents (``)`:</strong> An operator used to raise a base to a given power.",
+            "<strong>`Modulus (`%`)`:</strong> An operator that returns the remainder of a division operation.",
+            "<strong>`Augmented Assignment Operators`:</strong> Shortcuts for reassigning variables (e.g., `+=`, `-=`, `*=`, `/=`).",
+            "<strong>`Increment (`++`) / Decrement (`--`)`:</strong> Operators used to add or subtract exactly one from a variable.",
+            "<strong>`Operator Precedence`:</strong> The strict order in which operations are solved in a complex equation (Parentheses, Exponents, Multiplication/Division/Modulus, Addition/Subtraction)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let students = 30;\n\n// Basic Arithmetic\nstudents = students + 1; // Addition: 31\nstudents = students - 1; // Subtraction: 29\nstudents = students * 2; // Multiplication: 60\nstudents = students / 2; // Division: 15\nstudents = students ** 2; // Exponents: 900\nlet extraStudents = students % 3; // Modulus (Remainder)\n\n// Augmented Assignment Operators (Shortcuts)\nstudents += 1;\nstudents -= 1;\nstudents *= 2;\nstudents /= 2;\nstudents **= 2;\nstudents %= 2;\n\n// Increment and Decrement\nstudents++; // Increases by 1\nstudents--; // Decreases by 1\n\n// Operator Precedence Example\n// Order: Parentheses -> Exponents -> Mult/Div/Mod -> Add/Sub\nlet result = 1 + 2 * 3 + 4 ** 2;\nconsole.log(result); // Solves 4**2 (16), then 2*3 (6), then 1+6+16 = 23"
+        }
+      ]
+    },
+    {
+      "title": "6. Accepting User Input (استقبال مدخلات المستخدم)",
+      "icon": "fa-solid fa-keyboard",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عشان ناخد بيانات من المستخدم عندنا طريقتين. الطريقة الأولى هي الطريقة السهلة عن طريق إظهار نافذة منبثقة بتطلب من المستخدم يكتب حاجة (`Window Prompt`)، وبعدين بنخزن القيمة دي في متغير ونطبعها. الطريقة التانية هي الطريقة الاحترافية والأكثر استخداماً في المواقع، وهي إننا نعمل مربع نص (`Text box`) وزرار (`Button`) في الـ `HTML`. بنستخدم الجافا سكريبت عشان نستهدف الزرار ده ونربطه بدالة (`Function`) بتشتغل لما نضغط عليه (`onclick`). الدالة دي بتدخل على مربع النص، بتسحب القيمة اللي جواه، بتخزنها في المتغير، وبناءً عليها بنغير محتوى عنصر في الصفحة عشان نرحب بالمستخدم باسمه."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`window.prompt()`:</strong> A simple method that creates a dialog box prompting the user to input some text.",
+            "<strong>`onclick`:</strong> An event handler attribute used to execute a specific function when a button or element is clicked.",
+            "<strong>`.value`:</strong> A property used to retrieve or set the text currently entered inside an HTML input element."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: The Easy Way (Window Prompt)\nlet username;\nusername = window.prompt(\"What's your username?\");\nconsole.log(username);"
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Setup for The Professional Way -->\n<h1 id=\"myH1\">Welcome</h1>\n<label>Username</label>\n<input type=\"text\" id=\"myText\">\n<br>\n<button id=\"mySubmit\">Submit</button>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 2: The Professional Way (HTML Text Box)\nlet username;\n\ndocument.getElementById(\"mySubmit\").onclick = function() {\n    // Get the value from the text box\n    username = document.getElementById(\"myText\").value;\n    \n    // Change the H1 text content based on the input\n    document.getElementById(\"myH1\").textContent = `Hello ${username}`;\n}"
+        }
+      ]
+    },
+    {
+      "title": "7. Type Conversion (تحويل أنواع البيانات)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ `Type Conversion` هو عملية تغيير نوع البيانات لقيمة معينة لنوع تاني، زي تحويل النصوص لأرقام أو العكس. الموضوع ده مهم جداً لإن أي مدخلات بناخدها من المستخدم بتكون افتراضياً من النوع النصي (`String`). لو حاولنا نعمل عملية حسابية زي الجمع على المدخلات دي من غير تحويل، الجافا سكريبت هتلزق النصوص في بعضها (`String Concatenation`) بدل ما تجمعهم كأرقام. عشان نعالج ده بنستخدم دالة `Number()` لتحويل النص لرقم. المدرب كمان وضح إيه اللي بيحصل لو حاولنا نحول أنواع تانية: لو حولنا كلمة فيها حروف لرقم النتيجة هتكون `NaN` (يعني ليس رقماً، بالرغم من إن نوع البيانات نفسه بيفضل مسجل كرقم). لو حولنا نصوص لقيم منطقية (`Booleans`)، أي نص هيرجع `true`، بينما النصوص الفارغة هترجع `false`، ودي طريقة ممتازة نقدر نستخدمها عشان نتأكد إذا كان المستخدم ساب حقل الإدخال فاضي ولا كتب حاجة. المتغيرات الغير معرفة (`Undefined`) لو اتحولت لرقم بترجع برضو `NaN`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Type Conversion`:</strong> The process of changing the data type of a value to another data type (e.g., from String to Number).",
+            "<strong>`Number()` / `String()` / `Boolean()`:</strong> Built-in functions used to explicitly cast variables into numbers, strings, or booleans.",
+            "<strong>`NaN`:</strong> Stands for \"Not a Number\". It is returned when an attempt to convert alphabetical or undefined characters into a numeric value fails."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Without Type Conversion (Causes Bug)\n/*\nlet age = window.prompt(\"How old are you?\"); // User enters 25\nage += 1;\nconsole.log(age); // Outputs \"251\" instead of 26 (String Concatenation)\n*/\n\n// Code block 2: With Proper Type Conversion\nlet age = window.prompt(\"How old are you?\");\nage = Number(age); // Converts string \"25\" to number 25\nage += 1;\nconsole.log(age, typeof age); // Outputs 26, \"number\"\n\n// Code block 3: Conversion Edge Cases\nlet x = \"pizza\";\nlet y = \"pizza\";\nlet z = \"pizza\";\n\nx = Number(x); // NaN (Not a Number, but type is still 'number')\ny = String(y); // \"pizza\"\nz = Boolean(z); // true (Any non-empty string is true)\n\n// Empty string conversions\nlet empty = \"\";\nconsole.log(Number(empty));  // 0\nconsole.log(Boolean(empty)); // false (Useful for checking if input is empty)"
+        }
+      ]
+    },
+    {
+      "title": "8. Constants (`const`) (الثوابت)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الثوابت هي عبارة عن متغيرات بنعين قيمتها مرة واحدة بس ومش بنقدر نغيرها بعدين. استخدام الـ `const` بيوفر طبقة حماية أمان إضافية للكود بتاعنا؛ عشان يمنعنا إحنا شخصياً (أو أي مطور تاني أو سكربت خبيث) من إننا نعدل قيم أساسية بالغلط والبرنامج يبوظ. كمثال تطبيقي، المدرب عمل برنامج بيحسب محيط الدائرة (`Circumference`). قيمة \"باي\" (`Pi`) دي قيمة ثابتة رياضياً، فلو استخدمنا `let` ممكن تتغير بالغلط وتطلع نواتج كارثية. لكن باستخدام `const`، لو حاولنا نعدل القيمة المتصفح هيطلع لنا خطأ (`TypeError`). من أفضل الممارسات عند كتابة الثوابت اللي بتحتوي على بيانات بدائية (زي الأرقام) إننا نكتب اسم المتغير كله بحروف كبيرة (`Uppercase`) عشان نميزه، لكن ده مش بينطبق عادة على أنواع البيانات المرجعية زي النصوص."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`const` (Constants):</strong> A keyword used to declare a variable that cannot be reassigned once it has been initialized.",
+            "<strong>`TypeError`:</strong> An error generated by JavaScript when an operation is performed that violates data type rules, such as trying to reassign a constant variable."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML for Circumference Calculator -->\n<h1 id=\"myH1\">Enter the radius of a circle:</h1>\n<label>Radius:</label>\n<input type=\"text\" id=\"myText\">\n<button id=\"mySubmit\">Submit</button>\n<h3 id=\"myH3\"></h3>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block: Circumference Calculator using Constants\nconst PI = 3.14159; // Constant named with UPPERCASE convention\nlet radius;\nlet circumference;\n\ndocument.getElementById(\"mySubmit\").onclick = function() {\n    radius = document.getElementById(\"myText\").value;\n    radius = Number(radius);\n    \n    // Attempting to reassign PI here (e.g., PI = 420.69;) would throw an Uncaught TypeError\n    \n    circumference = 2 * PI * radius;\n    document.getElementById(\"myH3\").textContent = circumference + \" cm\";\n}"
+        }
+      ]
+    },
+    {
+      "title": "9. Counter Program (برنامج العداد)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب قام بتطبيق عملي شامل لبناء برنامج عداد رقمي (`Counter`) بيجمع بين الـ `HTML` والـ `CSS` والجافا سكريبت. الفكرة بتعتمد على إنشاء عنصر نصي (`Label`) لعرض الرقم، وتلات زراير للتحكم: زرار للزيادة، زرار للنقصان، وزرار لإعادة الضبط للصفر. في الجافا سكريبت، بنقوم بحفظ العناصر دي في ثوابت (`const`) عشان مش هنغير العناصر نفسها، لكن بنعمل متغير رقمي باستخدام `let` عشان نخزن جواه القيمة الحالية للعداد واللي هتتغير باستمرار. بعد كده، بنربط كل زرار بدالة (`Function`) بتشتغل لما نضغط عليه (`onclick`). دالة الزيادة بتستخدم معامل الزيادة (`++`) عشان تزود المتغير بواحد، ودالة النقصان بتستخدم معامل النقصان (`--`)، ودالة إعادة الضبط بتخلي المتغير يساوي صفر. في نهاية كل دالة، بنحدث المحتوى النصي الخاص بالـ `Label` عشان يعرض القيمة الجديدة للمستخدم."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Counter Program`:</strong> A simple application that increments, decrements, or resets a numeric value based on user interaction.",
+            "<strong>`State Variable`:</strong> A variable (like `count`) used to keep track of the current status or value within an application."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Setup for Counter -->\n<label id=\"countLabel\">0</label><br>\n<div id=\"btnContainer\">\n    <button id=\"decreaseBtn\" class=\"buttons\">Decrease</button>\n    <button id=\"resetBtn\" class=\"buttons\">Reset</button>\n    <button id=\"increaseBtn\" class=\"buttons\">Increase</button>\n</div>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// JavaScript Implementation for Counter\nconst decreaseBtn = document.getElementById(\"decreaseBtn\");\nconst resetBtn = document.getElementById(\"resetBtn\");\nconst increaseBtn = document.getElementById(\"increaseBtn\");\nconst countLabel = document.getElementById(\"countLabel\");\n\nlet count = 0; // State variable\n\nincreaseBtn.onclick = function() {\n    count++;\n    countLabel.textContent = count;\n}\n\ndecreaseBtn.onclick = function() {\n    count--;\n    countLabel.textContent = count;\n}\n\nresetBtn.onclick = function() {\n    count = 0;\n    countLabel.textContent = count;\n}"
+        }
+      ]
+    },
+    {
+      "title": "10. Math Object (كائن الرياضيات `Math`)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الـ `Math` عبارة عن كائن مدمج (`Built-in Object`) جوه الجافا سكريبت بيوفر لنا مجموعة كبيرة من الخواص والدوال المتعلقة بالعمليات الرياضية. المدرب وضح إننا نقدر نوصل لقيم ثابتة زي قيمة الـ (`Pi`) وقيمة الـ (`Euler`'`s number`). كمان الكائن ده بيوفر دوال لتقريب الأرقام بطرق مختلفة: دالة `round` للتقريب العادي لأقرب رقم صحيح، دالة `floor` اللي دايماً بتقرب للرقم الأقل (بتحذف الكسر وتنزل لتحت)، دالة `ceil` اللي دايماً بتقرب للرقم الأعلى (للسقف)، ودالة `trunc` اللي بتقطع أو بتحذف أي كسور عشرية من غير ما تقرب. كمان في دوال لحساب الأسس زي `pow`، والجذر التربيعي زي `sqrt`، واللوغاريتم الطبيعي زي `log`. للعمليات الهندسية، في دوال للـ `sin` والـ `cos` والـ `tan`. لو حابين نحصل على القيمة المطلقة (الموجبة دايماً) بنستخدم `abs`، وعشان نعرف إشارة الرقم (موجب ولا سالب ولا صفر) بنستخدم `sign`. أخيراً، عشان نطلع أكبر أو أصغر رقم من مجموعة أرقام، بنستخدم `max` و `min` على التوالي."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Math` Object:</strong> A built-in JavaScript object that has properties and methods for mathematical constants and functions.",
+            "<strong>`Math.round()`:</strong> Rounds a number to the nearest integer.",
+            "<strong>`Math.floor()`:</strong> Always rounds a number down to the nearest integer.",
+            "<strong>`Math.ceil()`:</strong> Always rounds a number up to the nearest integer.",
+            "<strong>`Math.trunc()`:</strong> Eliminates the decimal portion of a number, returning only the integer part.",
+            "<strong>`Math.pow(base, exponent)`:</strong> Raises a base number to a given power.",
+            "<strong>`Math.sqrt()`:</strong> Returns the square root of a number.",
+            "<strong>`Math.abs()`:</strong> Returns the absolute (positive) value of a number.",
+            "<strong>`Math.max()` / `Math.min()`:</strong> Returns the highest or lowest value from a list of arguments."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Math Properties\nconsole.log(Math.PI); // 3.14159...\nconsole.log(Math.E);  // Euler's number\n\nlet x = 3.21;\nlet y = 2;\nlet z = -3.21;\n\n// Rounding Methods\nconsole.log(Math.round(x)); // 3\nconsole.log(Math.floor(3.99)); // 3 (Always rounds down)\nconsole.log(Math.ceil(3.21)); // 4 (Always rounds up)\nconsole.log(Math.trunc(x)); // 3 (Eliminates decimals)\n\n// Mathematical Operations\nconsole.log(Math.pow(3, 2)); // 9 (3 to the power of 2)\nconsole.log(Math.sqrt(81)); // 9 (Square root)\nconsole.log(Math.log(10)); // 2.3... (Natural logarithm)\n\n// Trigonometry\nconsole.log(Math.sin(45)); // Sine\nconsole.log(Math.cos(45)); // Cosine\nconsole.log(Math.tan(45)); // Tangent\n\n// Absolute and Sign\nconsole.log(Math.abs(z)); // 3.21 (Absolute positive value)\nconsole.log(Math.sign(z)); // -1 (Returns -1 for negative, 1 for positive, 0 for zero)\n\n// Max and Min\nlet max = Math.max(x, y, 1);\nlet min = Math.min(x, y, 1);\nconsole.log(max); // 3.21\nconsole.log(min); // 1"
+        }
+      ]
+    },
+    {
+      "title": "11. Random Number Generator (توليد الأرقام العشوائية)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لتوليد أرقام عشوائية في الجافا سكريبت بنستخدم دالة `Math.random()`. الدالة دي بطبيعتها بتطلع رقم عشري عشوائي بين الصفر والواحد (الواحد مش معانا). عشان نولد رقم عشوائي مفيد زي رمية حجر النرد (من 1 لـ 6)، بنحتاج نضرب النتيجة في 6، وده هيدينا رقم بين 0 و 5. عشان نتخلص من الكسور بنحط المعادلة كلها جوه `Math.floor()`. ولإننا عايزين نبدأ من 1 مش من 0، بنزود 1 على النتيجة النهائية. المدرب بعد كده شرح المعادلة الشاملة (`Universal Formula`) اللي بتسمح لنا نولد رقم عشوائي بين أي حد أدنى (`Minimum`) وحد أقصى (`Maximum`). المعادلة بتتم عن طريق طرح الحد الأدنى من الحد الأقصى وإضافته للضرب، وبعدين بنزود الحد الأدنى في نهاية المعادلة. في التطبيق العملي، المدرب عمل برنامج بيرمي تلات أحجار نرد في نفس الوقت بيحدث نصوص عناصر الـ `HTML` بنتائج الأرقام العشوائية دي لما المستخدم بيضغط على زرار."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Math.random()`:</strong> A method that returns a floating-point, pseudo-random number in the range 0 to less than 1 (inclusive of 0, but not 1).",
+            "<strong>`Random Range Formula`:</strong> `Math.floor(Math.random() * (max - min)) + min` is used to generate a random integer within a specific inclusive range."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Generating a basic random number between 1 and 6 (Dice Roll)\nlet randomNum = Math.floor(Math.random() * 6) + 1;\nconsole.log(randomNum);\n\n// Universal Formula for generating a number between a specific range (e.g., 50 to 100)\nconst min = 50;\nconst max = 100;\nlet randomRange = Math.floor(Math.random() * (max - min)) + min;\nconsole.log(randomRange);"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Dice Roller Mini-Project (Generating 3 Random Numbers)\nconst myButton = document.getElementById(\"myButton\");\nconst label1 = document.getElementById(\"label1\");\nconst label2 = document.getElementById(\"label2\");\nconst label3 = document.getElementById(\"label3\");\n\nconst minDice = 1;\nconst maxDice = 6;\nlet randomNum1;\nlet randomNum2;\nlet randomNum3;\n\nmyButton.onclick = function() {\n    randomNum1 = Math.floor(Math.random() * maxDice) + minDice;\n    randomNum2 = Math.floor(Math.random() * maxDice) + minDice;\n    randomNum3 = Math.floor(Math.random() * maxDice) + minDice;\n\n    label1.textContent = randomNum1;\n    label2.textContent = randomNum2;\n    label3.textContent = randomNum3;\n}"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+/* ═══════════════════════════════════
+   APP LAYOUT (Sidebar + Content)
+   ═══════════════════════════════════ */
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  /* Make sure the entire layout doesn't overflow */
+  overflow: hidden;
+}
+
+/* --- Main Content --- */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  min-width: 0;
+  height: 100%;
+  display: block; /* Centering handled by margin: auto in children */
+}

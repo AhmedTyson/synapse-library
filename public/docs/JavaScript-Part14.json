@@ -1,0 +1,252 @@
+{
+  "title": "JavaScript Full Course: Part 14",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Elzero Web School curriculum.",
+  "links": [
+    "https://youtu.be/gIGGhFlGgLI?si=h3SzxBzNgsnu5gqD"
+  ],
+  "sections": [
+    {
+      "title": "147. Document Object Model - DOM (تحديد العناصر في الـ `DOM`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ `DOM` هو الموديل اللي المتصفح بيبنيه أول ما الصفحة تحمل، وبيخلينا نقدر نوصل لأي عنصر ونتحكم فيه عن طريق كائن `document`. للوصول للعناصر، عندنا عدة طرق:\n*   `getElementById`: بتجيب عنصر واحد محدد بالـ `ID` بتاعه.\n*   `getElementsByTagName` و `getElementsByClassName`: بيرجعوا مجموعة عناصر في هيكل اسمه (`HTMLCollection`)، وبنوصل للعنصر اللي عايزينه عن طريق رقم الفهرس (`Index`).\n*   الطريقة الأقوى والأحدث هي `querySelector` اللي بتقبل أي (`CSS Selector`) وبترجع أول عنصر يطابق البحث، و `querySelectorAll` اللي بترجع كل العناصر المطابقة في هيكل اسمه (`NodeList`). \nكمان الكائن `document` جواه خواص جاهزة بتسمح لنا نوصل لمجموعات معينة في الصفحة بشكل مباشر، زي `document.title` لعنوان الصفحة، و `document.body`، و `document.links`، و `document.forms`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`DOM (Document Object Model)`:</strong> An API representing the HTML document as a structured tree of nodes, allowing JavaScript to dynamically manipulate the content, structure, and style.",
+            "<strong>`querySelector()` / `querySelectorAll()`:</strong> Highly flexible methods that use CSS-style syntax to select elements."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Selecting by ID (Returns a single element)\nlet myIdElement = document.getElementById(\"my-div\");\n\n// Selecting by Tag Name (Returns an HTMLCollection)\nlet allParagraphs = document.getElementsByTagName(\"p\");\nconsole.log(allParagraphs); // Accessing the first paragraph\n\n// Selecting by Class Name (Returns an HTMLCollection)\nlet classElements = document.getElementsByClassName(\"my-class\");\n\n// querySelector (Returns the FIRST matching element)\nlet firstSpecial = document.querySelector(\".special\");\n\n// querySelectorAll (Returns a NodeList of ALL matches)\nlet allSpecials = document.querySelectorAll(\".special\");\n\n// Direct Document Collections\nconsole.log(document.title); // Reads the page title\nconsole.log(document.links); // Accesses the first <a> tag\nconsole.log(document.forms); // Accesses the first <form>"
+        }
+      ]
+    },
+    {
+      "title": "148. DOM Content and Attributes (محتوى وخصائص العناصر)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عشان نقرأ أو نعدل المحتوى الداخلي للعنصر، الجافا سكريبت بتوفر لنا خاصيتين: خاصية `innerHTML` اللي بترجع النص ومعاه وسوم الـ `HTML` (لو موجودة)، وبتسمح لنا نضيف وسوم جديدة المتصفح هيترجمها ويعرضها. على الناحية التانية، `textContent` بترجع النص الصافي بس (`Pure text`) وبتتجاهل أي وسوم، ولو حاولنا نضيف وسم `HTML` من خلالها، المتصفح هيعتبره مجرد نص مكتوب وهيطبعه زي ما هو. نقدر كمان نعدل خصائص العناصر (`Attributes`) بشكل مباشر، زي تغيير رابط الصورة `element.src` أو الكلاس الخاص بيها `element.className`، ولو الخاصية دي مكانتش موجودة في العنصر، المتصفح هيضيفها له أوتوماتيكياً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`innerHTML`:</strong> Gets or sets the HTML markup contained within an element, rendering tags correctly.",
+            "<strong>`textContent`:</strong> Gets or sets the raw text content of a node and its descendants, treating tags as literal string characters."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<div id=\"myDiv\">Old Content</div>\n<img id=\"myImg\" src=\"old.jpg\" alt=\"Old Image\">"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myDiv = document.getElementById(\"myDiv\");\nlet myImg = document.getElementById(\"myImg\");\n\n// Using innerHTML (The <span> tag is processed by the browser)\nmyDiv.innerHTML = \"Hello from <span>JS</span>\";\n\n// Using textContent (The <span> tag is printed as literal text)\nmyDiv.textContent = \"Hello from <span>JS</span>\";\n\n// Direct Attribute Manipulation\nmyImg.src = \"new-image.jpg\"; // Modifies existing attribute\nmyImg.title = \"A new title\"; // Adds a new attribute if it didn't exist\nmyImg.className = \"image-style\"; // Sets the class"
+        }
+      ]
+    },
+    {
+      "title": "149. DOM Attribute Methods (دوال التحكم في الخصائص)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "بالإضافة للتعديل المباشر، الجافا سكريبت بتوفر دوال متخصصة للتعامل مع الخصائص (`Attributes`):\n*   `getAttribute(name)`: بتجيب وتستخرج قيمة الخاصية.\n*   `setAttribute(name, value)`: بتضيف خاصية جديدة أو بتعدل قيمة خاصية موجودة مسبقاً.\n*   `hasAttribute(name)`: دي دالة مهمة جداً في الشروط (`If Conditions`)؛ بترجع `true` لو الخاصية موجودة في العنصر، و `false` لو مش موجودة، وده بيحمينا من إننا نعدل خاصية مش موجودة أساساً وتعمل مشكلة.\n*   `removeAttribute(name)`: بتحذف الخاصية بالكامل من العنصر."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Attribute Methods`:</strong> Native DOM methods specifically designed to safely retrieve, update, check the existence of, or delete HTML attributes."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myParagraph = document.querySelector(\"p\");\n\n// Setting a new attribute\nmyParagraph.setAttribute(\"data-custom\", \"testing\");\n\n// Getting an attribute's value\nconsole.log(myParagraph.getAttribute(\"data-custom\")); // \"testing\"\n\n// Checking if an attribute exists before manipulating it\nif (myParagraph.hasAttribute(\"data-custom\")) {\n    console.log(\"Attribute found! We can safely remove it.\");\n    // Removing the attribute entirely\n    myParagraph.removeAttribute(\"data-custom\");\n} else {\n    console.log(\"Attribute not found.\");\n}"
+        }
+      ]
+    },
+    {
+      "title": "150. Creating DOM Elements (إنشاء العناصر ديناميكياً)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عشان ننشئ عنصر `HTML` جديد بالكامل من الجافا سكريبت ونظهره في الصفحة، بنمر بـ 3 خطوات رئيسية. أولاً، بننشئ الهيكل بتاع العنصر باستخدام دالة `createElement` (زي إننا ننشئ `div` أو `p`). ثانياً، بننشئ النص اللي هيتكتب جواه باستخدام `createTextNode`، أو حتى ممكن ننشئ تعليق برمجي باستخدام `createComment`. ثالثاً، بنبدأ نركب الأجزاء دي في بعض؛ بناخد النص ونحطه جوه العنصر باستخدام دالة `appendChild`، وبعدين بناخد العنصر ده كله (بعد ما حطينا له كلاسات وخصائص) ونحطه في المكان اللي إحنا عايزينه في الصفحة (زي إننا نلحقه بـ `document.body`). نقدر نستخدم الخطوات دي جوه حلقة تكرار (`Loop`) عشان ننشئ عدد كبير جداً من العناصر ديناميكياً زي المنتجات في المتاجر الإلكترونية."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`document.createElement(tagName)`:</strong> Creates an HTML element node specified by the tag name.",
+            "<strong>`document.createTextNode(data)`:</strong> Creates a new Text node.",
+            "<strong>`node.appendChild(childNode)`:</strong> Adds a node to the end of the list of children of a specified parent node."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Step 1: Create the Elements\nlet myDiv = document.createElement(\"div\");\nlet myHeading = document.createElement(\"h2\");\n\n// Step 2: Create the Text Nodes\nlet headingText = document.createTextNode(\"Product Title\");\nlet myComment = document.createComment(\"This is a dynamically created product\");\n\n// Optional: Add attributes and classes\nmyDiv.className = \"product-card\";\n\n// Step 3: Append children to build the structure\nmyHeading.appendChild(headingText); // Put text inside <h2>\nmyDiv.appendChild(myComment);       // Put comment inside <div>\nmyDiv.appendChild(myHeading);       // Put <h2> inside <div>\n\n// Step 4: Append the finalized element to the actual DOM (e.g., the body)\ndocument.body.appendChild(myDiv);"
+        }
+      ]
+    },
+    {
+      "title": "151. DOM Children and Nodes (العناصر الأبناء والعقد)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لما بنحتاج نتنقل ونجيب العناصر اللي جوه عنصر معين (الأبناء)، الـ `DOM` بيوفر لنا نوعين من الخواص: خاصية `children` ودي بترجع \"العناصر الحقيقية\" بس (`Elements`) زي الديفات والبراجرافات في شكل `HTMLCollection`. لكن خاصية `childNodes` بترجع كل \"العقد\" (`Nodes`) جوه العنصر، وده بيشمل العناصر، ومسافات الإنتر (اللي المتصفح بيعتبرها `Text Nodes`)، والتعليقات البرمجية. \nبالمثل، لو حابين نجيب أول وأخر ابن جوه العنصر، لو استخدمنا `firstChild` و `lastChild`، ممكن يرجعوا لنا مجرد مسافة بيضاء لإنهم بيتعاملوا مع أي نوع نود. عشان نضمن إننا بنجيب عنصر `HTML` حقيقي، بنستخدم `firstElementChild` و `lastElementChild` اللي بيتجاهلوا المسافات والتعليقات."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`children` vs `childNodes`:</strong> `children` returns only element nodes (HTML tags). `childNodes` returns all node types (elements, text nodes representing whitespace, and comments).",
+            "<strong>`firstElementChild` / `lastElementChild`:</strong> Properties that selectively return the first or last *element* node, ignoring text and comment nodes."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Structure with indentation (whitespace) -->\n<div id=\"parent\">\n    <!-- A comment -->\n    <p>Paragraph 1</p>\n    <span>Span 1</span>\n</div>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let parentEl = document.getElementById(\"parent\");\n\n// Returns an HTMLCollection of just the <p> and <span> (Length: 2)\nconsole.log(parentEl.children); \n\n// Returns a NodeList of Text (whitespace), Comment, Text, <p>, Text, <span>, Text (Length: 7)\nconsole.log(parentEl.childNodes); \n\n// Returns the #text node (the whitespace/enter before the comment)\nconsole.log(parentEl.firstChild);\n\n// Returns the actual <p> element\nconsole.log(parentEl.firstElementChild);"
+        }
+      ]
+    },
+    {
+      "title": "152. DOM Events Introduction (مقدمة عن الأحداث `Events`)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الأحداث (`Events`) هي وسيلة المتصفح للتفاعل مع تصرفات المستخدم. نقدر نكتب الحدث كـ خاصية جوه وسم الـ `HTML` مباشرة (زي `onclick=\"function()\"` )، لكن الطريقة الأفضل والأكثر احترافية هي إننا نحدد العنصر في الجافا سكريبت، ونساويه بدالة مجهولة (`Anonymous Function`) بتتنفذ تلقائياً أول ما الحدث ده يحصل. \nالأحداث دي متنوعة جداً وبتغطي كل تفاعلات المستخدم:\n*   أحداث الماوس: زي الضغط العادي `onclick`، أو الكليك يمين `oncontextmenu`، أو مرور الماوس فوق العنصر `onmouseenter` ومغادرته `onmouseleave`.\n*   أحداث النافذة: زي عمل تمرير للصفحة `onscroll` أو تغيير حجم النافذة `onresize`.\n*   أحداث النماذج (`Forms`): زي إن المستخدم يقف جوه حقل الإدخال عشان يكتب `onfocus`، أو يخرج منه `onblur`، أو يضغط على زرار الإرسال `onsubmit`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Events`:</strong> Actions or occurrences that happen in the system being programmed (e.g., clicks, scrolls, form submissions) that the code can listen to and react against.",
+            "<strong>`Event Handler`:</strong> A function that is executed in response to an event firing."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<button id=\"myBtn\">Click Me</button>\n<input type=\"text\" id=\"myInput\" placeholder=\"Focus on me\">"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myBtn = document.getElementById(\"myBtn\");\nlet myInput = document.getElementById(\"myInput\");\n\n// Mouse Event: Click\nmyBtn.onclick = function() {\n    console.log(\"Button was clicked!\");\n};\n\n// Mouse Event: Enter and Leave\nmyBtn.onmouseenter = function() {\n    myBtn.style.backgroundColor = \"yellow\";\n};\n\nmyBtn.onmouseleave = function() {\n    myBtn.style.backgroundColor = \"\"; // Resets\n};\n\n// Form Events: Focus and Blur\nmyInput.onfocus = function() {\n    console.log(\"User is typing...\");\n};\n\nmyInput.onblur = function() {\n    console.log(\"User clicked away from the input.\");\n};\n\n// Window Event: Scroll\nwindow.onscroll = function() {\n    console.log(\"User is scrolling the page!\");\n};"
+        }
+      ]
+    },
+    {
+      "title": "153. CSS Styling via JavaScript (تنسيق العناصر عبر الجافا سكريبت)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لغة الجافا سكريبت بتسمح لنا نتحكم في التنسيقات (`CSS`) الخاصة بأي عنصر بطرق مختلفة. الطريقة الأولى والأكثر شيوعاً هي الدخول على خاصية `style`، زي إننا نكتب `element.style.color`. ولازم نفتكر إن أي خاصية في الـ `CSS` بتتكون من كلمتين (زي `background-color`) لازم نكتبها في الجافا سكريبت بطريقة الـ (`Camel Case`) ونشيل علامة الناقص، فتبقى `backgroundColor`. \nلو عندنا تنسيقات كتير عايزين نضيفها، بدل ما نكتب 10 سطور، الجافا سكريبت بتوفر لنا خاصية `cssText`. دي بتسمح لنا نكتب كود `CSS` كامل زي ما بنكتبه في ملف الستايل بالظبط (كنص واحد). كمان عندنا دوال متقدمة زي `setProperty` ودي ميزتها إنها بتسمح لنا نضيف خاصية الـ `!important` للتنسيق، ودالة `removeProperty` عشان نحذف تنسيق معين من العنصر تماماً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Inline Styling (`element.style.property`)`:</strong> Modifying the CSS of an element directly. Multi-word CSS properties must be written in camelCase.",
+            "<strong>`cssText`:</strong> A property that allows you to set multiple inline CSS styles at once using standard CSS string syntax.",
+            "<strong>`setProperty(propertyName, value, priority)`:</strong> A method that sets a new value for a property on a CSS style declaration object, allowing the addition of the \"important\" flag.",
+            "<strong>`removeProperty(propertyName)`:</strong> A method that removes a property from a CSS style declaration object."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myDiv = document.getElementById(\"my-div\");\n\n// Method 1: Standard Inline Styling (Requires camelCase)\nmyDiv.style.color = \"blue\";\nmyDiv.style.fontWeight = \"bold\";\nmyDiv.style.backgroundColor = \"lightgray\"; // Note the camelCase\n\n// Method 2: cssText (Applies multiple styles using standard CSS syntax, overwriting existing inline styles)\nmyDiv.style.cssText = \"font-weight: bold; color: green; display: block;\";\n\n// Method 3: setProperty and removeProperty\n// Useful when you need to specifically add the !important flag\nmyDiv.style.setProperty(\"font-size\", \"40px\", \"important\");\n\n// Removes the color property from the inline styles\nmyDiv.style.removeProperty(\"color\");"
+        }
+      ]
+    },
+    {
+      "title": "154. Managing External Stylesheets (التحكم في ملفات الستايل الخارجية)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب أسامة الزيرو وضح معلومة متقدمة جداً (`Advanced`)؛ وهي إن الجافا سكريبت مش بس بتقدر تعدل التنسيقات الداخلية للعنصر (`Inline Styles`)، دي كمان تقدر توصل لملفات الـ `CSS` الخارجية (`External Stylesheets`) اللي مربوطة بالصفحة وتعدل فيها! عن طريق كائن `document.styleSheets` بنقدر نوصل لكل ملفات الستايل، وندخل جواها على القواعد (`Rules`) اللي مكتوبة، ونقدر نحذف أو نضيف خواص للقاعدة دي. التعديل هنا مش بيتم على عنصر واحد، ده بيتم على القواعد الأساسية في الملف نفسه، فبيأثر على أي عنصر في الصفحة واخد الكلاس ده."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`document.styleSheets`:</strong> A read-only property that returns a StyleSheetList of CSSStyleSheet objects for stylesheets explicitly linked into or embedded in a document.",
+            "<strong>`cssRules` / `rules`:</strong> A property of a stylesheet object representing the collection of individual CSS rules written in that file."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Accessing the very first linked CSS file in the HTML document\nlet firstStyleSheet = document.styleSheets;\n\n// Accessing the very first rule (e.g., the CSS block for 'div' or '.my-class') in that stylesheet\nlet firstRule = firstStyleSheet.rules;\n\n// Removing a specific property globally from that CSS rule\n// This affects ALL elements sharing that rule on the page, not just an inline style\nfirstRule.style.removeProperty(\"line-height\");\n\n// Adding a new property globally to that CSS rule\nfirstRule.style.setProperty(\"background-color\", \"red\", \"important\");"
+        }
+      ]
+    },
+    {
+      "title": "155. Form Validation & `preventDefault()` (تطبيق عملي على منع السلوك الافتراضي)",
+      "icon": "fa-solid fa-bolt",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لمنع أي عنصر من القيام بوظيفته الافتراضية اللي المتصفح برمجها عليه، بنستخدم دالة `preventDefault()`. المدرب ضرب مثالين: الأول بلينك (`Link`)، لما بنضغط عليه المفروض يودينا لصفحة تانية، بس لو استخدمنا الدالة دي جوه حدث الـ `click`، اللينك مش هيشتغل. المثال التاني والأهم هو النماذج (`Forms`). الزرار بتاع الإرسال (`Submit`) وظيفته يبعت البيانات ويعمل (`Refresh`) للصفحة. في التطبيق العملي للـ `Validation`، بنعمل متغيرات كـ (`Flags`) قيمتها المبدئية `false`. بنختبر الحقول؛ لو اليوزر نيم مكتوب ومطابق للشروط (مثلاً مش فاضي وحروفه أقل من 10)، بنغير الـ `Flag` لـ `true`. لو في النهاية لقينا إن في `Flag` لسه `false` (يعني شرط متحققش)، بنستدعي `preventDefault()` عشان نمنع الفورم تتبعت ونعرض للمستخدم رسالة خطأ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`event.preventDefault()`:</strong> A method that cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.",
+            "<strong>`Validation Flags`:</strong> Boolean variables used to track whether specific input fields have passed their respective validation rules before permitting a form submission."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<form id=\"myForm\" action=\"/submit\" method=\"POST\">\n    <input type=\"text\" id=\"username\" placeholder=\"Max 10 chars\">\n    <input type=\"text\" id=\"age\" placeholder=\"Age\">\n    <button type=\"submit\">Submit Data</button>\n</form>\n<a href=\"https://google.com\" id=\"myLink\">Go to Google</a>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// 1. Preventing a link from opening\ndocument.getElementById(\"myLink\").addEventListener(\"click\", function(event) {\n    event.preventDefault(); \n    console.log(\"Link blocked!\");\n});\n\n// 2. Form Validation\ndocument.getElementById(\"myForm\").addEventListener(\"submit\", function(event) {\n    let userValid = false;\n    let ageValid = false;\n    \n    let userValue = document.getElementById(\"username\").value;\n    let ageValue = document.getElementById(\"age\").value;\n    \n    // Check if username is not empty and <= 10 characters\n    if (userValue !== \"\" && userValue.length <= 10) {\n        userValid = true;\n    }\n    \n    // Check if age is not empty\n    if (ageValue !== \"\") {\n        ageValid = true;\n    }\n    \n    // If either condition fails, prevent the form from submitting\n    if (userValid === false || ageValid === false) {\n        event.preventDefault(); // Stops the page refresh and data submission\n        console.log(\"Validation failed! Please fix your inputs.\");\n    }\n});"
+        }
+      ]
+    },
+    {
+      "title": "156. Final DOM Challenge (التحدي النهائي لنموذج كائنات المستند)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في نهاية شروحات الـ `DOM`، المدرب أسامة الزيرو وضع تحدي شامل بيقيس مدى فهم المطور لكل المفاهيم اللي اتعلمها. التحدي عبارة عن بناء هيكل صفحة ويب كاملة (`Header`, `Menu`, `Content`, `Products`, `Footer`) باستخدام الجافا سكريبت فقط وبدون كتابة أي أكواد `HTML` أو `CSS` مسبقة. التحدي بيتطلب استخدام دوال إنشاء العناصر `createElement`، وإنشاء النصوص `createTextNode`، وإضافتهم لبعض عن طريق `appendChild`. وكمان استخدام حلقات التكرار `for loop` لإنشاء 15 منتج ديناميكياً وعرضهم في الشاشة. وأخيراً استخدام خواص التنسيق `style` اللي لسه متعلمينها لتلوين وضبط مقاسات وتوزيع العناصر في الصفحة باستخدام الـ `Flexbox`. التحدي ده بيثبت إنك بقيت قادر تتحكم في شجرة المستند بالكامل (`DOM Tree`) برمجياً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`DOM Manipulation Mastery`:</strong> The ability to construct an entire, fully styled web page interface entirely from scratch dynamically using only JavaScript functions and logic."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// A brief snippet illustrating the logic needed to pass the challenge\n\n// 1. Create Header and Menu\nconst header = document.createElement(\"header\");\nconst logo = document.createElement(\"h1\");\nlogo.textContent = \"Elzero\";\nlogo.style.color = \"green\";\n\nconst menu = document.createElement(\"ul\");\nmenu.style.display = \"flex\";\nmenu.style.listStyle = \"none\";\n// ... (Logic to append li items to menu goes here)\n\nheader.appendChild(logo);\nheader.appendChild(menu);\ndocument.body.appendChild(header);\n\n// 2. Create Content Area\nconst content = document.createElement(\"div\");\ncontent.className = \"content\";\ncontent.style.display = \"flex\";\ncontent.style.flexWrap = \"wrap\";\n\n// 3. Generate 15 Products using a Loop\nfor (let i = 1; i <= 15; i++) {\n    const productBox = document.createElement(\"div\");\n    productBox.className = \"product\";\n    \n    const productNum = document.createElement(\"span\");\n    productNum.textContent = i;\n    \n    const productText = document.createTextNode(\" Product\");\n    \n    productBox.appendChild(productNum);\n    productBox.appendChild(productText);\n    \n    // Basic styling for the box\n    productBox.style.padding = \"20px\";\n    productBox.style.margin = \"10px\";\n    productBox.style.border = \"1px solid #ccc\";\n    \n    content.appendChild(productBox);\n}\n\ndocument.body.appendChild(content);\n\n// 4. Create Footer\nconst footer = document.createElement(\"footer\");\nfooter.textContent = \"Copyright 2024\";\nfooter.style.backgroundColor = \"green\";\nfooter.style.color = \"white\";\nfooter.style.textAlign = \"center\";\ndocument.body.appendChild(footer);"
+        }
+      ]
+    }
+  ]
+}

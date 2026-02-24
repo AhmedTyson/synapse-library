@@ -1,0 +1,235 @@
+{
+  "title": "JavaScript Full Course: Part 8",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "74. Showing and Hiding Elements (إظهار وإخفاء العناصر)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لإظهار وإخفاء العناصر ديناميكياً، الجافا سكريبت بتتحكم في خصائص الـ `CSS` للعنصر. عندنا طريقتين بيقدموا نتايج مختلفة شوية في هيكل الصفحة (`Layout`). الطريقة الأولى هي التلاعب بخاصية الـ `display`. لما نساويها بـ `none`، العنصر بيختفي تماماً والمتصفح مش بيحجز له أي مساحة في الصفحة، فالعناصر اللي تحته بتطلع لفوق وتاخد مكانه. ولما نحب نظهره تاني بنديله قيمته الأصلية زي `block` أو `flex`. الطريقة التانية هي التلاعب بخاصية الـ `visibility`. لما نساويها بـ `hidden`، العنصر بيختفي عن العين، لكن المتصفح بيفضل حاجز مساحته الفاضية في الصفحة زي ما هي، والعناصر اللي تحته مش بتتحرك. ولما نحب نظهره بنساويها بـ `visible`. بنختار بين الطريقتين على حسب تصميم الموقع بتاعنا وهل محتاجين نحافظ على أبعاد الصفحة ثابتة ولا لأ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`display:</strong> none`: A CSS property manipulation that hides an element and completely removes it from the document flow, freeing up its allocated space.",
+            "<strong>`visibility:</strong> hidden`: A CSS property manipulation that hides an element visually but retains its physical space and dimensions within the document flow."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const myImage = document.getElementById(\"my-img\");\nconst toggleDisplayBtn = document.getElementById(\"toggle-display\");\nconst toggleVisibilityBtn = document.getElementById(\"toggle-visibility\");\n\n// Method 1: Toggling Display (Space is reclaimed)\ntoggleDisplayBtn.addEventListener(\"click\", () => {\n    if(myImage.style.display === \"none\") {\n        myImage.style.display = \"block\";\n        toggleDisplayBtn.textContent = \"Hide (Display)\";\n    } else {\n        myImage.style.display = \"none\";\n        toggleDisplayBtn.textContent = \"Show (Display)\";\n    }\n});\n\n// Method 2: Toggling Visibility (Space is reserved)\ntoggleVisibilityBtn.addEventListener(\"click\", () => {\n    if(myImage.style.visibility === \"hidden\") {\n        myImage.style.visibility = \"visible\";\n    } else {\n        myImage.style.visibility = \"hidden\";\n    }\n});"
+        }
+      ]
+    },
+    {
+      "title": "75. NodeLists (قوائم العقد `NodeLists`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "قائمة العقد (`NodeList`) هي هيكل بيانات بيرجع لما نستخدم دالة زي `querySelectorAll`. الهيكل ده شبه المصفوفة (`Array`) وبيحتوي على العناصر اللي بتطابق البحث بتاعنا، وبيمتلك خاصية طول `length` ودالة `forEach` عشان نلف على العناصر عنصر عنصر ونعدل فيهم. لكن في فرقين جوهريين لازم نعرفهم: الأول إن الـ `NodeList` مفيهوش دوال المصفوفات المتقدمة زي `map` و `filter` و `reduce` (ولو احتجناهم لازم نحول الـ `NodeList` لمصفوفة حقيقية باستخدام `Array.from()`). الفرق التاني والأخطر هو إن الـ `NodeList` عبارة عن تجميعة \"ثابتة\" (`Static Collection`). يعني لو إنت سحبت 4 زراير وحطيتهم في `NodeList`، وبعدين مسحت زرار منهم من الـ `DOM`، الزرار ده هيفضل متسجل جوه الـ `NodeList` والعدد هيفضل 4 زي ما هو. عشان كده، لو ضفت أو حذفت عناصر في الصفحة، لازم تعمل تحديث (`Update`) للـ `NodeList` بأنك تنادي على `querySelectorAll` مرة تانية عشان يسحب العدد الفعلي الجديد."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`NodeList`:</strong> A collection of document nodes (typically elements) returned by properties like `Node.childNodes` or methods like `document.querySelectorAll`.",
+            "<strong>`Static Collection`:</strong> A characteristic of NodeLists returned by `querySelectorAll`, meaning any subsequent changes in the DOM (adding/removing elements) are NOT automatically reflected in the collection."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Creates a STATIC NodeList of elements\nlet buttons = document.querySelectorAll(\".my-buttons\");\n\n// NodeLists have a native forEach method\nbuttons.forEach(button => {\n    button.addEventListener(\"click\", event => {\n        // Removes the clicked button from the DOM entirely\n        event.target.remove(); \n        \n        // At this point, the button is gone from the browser, \n        // BUT it still exists inside the 'buttons' NodeList memory!\n        console.log(buttons.length); // Will still log the original number\n        \n        // Solution: Manually re-query the DOM to update the NodeList\n        buttons = document.querySelectorAll(\".my-buttons\");\n        console.log(buttons.length); // Will now log the updated, correct number\n    });\n});"
+        }
+      ]
+    },
+    {
+      "title": "76. Rock Paper Scissors Game (لعبة حجر ورقة مقص)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب قام بتطبيق عملي لبرمجة اللعبة الشهيرة \"حجر ورقة مقص\". اللعبة بتتكون من 3 زراير، كل زرار بيمثل اختيار معين (حجر، ورقة، أو مقص)، وبنمرر الاختيار ده كمعامل (`Argument`) لدالة اسمها `playGame`. جوه الدالة، بنخلي الكمبيوتر يختار اختياره بشكل عشوائي عن طريق إنشاء مصفوفة (`Array`) فيها التلات اختيارات، وتوليد رقم عشوائي بين 0 و 2 باستخدام `Math.random()` عشان نستخدمه كمؤشر (`Index`) لاختيار الكمبيوتر. بعد كده بنقارن اختيار المستخدم باختيار الكمبيوتر. لو الاتنين زي بعض بنطبع \"تعادل\" (`It`'`s a tie`). لو مختلفين، بنستخدم جملة الاختيار `switch` عشان نختبر اختيار المستخدم، وجواها بنستخدم المعامل الثلاثي (`Ternary Operator`) عشان نختبر اختيار الكمبيوتر ونحدد مين كسبان ومين خسران. المدرب كمان استخدم الـ `classList` عشان يضيف كلاس بيخلي النص لونه أخضر لو المستخدم كسب، وأحمر لو خسر، وبيشيل الكلاسات دي في حالة التعادل. وفي النهاية، تم إضافة متغيرات لعداد النقاط (`Score Tracker`) بيزيد مع كل مكسب للمستخدم أو للكمبيوتر."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`State Tracking`:</strong> Keeping variables (like player score and computer score) outside of the main function so they persist and increment accurately across multiple function calls.",
+            "<strong>`Game Logic`:</strong> The conditional statements (switch/ternary) used to evaluate the win/loss/tie outcomes based on the choices made by the player and computer."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const choices = [\"rock\", \"paper\", \"scissors\"];\nconst playerDisplay = document.getElementById(\"playerDisplay\");\nconst computerDisplay = document.getElementById(\"computerDisplay\");\nconst resultDisplay = document.getElementById(\"resultDisplay\");\nconst playerScoreDisplay = document.getElementById(\"playerScoreDisplay\");\nconst computerScoreDisplay = document.getElementById(\"computerScoreDisplay\");\n\nlet playerScore = 0;\nlet computerScore = 0;\n\nfunction playGame(playerChoice) {\n    const computerChoice = choices[Math.floor(Math.random() * 3)];\n    let result = \"\";\n\n    if (playerChoice === computerChoice) {\n        result = \"IT'S A TIE!\";\n    } else {\n        switch (playerChoice) {\n            case \"rock\":\n                result = (computerChoice === \"scissors\") ? \"YOU WIN!\" : \"YOU LOSE!\";\n                break;\n            case \"paper\":\n                result = (computerChoice === \"rock\") ? \"YOU WIN!\" : \"YOU LOSE!\";\n                break;\n            case \"scissors\":\n                result = (computerChoice === \"paper\") ? \"YOU WIN!\" : \"YOU LOSE!\";\n                break;\n        }\n    }\n\n    playerDisplay.textContent = `PLAYER: ${playerChoice}`;\n    computerDisplay.textContent = `Computer: ${computerChoice}`;\n    resultDisplay.textContent = result;\n\n    // Reset CSS classes before applying new ones\n    resultDisplay.classList.remove(\"greenText\", \"redText\");\n\n    // Update Scores and apply CSS classes based on the result\n    if (result === \"YOU WIN!\") {\n        resultDisplay.classList.add(\"greenText\");\n        playerScore++;\n        playerScoreDisplay.textContent = playerScore;\n    } else if (result === \"YOU LOSE!\") {\n        resultDisplay.classList.add(\"redText\");\n        computerScore++;\n        computerScoreDisplay.textContent = computerScore;\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "77. Image Slider Program (برنامج عارض الصور)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب شرح إزاي نعمل عارض صور (`Image Slider`) بيقلب الصور بشكل أوتوماتيكي ويدوي. بنبدأ بإخفاء كل الصور عن طريق إعطائهم خاصية `display: none` في الـ `CSS`. في الجافا سكريبت، بنجمع كل الصور دي في قائمة عقد (`NodeList`) باستخدام `querySelectorAll`. البرنامج بيعتمد على متغير اسمه `slideIndex` قيمته المبدئية صفر. بنستخدم دالة أوتوماتيكية `setInterval` عشان تزود الـ `Index` ده وتستدعي دالة تانية بتشيل كلاس الإظهار `displaySlide` من الصورة القديمة وتحطه على الصورة الجديدة. ولإننا بنتعامل مع مصفوفة صور محدودة، المدرب عمل شروط (`If Statements`) تضمن إن لو الـ `Index` عدى عدد الصور، يرجع للصفر تاني (عشان يلف في دائرة)، ولو ضغطنا على زرار \"السابق\" والـ `Index` بقى أصغر من صفر، يروح لآخر صورة. المدرب كمان ضاف دالة `clearInterval` على زرار الرجوع عشان لو المستخدم قرر يرجع يتفرج على صورة براحته، المؤقت الأوتوماتيكي يقف والصورة متتغيرش فجأة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Image Slider / Carousel`:</strong> A UI component that cycles through a series of images linearly.",
+            "<strong>`clearInterval(intervalID)`:</strong> A method that cancels a timed, repeating action which was previously established by a call to `setInterval()`."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const slides = document.querySelectorAll(\".slides img\");\nlet slideIndex = 0;\nlet intervalId = null;\n\n// Wait for all DOM content to load before running\ndocument.addEventListener(\"DOMContentLoaded\", initializeSlider);\n\nfunction initializeSlider() {\n    if (slides.length > 0) {\n        slides[slideIndex].classList.add(\"displaySlide\");\n        // Automatically change slides every 5 seconds\n        intervalId = setInterval(nextSlide, 5000); \n    }\n}\n\nfunction showSlide(index) {\n    // Loop back to the beginning if we exceed the array length\n    if (index >= slides.length) {\n        slideIndex = 0;\n    } \n    // Loop to the end if we go backwards past 0\n    else if (index < 0) {\n        slideIndex = slides.length - 1;\n    }\n\n    // Hide all slides\n    slides.forEach(slide => {\n        slide.classList.remove(\"displaySlide\");\n    });\n\n    // Show the current slide\n    slides[slideIndex].classList.add(\"displaySlide\");\n}\n\nfunction prevSlide() {\n    // Stop the automatic sliding when manually interacting\n    clearInterval(intervalId);\n    slideIndex--;\n    showSlide(slideIndex);\n}\n\nfunction nextSlide() {\n    slideIndex++;\n    showSlide(slideIndex);\n}"
+        }
+      ]
+    },
+    {
+      "title": "78. Callback Hell (جحيم الاستدعاءات الرجعية `Callback Hell`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "جحيم الاستدعاءات الرجعية (`Callback Hell`) هو مصطلح بيوصف حالة سيئة في الكود بتحصل لما بنكتب دوال ممررة (`Callbacks`) متداخلة جوه بعضها بشكل عميق جداً لدرجة إن الكود بياخد شكل هرمي وبيبقى صعب جداً في القراءة والصيانة. المدرب وضح إننا بنضطر نعمل كده مع العمليات غير المتزامنة (`Asynchronous Functions`) لإننا مش عارفين المهام دي هتاخد وقت قد إيه، وعايزين نجبرها تتنفذ بالترتيب (مهمة 1، ثم 2، ثم 3، ثم 4). عشان نضمن الترتيب ده، بنخلي كل دالة تستقبل `Callback`، ولما تخلص شغلها، تستدعي الدالة اللي بعدها، وهكذا. النمط ده كان منتشر جداً في الجافا سكريبت القديمة، بس المدرب حذر منه جداً وقال إننا لازم نتجنبه لإن في طرق أحدث وأسهل بكتير للقراءة زي الـ `Promises` والـ `Async`/`Await`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Callback Hell`:</strong> A phenomenon that afflicts JavaScript developers when multiple asynchronous functions are nested inside callbacks, resulting in a pyramid-like structure of code that is hard to read and debug."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block: Demonstrating Callback Hell to enforce sequential execution\nfunction task1(callback) {\n    setTimeout(() => {\n        console.log(\"Task 1 complete\");\n        callback();\n    }, 2000);\n}\n\nfunction task2(callback) {\n    setTimeout(() => {\n        console.log(\"Task 2 complete\");\n        callback();\n    }, 1000);\n}\n\nfunction task3(callback) {\n    setTimeout(() => {\n        console.log(\"Task 3 complete\");\n        callback();\n    }, 3000);\n}\n\nfunction task4(callback) {\n    setTimeout(() => {\n        console.log(\"Task 4 complete\");\n        callback();\n    }, 1500);\n}\n\n// Nested Callbacks (The \"Pyramid of Doom\")\ntask1(() => {\n    task2(() => {\n        task3(() => {\n            task4(() => {\n                console.log(\"All tasks complete!\");\n            });\n        });\n    });\n});"
+        }
+      ]
+    },
+    {
+      "title": "79. Promises (الوعود `Promises`)",
+      "icon": "fa-solid fa-clock",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الوعود (`Promises`) هي عبارة عن كائنات (`Objects`) وظيفتها إدارة العمليات غير المتزامنة زي تحميل ملفات أو جلب بيانات من سيرفر. الفكرة هنا إن الدالة بترجع لك \"وعد\" إنها هتجيبلك قيمة في المستقبل. الوعد ده بيفضل في حالة انتظار (`Pending`) لحد ما المهمة تخلص. لو المهمة نجحت، الوعد بيتحقق (`Resolved`) وبيرجعلك النتيجة، ولو فشلت، الوعد بيترفض (`Rejected`) وبيرجعلك رسالة خطأ. عشان ننشئ وعد، بنكتب `new Promise` وبنمرر لها دالة بتاخد معاملين: `resolve` و `reject`. الميزة الكبرى للـ `Promises` إنها بتعالج مشكلة الـ `Callback Hell`؛ بدل التداخل الهرمي، بنستخدم تقنية تسلسل الدوال (`Method Chaining`) عن طريق استخدام كلمة `then.` اللي معناها \"وبعدين\"، عشان نقول للبرنامج \"لما الوعد ده يتحقق، نفذ الوعد اللي بعده\"، وفي الآخر بنحط دالة `catch.` عشان تصطاد أي خطأ ممكن يحصل في أي خطوة من السلسلة. في المثال، المدرب طبق الفكرة دي على مهام زي (تمشية الكلب، تنظيف المطبخ، إخراج القمامة)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Promise`:</strong> An object representing the eventual completion (or failure) of an asynchronous operation and its resulting value.",
+            "<strong>`resolve(value)`:</strong> A function parameter inside the Promise constructor used to indicate that the asynchronous operation completed successfully.",
+            "<strong>`reject(reason)`:</strong> A function parameter inside the Promise constructor used to indicate that the asynchronous operation failed.",
+            "<strong>`.then()`:</strong> A method used to schedule callback functions to be executed when the Promise successfully resolves.",
+            "<strong>`.catch()`:</strong> A method used to handle errors or rejections produced anywhere in the Promise chain."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Creating a Promise-returning function\nfunction walkDog() {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            const dogWalked = true; // Simulating success\n            \n            if (dogWalked) {\n                resolve(\"You walk the dog\");\n            } else {\n                reject(\"You didn't walk the dog\");\n            }\n        }, 1500);\n    });\n}\n\nfunction cleanKitchen() {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            const kitchenCleaned = true;\n            \n            if (kitchenCleaned) {\n                resolve(\"You clean the kitchen\");\n            } else {\n                reject(\"You didn't clean the kitchen\");\n            }\n        }, 2500);\n    });\n}\n\nfunction takeOutTrash() {\n    return new Promise((resolve, reject) => {\n        setTimeout(() => {\n            const trashTakenOut = false; // Simulating a failure here\n            \n            if (trashTakenOut) {\n                resolve(\"You take out the trash\");\n            } else {\n                reject(\"You didn't take out the trash\");\n            }\n        }, 500);\n    });\n}\n\n// Executing Promises sequentially using Method Chaining\nwalkDog()\n    .then(value => {\n        console.log(value);\n        return cleanKitchen(); // Returning the next Promise in the chain\n    })\n    .then(value => {\n        console.log(value);\n        return takeOutTrash();\n    })\n    .then(value => {\n        console.log(value);\n        console.log(\"You finished all the chores!\");\n    })\n    .catch(error => {\n        // This will catch the failure in takeOutTrash\n        console.error(error); \n    });"
+        }
+      ]
+    },
+    {
+      "title": "80. Async / Await (التزامن والانتظار `Async / Await`)",
+      "icon": "fa-solid fa-clock",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الكلمتين المفتاحيتين `async` و `await` بيشتغلوا مع بعض كفريق عشان يسهلوا كتابة الأكواد غير المتزامنة ويخلوها تتقرأ كأنها كود متزامن عادي سطراً بسطر (`Synchronous manner`). المدرب وضح إن لو كتبنا كلمة `async` قبل تعريف أي دالة، ده بيخلي الدالة دي أوتوماتيكياً ترجع وعد (`Promise`). لكن السحر الحقيقي في كلمة `await`، اللي بتكبر الدالة إنها تقف وتستنى (`Wait`) لحد ما الوعد ده يخلص ويجيب النتيجة قبل ما تكمل قراءة باقي السطور. ولازم نكون عارفين إن كلمة `await` مينفعش تُستخدم إطلاقاً غير جوه دالة مكتوب قبلها `async`. ولإن الوعود ممكن تفشل وترجع (`Reject`)، أفضل طريقة للتعامل معاها جوه الـ `async`/`await` هي استخدام بلوك الـ `try/catch` اللي شرحناه قبل كده عشان نصطاد الأخطاء بأناقة من غير ما البرنامج يبوظ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`async` Keyword:</strong> Used to declare an asynchronous function, guaranteeing that the function will implicitly return a Promise.",
+            "<strong>`await` Keyword:</strong> Pauses the execution of an async function, waiting for a Promise to resolve before continuing to the next line of code."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Using the same Promise-returning functions (walkDog, cleanKitchen, takeOutTrash) from the previous section\n\n// Declaring the function as async\nasync function doChores() {\n    // Encasing the logic in a try/catch block to handle rejections\n    try {\n        // Code execution pauses here until walkDog resolves\n        const walkDogResult = await walkDog();\n        console.log(walkDogResult);\n\n        // Pauses again until cleanKitchen resolves\n        const cleanKitchenResult = await cleanKitchen();\n        console.log(cleanKitchenResult);\n\n        // Pauses again until takeOutTrash resolves\n        const takeOutTrashResult = await takeOutTrash();\n        console.log(takeOutTrashResult);\n\n        console.log(\"You finished all the chores!\");\n\n    } catch (error) {\n        // Any reject() triggered in the awaited promises will be caught here\n        console.error(error); \n    }\n}\n\n// Invoking the async function\ndoChores();"
+        }
+      ]
+    },
+    {
+      "title": "81. JSON (صيغة جيسون `JSON`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "صيغة الجيسون (`JSON`) هي اختصار لـ `JavaScript Object Notation`. هي عبارة عن صيغة قياسية خفيفة لتبادل ونقل البيانات، وبتُستخدم غالباً عشان نبعت ونستقبل بيانات بين المتصفح (`Web Application`) وبين السيرفر. ملفات الجيسون ممكن تكون عبارة عن كائن (`Object`)، أو مصفوفة قيم (`Array`)، أو مصفوفة من الكائنات (`Array of Objects`). التركيبة بتاعتها بتشبه الكائنات العادية في الجافا سكريبت بس في شرط صارم جداً: كل المفاتيح (`Keys`) والنصوص (`String values`) لازم تكون محطوطة بين علامات تنصيص مزدوجة (`Double quotes`). الجافا سكريبت بتوفر كائن مدمج اسمه `JSON` جواه دالتين مهمين: دالة `stringify` عشان تاخد أي كائن أو مصفوفة عندك في الكود وتحولها لنص (`String`) واحد طويل ينفع يتبعت للسيرفر، ودالة `parse` عشان تعمل العكس؛ يعني تاخد النص اللي جاي من السيرفر وتفكه وترجعه لكائن أو مصفوفة جافا سكريبت حقيقية تقدر تتعامل معاها."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`JSON`:</strong> JavaScript Object Notation. A lightweight, text-based data interchange format.",
+            "<strong>`JSON.stringify()`:</strong> A method that converts a JavaScript object or value to a JSON string.",
+            "<strong>`JSON.parse()`:</strong> A method that parses a JSON string, constructing the JavaScript value or object described by the string."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// A JavaScript Array of Objects\nconst people = [\n    { name: \"SpongeBob\", age: 30, isEmployed: true },\n    { name: \"Patrick\", age: 34, isEmployed: false }\n];\n\n// Converting JS Objects into a JSON String\nconst jsonString = JSON.stringify(people);\nconsole.log(jsonString); \n// Output is a single string: '[{\"name\":\"SpongeBob\",\"age\":30,\"isEmployed\":true},{\"name\":\"Patrick\",\"age\":34,\"isEmployed\":false}]'\n\n// Converting a JSON String back into JS Objects\nconst parsedData = JSON.parse(jsonString);\nconsole.log(parsedData); \n// Output is a proper JS Array of Objects\n\n// Accessing the parsed data\nparsedData.forEach(person => {\n    console.log(`Name: ${person.name}, Employed: ${person.isEmployed}`);\n});"
+        }
+      ]
+    },
+    {
+      "title": "82. Fetch API (واجهة جلب البيانات `Fetch API`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دالة الـ `fetch` هي واجهة مدمجة في المتصفح بتستخدم لعمل طلبات (`HTTP requests`) لجلب أو إرسال موارد عبر شبكة الإنترنت. الدالة دي بتدعم العمليات غير المتزامنة وبترجع وعد (`Promise`). بشكل افتراضي، الـ `fetch` بتعمل طلب من نوع (`GET`) لجلب البيانات، لكن بنقدر نحدد أنواع تانية زي (`POST`، `PUT`، `DELETE`) لإرسال أو تعديل البيانات. المدرب عمل تطبيق بيجيب بيانات من (Pokémon `API`). عشان نتعامل مع الـ `fetch`، أول حاجة بنمرر الرابط (`URL`)، ولما الوعد ينجح بيرجع لنا كائن استجابة (`Response Object`). مهم جداً نشيك على خاصية `response.ok` (اللي بتكون `true` لو رمز الحالة 200)، لإن الـ `fetch` مش بيعمل `Reject` للوعد لو المورد مش موجود (زي رمز خطأ 404)، فلو الخاصية دي `false` لازم نفتعل خطأ بـ `throw new Error`. بعد كده بنستخدم دالة `json()` اللي بترجع وعد جديد عشان تحول البيانات من شكلها النصي الخام لصيغة جيسون نقدر نقرأها. المدرب وضح طريقتين لكتابة ده: استخدام تسلسل الـ `.then()`، واستخدام الأسلوب الأحدث والأسهل `async / await`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`fetch(url, options)`:</strong> A global function used to make asynchronous HTTP requests to fetch resources from a network.",
+            "<strong>`response.ok`:</strong> A read-only boolean property of the Response object that indicates whether the response was successful (status in the range 200–299).",
+            "<strong>`.json()`:</strong> A method on the Response object that reads the body to completion and returns a promise that resolves with the result of parsing the body text as JSON."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Fetching using traditional Promises (.then)\nfetch(\"https://pokeapi.co/api/v2/pokemon/pikachu\")\n    .then(response => {\n        if (!response.ok) { // Handles 404 Not Found errors\n            throw new Error(\"Could not fetch resource\");\n        }\n        return response.json(); // Parses body as JSON\n    })\n    .then(data => {\n        console.log(`Name: ${data.name}, Weight: ${data.weight}`);\n    })\n    .catch(error => {\n        console.error(error);\n    });\n\n// Code block 2: Fetching using modern Async / Await\nasync function fetchPokemonData() {\n    try {\n        const pokemonName = \"typhlosion\";\n        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);\n        \n        if (!response.ok) {\n            throw new Error(\"Could not fetch resource\");\n        }\n\n        const data = await response.json();\n        console.log(`Name: ${data.name}, ID: ${data.id}`);\n\n    } catch (error) {\n        console.error(error);\n    }\n}\nfetchPokemonData();"
+        }
+      ]
+    },
+    {
+      "title": "83. Weather App Project (مشروع تطبيق الطقس)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب قام ببناء مشروع متكامل لتطبيق بيجيب بيانات الطقس الحقيقية بناءً على اسم المدينة باستخدام الـ (`Fetch API`) وموقع (`OpenWeatherMap`). البرنامج بيبدأ بنموذج إدخال (`Form`)، ولما المستخدم بيضغط زرار الإرسال، بنستخدم حدث الـ `submit`، وبنمنع المتصفح من إنه يعمل تحديث للصفحة باستخدام `event.preventDefault()`. لو حقل الإدخال مش فاضي، بنستدعي دالة غير متزامنة (`Async function`) بتعمل `fetch` للرابط بتاع الـ `API` وبنمررله اسم المدينة ومفتاح الواجهة البرمجية (`API Key`). بعد ما بنستلم بيانات الجيسون، المدرب استخدم تقنية الـ `Destructuring` المتقدمة (استخراج القيم المتداخلة) عشان يسحب المدينة والحرارة والرطوبة وحالة الطقس ورمز الـ `ID` الخاص بالطقس في سطر واحد. بعد كده بنبني عناصر الـ `HTML` ديناميكياً باستخدام `createElement` وبنحط جواها البيانات، وبنحول درجات الحرارة من الكلفن (`Kelvin`) للفهرنهايت والمئوية. وأخيراً، المدرب استخدم جملة `switch` عشان يفحص الـ `ID` الخاص بالطقس (اللي بييجي من الـ `API` على شكل أرقام زي 200 للعواصف، أو 800 للسماء الصافية) وبناءً عليه بيرجع الإيموجي المناسب لتمثيل حالة الجو."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`event.preventDefault()`:</strong> A method called on the event object inside an event listener to prevent the browser's default behavior, such as preventing a form submission from refreshing the entire page.",
+            "<strong>`Nested Object Destructuring`:</strong> The process of unpacking variables from deep within a complex JSON object structure directly in the variable assignment phase."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Note: Partial core logic implementation representing the project's logic\nconst weatherForm = document.querySelector(\".weatherForm\");\nconst cityInput = document.querySelector(\".cityInput\");\n// Replace with a real API key from openweathermap.org\nconst apiKey = \"YOUR_API_KEY_HERE\"; \n\nweatherForm.addEventListener(\"submit\", async (event) => {\n    event.preventDefault(); // Prevents page reload\n    \n    const city = cityInput.value;\n    \n    if (city) {\n        try {\n            const weatherData = await getWeatherData(city);\n            displayWeatherInfo(weatherData);\n        } catch (error) {\n            console.error(error);\n            displayError(\"Could not fetch weather data\");\n        }\n    } else {\n        displayError(\"Please enter a city\");\n    }\n});\n\nasync function getWeatherData(city) {\n    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;\n    const response = await fetch(apiUrl);\n    \n    if (!response.ok) {\n        throw new Error(\"Could not fetch weather data\");\n    }\n    \n    return await response.json();\n}\n\nfunction displayWeatherInfo(data) {\n    // Nested Object Destructuring\n    const { \n        name: city, \n        main: { temp, humidity }, \n        weather: [{ description, id }] \n    } = data;\n\n    // Element creation and appending logic would go here\n    // Example formula: Kelvin to Celsius\n    const tempCelsius = (temp - 273.15).toFixed(1);\n    console.log(`City: ${city}, Temp: ${tempCelsius}°C, Humidity: ${humidity}%`);\n    console.log(`Weather: ${description} ${getWeatherEmoji(id)}`);\n}\n\nfunction getWeatherEmoji(weatherId) {\n    // Weather API condition codes\n    switch (true) {\n        case (weatherId >= 200 && weatherId < 300):\n            return \"⛈️\"; // Thunderstorm\n        case (weatherId >= 300 && weatherId < 400):\n            return \"🌧️\"; // Drizzle\n        case (weatherId >= 500 && weatherId < 600):\n            return \"🌧️\"; // Rain\n        case (weatherId >= 600 && weatherId < 700):\n            return \"❄️\"; // Snow\n        case (weatherId >= 700 && weatherId < 800):\n            return \"🌫️\"; // Atmosphere/Fog\n        case (weatherId === 800):\n            return \"☀️\"; // Clear\n        case (weatherId >= 801 && weatherId < 810):\n            return \"☁️\"; // Clouds\n        default:\n            return \"❓\";\n    }\n}"
+        }
+      ]
+    }
+  ]
+}

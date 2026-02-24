@@ -1,0 +1,237 @@
+{
+  "title": "JavaScript Full Course: Part 12",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Elzero Web School curriculum.",
+  "links": [
+    "https://youtu.be/gIGGhFlGgLI?si=h3SzxBzNgsnu5gqD"
+  ],
+  "sections": [
+    {
+      "title": "114. Arrays (المصفوفات `Arrays`)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المصفوفة (`Array`) هي نوع من البيانات بيسمحلك تخزن قايمة من العناصر (`Elements`) في مكان واحد بدل ما تعمل متغير منفصل لكل عنصر. بننشئ المصفوفة باستخدام الأقواس المربعة `[]` وبنفصل بين العناصر بفاصلة `,`. عشان نوصل لأي عنصر بنستخدم رقم الفهرس الخاص بيه (`Index`) واللي بيبدأ دايماً من صفر `0` زي ما اتعلمنا في النصوص. الجميل في الجافا سكريبت إن المصفوفة ممكن تحتوي على مصفوفة تانية جواها (`Nested Array`)؛ وعشان توصل لعنصر جوه المصفوفة الداخلية، بتستخدم الأقواس المربعة ورا بعض زي `array`. كمان نقدر نعدل أي عنصر بسهولة بإننا نحدد الفهرس بتاعه ونديله قيمة جديدة. الجافا سكريبت بتعتبر المصفوفات ككائنات (`object`) لو استخدمنا معاها `typeof`، وعشان نتأكد بشكل قاطع هل المتغير ده مصفوفة ولا لأ، بنستخدم دالة مدمجة اسمها `Array.isArray()`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Array`:</strong> A data structure resembling a list that stores multiple values within a single variable. Arrays in JavaScript are zero-indexed.",
+            "<strong>`Nested Array`:</strong> An array placed inside another array, forming a multi-dimensional structure.",
+            "<strong>`Array.isArray()`:</strong> A static method that determines whether the passed value is explicitly an Array, returning a boolean."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [\"Ahmed\", \"Mohamed\", \"Sayed\", [\"Marwan\", \"Ali\"]];\n\n// Accessing elements via index\nconsole.log(myFriends); // \"Ahmed\"\n\n// Accessing elements inside a nested array\nconsole.log(myFriends); // \"Ali\"\nconsole.log(myFriends); // \"i\" (Accessing the character of the string)\n\n// Modifying an element\nmyFriends = \"Mahmoud\";\nconsole.log(myFriends); // [\"Ahmed\", \"Mahmoud\", \"Sayed\", [\"Marwan\", \"Ali\"]]\n\n// Checking if it is an array (since typeof returns \"object\")\nconsole.log(typeof myFriends); // \"object\"\nconsole.log(Array.isArray(myFriends)); // true"
+        }
+      ]
+    },
+    {
+      "title": "115. Array `length` Property (خاصية طول المصفوفة `length`)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "خاصية `length` بتجيبلك عدد العناصر اللي جوه المصفوفة. ولإن العد بيبدأ من 1 بينما الفهرس بيبدأ من 0، دايماً الـ `length` بيكون سابق الفهرس ومتقدم عليه بخطوة (أكبر من آخر فهرس بواحد). المدرب وضح استراتيجيات ذكية لاستخدام الـ `length`: نقدر نوصل لآخر عنصر في المصفوفة ديناميكياً عن طريق `array.length - 1`. ونقدر نضيف عنصر جديد في آخر المصفوفة بالظبط عن طريق مساواته باللينس `array[array.length] = value`. الميزة الأقوى إننا نقدر نتحكم في حجم المصفوفة (`Truncate`) ونقصها؛ لو عندنا مصفوفة فيها 4 عناصر وخلينا الـ `length = 2`، الجافا سكريبت هتحذف اخر عنصرين وتسيب أول اتنين بس."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`length` (Array):</strong> A property that returns or sets the number of elements in an array.",
+            "<strong>`Dynamic Appending`:</strong> Using `array[array.length] = value` to safely insert an element precisely at the end of the array without needing to know its exact size.",
+            "<strong>`Truncation`:</strong> The process of intentionally shortening an array by manually setting its `length` property to a smaller number."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [\"Ahmed\", \"Mohamed\", \"Sayed\", \"Alaa\"];\n\nconsole.log(myFriends.length); // 4\n\n// 1. Appending a new element dynamically to the end\nmyFriends[myFriends.length] = \"Gamal\";\nconsole.log(myFriends); // [\"Ahmed\", \"Mohamed\", \"Sayed\", \"Alaa\", \"Gamal\"]\n\n// 2. Updating the very last element dynamically\nmyFriends[myFriends.length - 1] = \"Sami\";\nconsole.log(myFriends); // \"Gamal\" is replaced by \"Sami\"\n\n// 3. Truncating the array\nmyFriends.length = 2;\nconsole.log(myFriends); // [\"Ahmed\", \"Mohamed\"]"
+        }
+      ]
+    },
+    {
+      "title": "116. Array Methods: Add and Remove (إضافة وحذف العناصر)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عشان نتحكم في عناصر المصفوفة، اللغة بتقدم لنا 4 دوال أساسية:\n*   **`unshift()`**: بتضيف عنصر أو أكتر في **بداية** المصفوفة وبترجع الطول الجديد للمصفوفة.\n*   **`push()`**: بتضيف عنصر أو أكتر في **نهاية** المصفوفة.\n*   **`shift()`**: بتحذف **أول** عنصر من المصفوفة، والميزة الخطيرة هنا إنها \"بترجع\" العنصر اللي اتحذف ده، يعني نقدر نخزنه في متغير ونستعمله في حتة تانية في الكود.\n*   **`pop()`**: بتحذف **آخر** عنصر من المصفوفة، وبرضه بترجعه نقدر نخزنه."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`unshift()`:</strong> Adds one or more elements to the beginning of an array and returns the new length of the array.",
+            "<strong>`push()`:</strong> Adds one or more elements to the end of an array and returns the new length of the array.",
+            "<strong>`shift()`:</strong> Removes the first element from an array and returns that removed element.",
+            "<strong>`pop()`:</strong> Removes the last element from an array and returns that element."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [\"Ahmed\", \"Mohamed\", \"Sayed\", \"Alaa\"];\n\n// Adding elements\nmyFriends.unshift(\"Osama\", \"Nabeel\"); // Adds to the beginning\nmyFriends.push(\"Samah\", \"Eman\");      // Adds to the end\n\nconsole.log(myFriends); \n// [\"Osama\", \"Nabeel\", \"Ahmed\", \"Mohamed\", \"Sayed\", \"Alaa\", \"Samah\", \"Eman\"]\n\n// Removing elements and capturing them in variables\nlet firstFriend = myFriends.shift(); // Removes and returns \"Osama\"\nlet lastFriend = myFriends.pop();    // Removes and returns \"Eman\"\n\nconsole.log(`First removed: ${firstFriend}`);\nconsole.log(`Last removed: ${lastFriend}`);\nconsole.log(myFriends); \n// [\"Nabeel\", \"Ahmed\", \"Mohamed\", \"Sayed\", \"Alaa\", \"Samah\"]"
+        }
+      ]
+    },
+    {
+      "title": "117. Array Methods: Search (البحث في المصفوفات)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "للبحث جوه المصفوفات عندنا 3 دوال مهمين جداً:\n*   **`indexOf(value, start)`**: بتبحث عن قيمة معينة وبترجع أول فهرس (`Index`) تلاقيه فيه. بتبحث من الشمال لليمين، وممكن نحدد نقطة بداية البحث. لو العنصر مش موجود نهائياً، هترجع `-1`.\n*   **`lastIndexOf(value, start)`**: بتعمل نفس الوظيفة بالظبط بس بتبحث من اليمين للشمال (من الآخر للأول). لو لقت العنصر، بتعد رقم الفهرس بتاعه بالطريقة الطبيعية من الشمال.\n*   **`includes(value, start)`**: دي دالة حديثة بترجع قيمة منطقية (`Boolean`). لو العنصر موجود هترجع `true` ولو مش موجود هترجع `false`. استخدام السالب في نقطة البداية بيخلي البحث يبدأ من آخر المصفوفة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`indexOf()`:</strong> Returns the first index at which a given element can be found in the array, or `-1` if it is not present.",
+            "<strong>`lastIndexOf()`:</strong> Returns the last index at which a given element can be found in the array, searching backwards from the end.",
+            "<strong>`includes()`:</strong> Determines whether an array includes a certain value among its entries, returning `true` or `false` as appropriate."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [\"Ahmed\", \"Mohamed\", \"Sayed\", \"Alaa\", \"Ahmed\"];\n\n// indexOf (Searches from start to end)\nconsole.log(myFriends.indexOf(\"Ahmed\")); // 0\nconsole.log(myFriends.indexOf(\"Ahmed\", 2)); // 4 (Starts searching from index 2)\n\n// lastIndexOf (Searches from end to start)\nconsole.log(myFriends.lastIndexOf(\"Ahmed\")); // 4\nconsole.log(myFriends.lastIndexOf(\"Ahmed\", -2)); // 0 (Starts from the second to last item)\n\n// Missing elements return -1\nconsole.log(myFriends.indexOf(\"Osama\")); // -1\n\n// includes (Returns Boolean)\nconsole.log(myFriends.includes(\"Sayed\")); // true\nconsole.log(myFriends.includes(\"Osama\")); // false"
+        }
+      ]
+    },
+    {
+      "title": "118. Array Methods: Sort and Reverse (ترتيب وعكس المصفوفات)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "*   **`sort()`**: الدالة دي بترتب عناصر المصفوفة. بس لازم نركز إنها بترتب أبجدياً (`Lexicographically`) مش رياضياً؛ يعني بتعتبر الأرقام نصوص وتقارن أول حرف. عشان كده رقم زي `20` هييجي بعد رقم `1000` لإن الـ `2` أكبر من الـ `1` في الترتيب المعجمي.\n*   **`reverse()`**: دي بتعكس ترتيب العناصر الحالية في المصفوفة (بتخلي أول عنصر يكون الأخير وهكذا)، وممكن ندمجها مع الـ `sort` (عن طريق الـ `Chaining`) عشان نرتب العناصر أبجدياً وبعدين نعكس الترتيب ده تماماً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`sort()`:</strong> Sorts the elements of an array in place. By default, it sorts values as strings in alphabetical and ascending order.",
+            "<strong>`reverse()`:</strong> Reverses an array in place. The first array element becomes the last, and the last array element becomes the first.",
+            "<strong>`Method Chaining`:</strong> Calling one method directly after another on the same object."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let mixedArray = [10, \"Sayed\", \"Mohamed\", \"90\", 1000, 100, 20, \"10\", -20, -10];\n\n// Sorting elements lexicographically\nconsole.log(mixedArray.sort()); \n// Outputs: [-10, -20, 10, \"10\", 100, 1000, 20, \"90\", \"Mohamed\", \"Sayed\"]\n\n// Reversing the array (does not sort mathematically, just flips the current order)\nlet names = [\"Ahmed\", \"Sayed\", \"Ali\"];\nconsole.log(names.reverse()); \n// Outputs: [\"Ali\", \"Sayed\", \"Ahmed\"]\n\n// Chaining sort and reverse\nlet sortedNames = [\"Ahmed\", \"Sayed\", \"Ali\"];\nconsole.log(sortedNames.sort().reverse()); \n// Outputs: [\"Sayed\", \"Ali\", \"Ahmed\"]"
+        }
+      ]
+    },
+    {
+      "title": "119. Array Methods: Slice and Splice (القص واللصق في المصفوفات)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الدالتين دول بيعملوا وظايف متقدمة في المصفوفات بس بينهم فرق جوهري:\n*   **`slice(start, end)`**: بتاخد \"قطعة\" من المصفوفة وترجعها في مصفوفة جديدة بدون ما تأثر نهائياً على المصفوفة الأصلية. النهاية (`End`) مش بتدخل معانا في القطع (`Not included`). وبتقبل أرقام سالبة عشان تعد من آخر المصفوفة.\n*   **`splice(start, deleteCount, items...)`**: دي بتعدل على المصفوفة الأصلية مباشرة وبترجع العناصر اللي اتمسحت. بتطلب 3 حاجات: هتبدأ منين؟ هتمسح كام عنصر؟ وهل عايز تحط عناصر جديدة مكانهم ولا لأ؟ لو خلينا عدد العناصر الممسوحة صفر، دي هتشتغل كأداة للإضافة في أي مكان جوه المصفوفة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`slice()`:</strong> Returns a shallow copy of a portion of an array into a new array object selected from `start` to `end` (`end` not included). The original array will not be modified.",
+            "<strong>`splice()`:</strong> Changes the contents of an array by removing or replacing existing elements and/or adding new elements in place."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [\"Ahmed\", \"Sayed\", \"Ali\", \"Osama\", \"Gamal\", \"Ameer\"];\n\n// 1. SLICE (Does not alter original array)\n// Extracts from index 1 to 3 (index 3 \"Osama\" is not included)\nconsole.log(myFriends.slice(1, 3)); // [\"Sayed\", \"Ali\"]\n\n// Using negative indices (from index -3 to -1)\nconsole.log(myFriends.slice(-3, -1)); // [\"Osama\", \"Gamal\"]\n\n\n// 2. SPLICE (Alters the original array directly)\n// Start at index 0, delete 0 items, and add \"Samir\" and \"Samara\"\nmyFriends.splice(0, 0, \"Samir\", \"Samara\");\nconsole.log(myFriends); \n// [\"Samir\", \"Samara\", \"Ahmed\", \"Sayed\", \"Ali\", \"Osama\", \"Gamal\", \"Ameer\"]\n\n// Start at index 2 (at \"Ahmed\"), delete 2 items (\"Ahmed\", \"Sayed\"), add \"Tarek\"\nmyFriends.splice(2, 2, \"Tarek\");\nconsole.log(myFriends);\n// [\"Samir\", \"Samara\", \"Tarek\", \"Ali\", \"Osama\", \"Gamal\", \"Ameer\"]"
+        }
+      ]
+    },
+    {
+      "title": "120. Array Methods: Concat and Join (دمج المصفوفات وتحويلها لنصوص)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "*   **`concat()`**: بتستخدم لدمج مصفوفتين أو أكتر مع بعض عشان نطلع بمصفوفة جديدة تماماً، القديم مش بيتأثر. نقدر كمان نمرر قيم فردية كمعاملات وتندمج جوه المصفوفة الجديدة.\n*   **`join(separator)`**: بتلم كل عناصر المصفوفة وتحولهم لنص واحد (`String`). بتقدر تحدد الفاصل (`Separator`) اللي هيكون بين الكلمات زي المسافة أو الـ `|` أو غيره. لو مكتبتش فاصل، الجافا سكريبت بتحط الفاصلة `,` بشكل افتراضي. لو حطيت نص فاضي `\"\"` الكلمات هتلزق في بعض."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`concat()`:</strong> Used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.",
+            "<strong>`join()`:</strong> Creates and returns a new string by concatenating all of the elements in an array, separated by commas or a specified separator string."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [\"Ahmed\", \"Sayed\", \"Ali\"];\nlet newFriends = [\"Samar\", \"Sameh\"];\nlet schoolFriends = [\"Haytham\", \"Shady\"];\n\n// Concatenating multiple arrays and individual string elements\nlet allFriends = myFriends.concat(newFriends, schoolFriends, \"Gameel\", [\"A\", \"B\"]);\nconsole.log(allFriends); \n// [\"Ahmed\", \"Sayed\", \"Ali\", \"Samar\", \"Sameh\", \"Haytham\", \"Shady\", \"Gameel\", \"A\", \"B\"]\n\n// Joining elements into a single string\nconsole.log(allFriends.join());      // Defaults to comma separated: \"Ahmed,Sayed,Ali...\"\nconsole.log(allFriends.join(\"\"));    // No separator: \"AhmedSayedAli...\"\nconsole.log(allFriends.join(\" @ \")); // Custom separator: \"Ahmed @ Sayed @ Ali...\""
+        }
+      ]
+    },
+    {
+      "title": "121. For Loop (حلقة التكرار `For`)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "التكرار (`Looping`) هو مفهوم برمجي بيخلينا ننفذ نفس الكود عدد معين من المرات بدل ما نكتبه بإيدينا. حلقة الـ `for` بتتكون من 3 خطوات أساسية (عبارة عن سيناريو تعيين موظفين):\n1.  **التهيئة `Initialization`**: بننشئ متغير (غالباً بنسميه `i`) وبنديله قيمة البداية زي ورقة فاضية.\n2.  **الشرط `Condition`**: بنختبر هل المفروض اللوب يكمل ولا يقف؟ (طول ما الـ `i` أصغر من الرقم المطلوب اللوب بيكمل).\n3.  **التحديث `Increment/Update`**: الأكشن اللي بتحصل بعد كل دورة عشان نتقدم خطوة (بنزود الـ `i` بـ `1`). لو نسينا الخطوة دي، الشرط هيفضل يتحقق للأبد وهنعمل كارثة اسمها (`Infinite Loop`) بتهنج المتصفح."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`for` Loop:</strong> A control flow statement for specifying iteration, which allows code to be executed repeatedly.",
+            "<strong>`Initialization`:</strong> The setup phase where a counter variable (usually `i` or `index`) is declared.",
+            "<strong>`Condition`:</strong> An expression evaluated before each loop pass. If true, the statement is executed. If false, the loop terminates.",
+            "<strong>`Increment / Final Expression`:</strong> An expression evaluated at the end of each loop iteration, typically used to update or increment the counter variable."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Loop to count from 0 to 9\n// 1. let i = 0 (Initialization)\n// 2. i < 10 (Condition)\n// 3. i++ (Increment)\nfor (let i = 0; i < 10; i++) {\n    console.log(`Employee number: ${i}`);\n}\n// Outputs: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9"
+        }
+      ]
+    },
+    {
+      "title": "122. Looping on Arrays (التكرار داخل المصفوفات)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "أهم استخدام للوب هو إننا نمشي على عناصر المصفوفة واحد واحد. عشان نعمل ده، بنخلي العداد `i` يبدأ من الصفر (لإن الفهرس بيبدأ من صفر)، ونخلي الشرط يقف لما يكون الـ `i` أصغر من طول المصفوفة `array.length` (لإن اللينس دايماً أكبر من آخر فهرس بواحد). الزيرو شرح تطبيق احترافي: إزاي نمشي على مصفوفة فيها نصوص وأرقام، ونعمل شرط (`If condition`) باستخدام `typeof` عشان نتجاهل الأرقام، ونستخرج الأسماء بس ونحطها في مصفوفة جديدة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Array Iteration`:</strong> The process of accessing each item in an array one by one using a loop, combining the array's `length` property and bracket notation `array[i]`."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let myFriends = [1, 2, \"Osama\", \"Ahmed\", 3, 4, \"Sayed\", 6, \"Ali\"];\nlet onlyNames = [];\n\nfor (let i = 0; i < myFriends.length; i++) {\n    // Check if the current element is a string\n    if (typeof myFriends[i] === \"string\") {\n        // Add it to the new array\n        onlyNames.push(myFriends[i]);\n    }\n}\n\nconsole.log(onlyNames); \n// Outputs: [\"Osama\", \"Ahmed\", \"Sayed\", \"Ali\"]"
+        }
+      ]
+    },
+    {
+      "title": "123. Nested Loops (حلقات التكرار المتداخلة `Nested Loops`)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ `Nested Loop` معناه إنك تكتب حلقة تكرار بالكامل جوه حلقة تكرار تانية. المنطق هنا إن اللوب الرئيسي (الأب) بيمسك العنصر الأول، بعدين اللوب الداخلي بيلف دورته كاملة على كل عناصره، وبعد ما يخلص، اللوب الرئيسي ينقل للعنصر التاني، وهكذا. التطبيق الأشهر لده في المتاجر الإلكترونية؛ اللوب الرئيسي بيعرض أسماء المنتجات (كيبورد، ماوس)، وجوه كل منتج بنشغل لوب فرعي يعرض الألوان والموديلات المتاحة للمنتج ده بالذات."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Nested Loop`:</strong> A loop situated entirely inside the body of another loop. The inner loop executes all its iterations completely for each single iteration of the outer loop."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let products = [\"Keyboard\", \"Mouse\", \"Pen\"];\nlet colors = [\"Red\", \"Green\", \"Black\"];\nlet models = ;\n\n// Outer Loop for Products\nfor (let i = 0; i < products.length; i++) {\n    console.log(\"#\".repeat(15));\n    console.log(`# ${products[i]}`);\n    console.log(\"#\".repeat(15));\n    \n    // First Inner Loop for Colors\n    console.log(\"Colors:\");\n    for (let j = 0; j < colors.length; j++) {\n        console.log(`- ${colors[j]}`);\n    }\n    \n    // Second Inner Loop for Models\n    console.log(\"Models:\");\n    for (let k = 0; k < models.length; k++) {\n        console.log(`- ${models[k]}`);\n    }\n}"
+        }
+      ]
+    }
+  ]
+}

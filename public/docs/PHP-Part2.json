@@ -1,0 +1,317 @@
+{
+  "title": "PHP Mastery: Part 2",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-solid fa-code",
+  "sections": [
+    {
+      "title": "12. Data Structures with Arrays: Queue and Stack",
+      "icon": "fa-solid fa-layer-group",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يمكننا باستخدام المصفوفات والدوال الجاهزة في بي إتش بي محاكاة هياكل بيانات أكثر تعقيداً مثل الطابور (Queue) والمكدس (Stack). يتبع هيكل الطابور (Queue) مبدأ \"الداخل أولاً يخرج أولاً\" (FIFO - First In, First Out). عند وقوف شخص جديد في الطابور (Enqueue) فإنه ينضم في النهاية، وهذا يحاكيه أمر `array_push`. عندما يخرج شخص من الطابور (Dequeue)، فإنه يخرج من المقدمة (أول عنصر)، وهذا يحاكيه أمر `array_shift` الذي يستخرج أول عنصر ويقوم بإزاحة باقي العناصر للأمام. يتبع هيكل المكدس (Stack) مبدأ \"الداخل أخيراً يخرج أولاً\" (LIFO - Last In, First Out)، وهو يشبه وضع الكتب فوق بعضها. لتطبيق المكدس (Stack)، إذا اعتبرنا أن العنصر الجديد يُضاف أعلى المكدس (أول عنصر)، نستخدم `array_unshift` للإضافة في البداية، ونستخدم `array_shift` للاستخراج من البداية. للوصول إلى مصفوفة معرفة خارج الدالة (Global Scope) والتعديل عليها داخل الدالة، نستخدم الكلمة المفتاحية `global` لجلبها إلى النطاق الداخلي."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Queue`:</strong> A linear data structure operating on a First In, First Out (FIFO) basis.",
+            "<strong>`Stack`:</strong> A linear data structure operating on a Last In, First Out (LIFO) basis.",
+            "<strong>`array_shift()`:</strong> Shifts the first value of the array off and returns it, shortening the array by one element and moving everything down.",
+            "<strong>`array_unshift()`:</strong> Prepends one or more elements to the absolute beginning of an array.",
+            "<strong>`Global Scope`:</strong> The context outside of any function; variables defined here require the `global` keyword to be accessed inside a local function scope."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// QUEUE Implementation (FIFO)\n$namesQueue = [\"Yehia\", \"Donia\", \"Ali\"];\n\nfunction enqueue($element) {\n    global $namesQueue;\n    array_push($namesQueue, $element); // Adds to the end\n}\n\nfunction dequeue() {\n    global $namesQueue;\n    return array_shift($namesQueue); // Removes from the beginning\n}\n\nenqueue(\"Ziad\");\n$servedPerson = dequeue(); // Returns \"Yehia\"\n\n\n// STACK Implementation (LIFO - Visualized as Top is Index 0)\n$bookStack = [\"Chemistry\", \"Math\", \"Linguistics\"]; // Linguistics is at the bottom\n\nfunction pushToStack($book) {\n    global $bookStack;\n    array_unshift($bookStack, $book); // Adds to the very top (Index 0)\n}\n\nfunction popFromStack() {\n    global $bookStack;\n    return array_shift($bookStack); // Removes from the very top (Index 0)\n}\n\npushToStack(\"New Book\");\n$topBook = popFromStack(); // Returns \"New Book\""
+        }
+      ]
+    },
+    {
+      "title": "13. Multi-dimensional Arrays",
+      "icon": "fa-solid fa-table-cells",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُتيح لغة البي إتش بي وضع مصفوفة بأكملها كعنصر داخل مصفوفة أخرى، وهذا ما يُعرف بالمصفوفات متعددة الأبعاد (Multi-dimensional Arrays). يُستخدم هذا المفهوم لتمثيل البيانات ذات البعدين (Rows and Columns) كالجداول المدرسية، أو مقاعد قاعات السينما (صفوف وكراسي). للوصول إلى عنصر معين داخل المصفوفة الداخلية، نستخدم أقواس الترقيم مرتين متتاليتين؛ القوس الأول لرقم الصف (الخارجي)، والقوس الثاني لرقم العمود أو الكرسي (الداخلي)، مثل `array[row][seat]`. لطباعة أو المرور على كافة العناصر المتداخلة، نحتاج إلى استخدام حلقات تكرار متداخلة (Nested Loops)؛ حيث تمشي الحلقة الخارجية على الصفوف، وتمشي الحلقة الداخلية على المقاعد داخل كل صف. يمكننا وضع شروط داخل الحلقة الداخلية لتعديل القيمة، مثلاً إذا كانت قيمة الكرسي هي علامة الطرح (`-`)، يمكننا استبدالها برمز (`X`) لتمثيل أن المقعد محجوز."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Multi-dimensional Array`:</strong> An array that contains one or more arrays as its elements, allowing data to be structured in grids or matrices.",
+            "<strong>`Nested Loop`:</strong> A loop running entirely within the body of another loop, commonly used to iterate over multi-dimensional data structures."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// 2D Array Representing Theater Seating\n$seatingList = [\n    [\"A1\", \"A2\", \"-\", \"A4\"], // Row 0 ('-' means taken)\n    [\"B1\", \"B2\", \"B3\", \"B4\"], // Row 1\n    [\"C1\", \"-\", \"C3\", \"C4\"]   // Row 2\n];\n\n// Displaying seating list with Nested Loops\n$rowCount = count($seatingList);\n\nfor ($row = 0; $row < $rowCount; $row++) {\n    echo \"Row \" . $row . \" | \";\n    \n    $seatCount = count($seatingList[$row]);\n    \n    for ($seat = 0; $seat < $seatCount; $seat++) {\n        $currentSeat = $seatingList[$row][$seat];\n        \n        // Modifying output based on condition\n        if ($currentSeat === \"-\") {\n            $currentSeat = \"X\"; // X means taken\n        }\n        \n        echo $currentSeat . \"\\t\"; // \\t for tab spacing\n    }\n    echo \"\\n\"; // New line after each row\n}"
+        }
+      ]
+    },
+    {
+      "title": "14. Associative Arrays and Foreach",
+      "icon": "fa-solid fa-tags",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تتخلى المصفوفات المترابطة (Associative Arrays) عن نظام الترقيم الصفرى المعتاد (0, 1, 2)، وتستبدله باستخدام مفاتيح نصية (String Keys) لتسمية الخانات. يُشبه هذا الهيكل ما يُعرف في اللغات الأخرى بالقاموس (Dictionary) أو الخريطة (Map)، حيث تتكون كل خانة من (مفتاح وقيمة - Key & Value). تُعد هذه المصفوفات ممتازة لتمثيل كيانات حقيقية مثل بيانات الأشخاص (الاسم، العمر، الدرجة)، وتجعل الكود أكثر وضوحاً وقابلية للقراءة. يُحذر بشدة من الخلط (Mixed Concerns) بين المصفوفات المترابطة والمصفوفات الرقمية في نفس الوعاء، لتجنب العشوائية وصعوبة صيانة الكود. تُعتبر حلقة `foreach` الأداة الأمثل والأكثر مرونة للمرور على عناصر هذا النوع من المصفوفات، حيث تضع المفتاح والقيمة مباشرة في متغيرات دون الحاجة لعداد (Counter). يمكنك فصل المفاتيح فقط في مصفوفة مستقلة باستخدام دالة `array_keys()`، أو الحصول على القيم فقط باستخدام `array_values()`."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "وجه المقارنة",
+            "Indexed Array",
+            "Associative Array"
+          ],
+          "rows": [
+            [
+              "**المفتاح (Key)**",
+              "رقم صحيح يبدأ دائماً من 0.",
+              "نص (String) مُعرف يدوياً لوصف البيانات."
+            ],
+            [
+              "**دلالة الاستخدام**",
+              "لحفظ قوائم وعناصر متشابهة متتالية.",
+              "لتمثيل كيانات ذات خصائص محددة كالقاموس."
+            ]
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Associative Array`:</strong> An array whose elements are accessed via designated string keys instead of integer indices.",
+            "<strong>`Dictionary / Map`:</strong> Abstract data structures conceptualized as a collection of unique key-value pairs.",
+            "<strong>`Foreach Loop`:</strong> A control structure specifically designed to easily and safely iterate over arrays and objects without managing index counters manually.",
+            "<strong>`array_keys()`:</strong> A built-in function that returns all the literal string/integer keys of an array.",
+            "<strong>`array_values()`:</strong> A built-in function that returns all the values from the array and indexes the newly returned array numerically."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Defining an Associative Array (Dictionary concept)\n$person = [\n    \"firstName\" => \"Yehia\",\n    \"age\" => 34,\n    \"grade\" => 95\n];\n\n// Adding a new key-value pair dynamically\n$person[\"department\"] = \"Computer Science\";\n\n// Extracting just the keys\n$keysArray = array_keys($person);\n// print_r($keysArray); // [0 => \"firstName\", 1 => \"age\", 2 => \"grade\", ...]\n\n// Iterating over Key-Value pairs using foreach\nforeach ($person as $key => $value) {\n    echo \"The \" . $key . \" is: \" . $value . \"\\n\";\n}\n\n// Iterating over an Array of Associative Arrays\n$students = [\n    [\"firstName\" => \"Yehia\", \"grade\" => 90],\n    [\"firstName\" => \"Donia\", \"grade\" => 95]\n];\n\nforeach ($students as $student) {\n    echo $student[\"firstName\"] . \" got \" . $student[\"grade\"] . \"\\n\";\n}"
+        }
+      ]
+    },
+    {
+      "title": "15. Strings and String Manipulation",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يتعامل المحلل البرمجي للغة بي إتش بي مع النص (String) وكأنه مصفوفة من الحروف (Array of Characters). بناءً على ذلك، يمكنك الوصول لأي حرف من الكلمة باستخدام أقواس الترقيم الخاصة بالمصفوفات. لا تقبل النصوص استخدام دوال المصفوفات بشكل مباشر، فلا يمكن استخدام `count()` لعد الحروف، بل يجب استخدام الدالة المخصصة للنصوص `strlen()` (String Length). لا يمكن استخدام حلقة `foreach` للمرور على حروف النص مباشرة لأنه ليس مصفوفة حقيقية، بل نستخدم حلقة `for` عادية مع الاستعانة بدالة `strlen`. توفر اللغة دوال جاهزة لتنظيف وتعديل النصوص؛ فدالة `str_replace()` تستبدل جزءاً من النص بآخر (ومفيدة لإزالة الفواصل أو المسافات)، ودالة `trim()` تحذف الفراغات من بداية ونهاية النص فقط دون التأثير على ما بداخله. لتحويل نص كامل إلى مصفوفة، يمكننا استخدام دالة `str_split()` لتحويل الكلمة لحروف منفصلة، أو استخدام دالة `explode()` لتقسيم الجملة إلى مصفوفة من الكلمات بناءً على فاصل معين كالمسافة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`String Offset`:</strong> The integer-based index corresponding to a specific individual character inside a string sequence.",
+            "<strong>`strlen()`:</strong> A built-in function that returns the total character length of a given string.",
+            "<strong>`str_replace()`:</strong> A built-in function that replaces all occurrences of a specified search string with a replacement string.",
+            "<strong>`trim()`:</strong> A built-in function that strictly strips whitespace (or other specific characters) from the beginning and end of a string.",
+            "<strong>`explode()`:</strong> A built-in function that splits a full string by a designated string separator, returning an array of substrings."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n$name = \" Yehia Alaraby \";\n\n// Accessing string as an array of characters\necho $name[1] . \"\\n\"; // Outputs 'Y' (offset 0 is a space)\n\n// Using trim to clean trailing/leading spaces\n$cleanName = trim($name);\necho \"Cleaned: '\" . $cleanName . \"'\\n\"; // 'Yehia Alaraby'\n\n// String length\n$length = strlen($cleanName);\n\n// Replacing text (Removing specific characters)\n$noSpaces = str_replace(\" \", \"\", $cleanName);\necho \"No Spaces: \" . $noSpaces . \"\\n\"; // 'YehiaAlaraby'\n\n// Exploding a string into an array of words\n$wordsArray = explode(\" \", $cleanName);\nprint_r($wordsArray); // Array ( [0] => Yehia [1] => Alaraby )\n\n// Splitting a string into an array of individual characters\n$charsArray = str_split(\"PHP\");\nprint_r($charsArray); // Array ( [0] => P [1] => H [2] => P )"
+        }
+      ]
+    },
+    {
+      "title": "16. Intro to OOP and Procedural Limits",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتمد كتابة الكود التقليدية التي تعلمناها سابقاً على الترتيب المتتالي وتنفيذ الأوامر واحداً تلو الآخر، وهذا ما يُعرف بالبرمجة الإجرائية (Procedural Programming). تظهر عيوب هذا الأسلوب بوضوح عند بناء مشاريع ضخمة؛ حيث يصبح الكود فوضوياً، وتتداخل المتغيرات ببعضها، ويصعب تتبع الأخطاء أو إضافة ميزات جديدة (Scalability Issues). تأتي البرمجة الكائنية (Object-Oriented Programming) كحل هيكلي لهذه المشكلة، حيث تحول الكود من مجرد أوامر إلى \"كائنات\" (Objects) تحاكي الواقع. يُركز الـ OOP على تقسيم المشروع إلى كيانات مستقلة (مثل مستخدم، منتج، طلب)، بحيث يحمل كل كيان بياناته الخاصة ووظائفه البرمجية داخل إطار واحد، مما يرفع من جودة الكود، ويسهل عملية الصيانة، ويمنع تكرار اللوجيك المكتوب بشكل كبير."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "وجه المقارنة",
+            "البرمجة الإجرائية (Procedural)",
+            "البرمجة الكائنية (OOP)"
+          ],
+          "rows": [
+            [
+              "**هيكل الكود**",
+              "أوامر متتالية ودوال متفرقة.",
+              "كائنات (Objects) وصفوف (Classes)."
+            ],
+            [
+              "**إعادة الاستخدام**",
+              "صعبة وتؤدي لتكرار الكود.",
+              "سهلة جداً بفضل الوراثة والوحدات."
+            ],
+            [
+              "**الأمان**",
+              "المتغيرات متاحة للجميع (Global).",
+              "بيانات محمية (Encapsulation)."
+            ]
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Procedural Programming`:</strong> A programming paradigm based on the concept of procedure calls and linear execution of tasks.",
+            "<strong>`Object-Oriented Programming (OOP)`:</strong> A paradigm based on the concept of \"objects,\" which contain data (attributes) and code (methods).",
+            "<strong>`Scalability`:</strong> The measure of a system's ability to handle growing amounts of work or its potential to be enlarged to accommodate that growth."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Procedural Way: Variables are scattered and lack a clear relationship\n$userName = \"Yehia\";\n$userRole = \"Admin\";\n$userStatus = \"Active\";\n\nfunction checkUserStatus($role, $status) {\n    if ($role === \"Admin\" && $status === \"Active\") {\n         return \"Access Granted\";\n    }\n    return \"Denied\";\n}\n\n// What if we have 100 users? Managing these separate variables becomes a nightmare."
+        }
+      ]
+    },
+    {
+      "title": "17. Classes, Objects, and Access Modifiers",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الفصيلة أو الـ (Class) بمثابة المخطط الهندسي (Blueprint) الذي يصف خصائص ووظائف الكائن، بينما يعتبر الكائن (Object) هو التنفيذ الفعلي لهذا المخطط. نستخدم الخصائص (Properties) لتمثيل بيانات الكائن، والوظائف (Methods) لتمثيل أفعاله. تُستخدم محددات الوصول (Access Modifiers) للتحكم في خصوصية البيانات؛ فنستخدم `public` لإتاحة البيانات للجميع، و `private` لإخفاء البيانات داخل الكلاس فقط، مما يُحقق مبدأ الكبسلة (Encapsulation). يُعد الـ (Constructor) دالة سحرية خاصة تُنفذ تلقائياً بمجرد إنشاء الكائن، وتُستخدم عادةً لتهيئة القيم الأساسية. للوصول لخصائص الكلاس من داخل وظائفه، نستخدم الكلمة المفتاحية `$this` التي تشير إلى النسخة الحالية من الكائن في الذاكرة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Class`:</strong> A template/blueprint for creating objects, providing initial values for state (properties) and implementations of behavior (methods).",
+            "<strong>`Object`:</strong> A specific instance of a class, holding its own unique data while sharing the structure defined by its class.",
+            "<strong>`Access Modifiers`:</strong> Keywords (public, private, protected) that set the visibility and accessibility of classes, methods, and properties.",
+            "<strong>`Encapsulation`:</strong> The bundling of data with the methods that operate on that data, restricting direct access to some components of the object.",
+            "<strong>`Constructor (__construct)`:</strong> A special method in a class that is automatically called when a new instance of the class is created."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\nclass User {\n    // Properties with Access Modifiers\n    private string $name;\n    private string $role;\n\n    // Constructor for Initialization\n    public function __construct(string $name, string $role) {\n        $this->name = $name;\n        $this->role = $role;\n        echo \"User created: \" . $this->name . \"\\n\";\n    }\n\n    // Public Method (Getter)\n    public function getInfo(): string {\n        return \"Name: \" . $this->name . \" | Role: \" . $this->role;\n    }\n}\n\n// Creating an Object (Instance)\n$user1 = new User(\"Yehia\", \"Admin\");\necho $user1->getInfo();"
+        }
+      ]
+    },
+    {
+      "title": "18. Inheritance and Overriding",
+      "icon": "fa-solid fa-hierarchical-structure",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تسمح الوراثة (Inheritance) لكلاس جديد بأخذ كافة الخصائص والوظائف من كلاس موجود مسبقاً، مما يمنع تكرار الكود ويُبني علاقة هرمية. نستخدم الكلمة المفتاحية `extends` لربط الكلاس الابن (Subclass) بالكلاس الأب (Base Class). يُمكن للكلاس الابن تعديل وظيفة موروثة من الأب لتناسب احتياجه الخاص، وهذا ما يُسمى بإعادة الكتابة أو التخطي (Method Overriding). لتشغيل كود الـ (Constructor) الموجود في الأب من داخل الـ (Constructor) الخاص بالابن لضمان تكامل البيانات، نستخدم الكلمة المحجوزة `parent::__construct()`. يُسمح للابن أيضاً بإضافة خصائص ووظائف جديدة تماماً لم تكن موجودة في الأب، مما يجعله أكثر تخصصاً (Specialization)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Inheritance`:</strong> A mechanism where a new class is derived from an existing class, inheriting its non-private properties and methods.",
+            "<strong>`Extends`:</strong> The PHP keyword used to establish an inheritance relationship between two classes.",
+            "<strong>`Method Overriding`:</strong> A feature that allows a subclass to provide a specific implementation of a method that is already defined in its parent class.",
+            "<strong>`parent::`:</strong> A keyword used to access and call methods or constructors defined in the parent class scope."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\nclass Employee {\n    protected string $name;\n\n    public function __construct($name) {\n        $this->name = $name;\n    }\n\n    public function work() {\n        return $this->name . \" is working...\";\n    }\n}\n\nclass Manager extends Employee {\n    // Method Overriding (Changing behavior)\n    public function work() {\n        return $this->name . \" is managing the team...\";\n    }\n\n    public function assignTask() {\n        return \"Task Assigned!\";\n    }\n}\n\n$mgr = new Manager(\"Yehia\");\necho $mgr->work(); // Outputs Manager's version"
+        }
+      ]
+    },
+    {
+      "title": "19. Abstraction and Interfaces",
+      "icon": "fa-solid fa-shield-halved",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم الفصائل المجردة (Abstract Classes) كقالب أساسي لا يمكن إنشاء كائنات منه مباشرة، بل يُستخدم فقط ليتم توريثه لصفوف أخرى. تحتوي الفصيلة المجردة عادة على دوال مجردة (Abstract Methods) ليس لها جسم، وهي بمثابة \"وعد\" أو \"عقد\" يُجبر أي كلاس يرثها على تنفيذ هذه الدوال بنفسه. تُعد الواجهات (Interfaces) عقداً أكثر صرامة، حيث لا تحتوي إلا على تعريفات الدوال فقط دون أي كود تنفيذي أو خصائص (Properties). يسمح الـ PHP للكلاس الواحد بتنفيذ أكثر من واجهة في نفس الوقت (Multiple Interfaces) باستخدام الكلمة `implements` بالرغم من أنه لا يسمح بوراثة أكثر من كلاس واحد، مما يعزز من مرونة النظام وقابلية تبديل المكونات (Decoupling)."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "وجه المقارنة",
+            "Abstract Class",
+            "Interface"
+          ],
+          "rows": [
+            [
+              "**التعريف (Keyword)**",
+              "تستخدم الكلمة `abstract` وتُورث بـ `extends`.",
+              "تستخدم الكلمة `interface` وتُنفذ بـ `implements`."
+            ],
+            [
+              "**المحتوى**",
+              "يمكن أن تحتوي على خصائص ودوال كاملة.",
+              "لا تحتوي إلا على تعريفات دوال (Signatures) فقط."
+            ],
+            [
+              "**التعدد**",
+              "يمكن وراثة كلاس أب واحد فقط.",
+              "يمكن تنفيذ عدد غير محدود من الواجهات."
+            ]
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Abstract Class`:</strong> A class that cannot be instantiated and is used to define a common interface for its subclasses.",
+            "<strong>`Abstract Method`:</strong> A method declared in an abstract class that has no implementation in the base class.",
+            "<strong>`Interface`:</strong> A complete contract that specifies what methods a class must implement, without defining how these methods are implemented.",
+            "<strong>`Implements`:</strong> The keyword used to ensure a class follows the contract defined by an interface."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Interface defining a contract for all database types\ninterface DatabaseInterface {\n    public function connect();\n}\n\n// Abstract Class for common attributes\nabstract class Connection {\n    protected string $host = \"localhost\";\n}\n\n// Concrete Class implementing both concepts\nclass MySQLConnection extends Connection implements DatabaseInterface {\n    public function connect() {\n        return \"Connecting to MySQL at \" . $this->host;\n    }\n}\n\n$db = new MySQLConnection();\necho $db->connect();"
+        }
+      ]
+    },
+    {
+      "title": "20. Practical OOP Project: Student Management System",
+      "icon": "fa-solid fa-briefcase",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يُعد بناء مشروع صغير مقسم إلى عدة ملفات هو التطبيق العملي الأمثل لفهم فوائد الـ OOP. في هذا المشروع (نظام إدارة الطلاب)، نقوم بتقسيم منطق العمل إلى ثلاثة ملفات أساسية. الملف الأول `Student.php` يمثل كلاس البيانات (Data Entity) الذي يحمل خصائص الطالب فقط. الملف الثاني `StudentManager.php` يمثل كلاس التحكم (Controller/Logic) الذي يحتوي على مصفوفة الطلاب ووظائف الإضافة والعرض. أما الملف الثالث `index.php` فيمثل نقطة الدخول (Entry Point) للمشروع؛ حيث نقوم بجلب الملفات الأخرى باستخدام `require` ونقوم بإنشاء الكائنات والتعامل معها. هذا التقسيم يُسهل صيانة الكود بشكل كبير؛ فإذا أردنا تعديل شكل بيانات الطالب نعدل ملف واحد فقط، وإذا أردنا تعديل منطق الإضافة نعدل ملف آخر، مما يمنع التداخل البرمجي."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Separation of Concerns (SoC)`:</strong> A design principle for separating a computer program into distinct sections such that each section addresses a separate concern.",
+            "<strong>`Controller / Logic Class`:</strong> A class dedicated to managing data flow and processing, separate from data entities.",
+            "<strong>`require`:</strong> A PHP statement used to include and evaluate a specific file, stopping execution if the file is missing."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n/** \n * File 1: Student.php \n */\nclass Student {\n    public string $name;\n    public int $age;\n\n    public function __construct($name, $age) {\n        $this->name = $name;\n        $this->age = $age;\n    }\n}\n\n/** \n * File 2: StudentManager.php \n */\nclass StudentManager {\n    private array $students = [];\n\n    public function addStudent(Student $s) {\n        $this->students[] = $s;\n    }\n\n    public function displayAll() {\n        foreach ($this->students as $s) {\n            echo \"Name: \" . $s->name . \" | Age: \" . $s->age . \"\\n\";\n        }\n    }\n}\n\n/** \n * File 3: index.php (Entry Point) \n */\nrequire \"Student.php\";\nrequire \"StudentManager.php\";\n\n$manager = new StudentManager();\n$manager->addStudent(new Student(\"Yehia\", 20));\n$manager->addStudent(new Student(\"Ali\", 22));\n\n$manager->displayAll();"
+        }
+      ]
+    },
+    {
+      "title": "21. Integrating PHP with HTML and Apache",
+      "icon": "fa-solid fa-globe",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُعرف لغة بي إتش بي بكونها لغة مضمنة (Embedded Language)، مما يعني إمكانية كتابة أكوادها مباشرة داخل ملفات الـ HTML. يتم ذلك عن طريق فتح وسم الـ PHP المعتاد وسط أكواد الـ CSS أو الـ HTML لإخراج بيانات ديناميكية من قاعدة البيانات أو لتنفيذ عمليات منطقية. لضمان عرض المشروع بشكل سليم في المتصفح، يجب وضع كافة ملفات المشروع داخل مجلد `htdocs` في برنامج XAMPP، ومن ثم تشغيل خادم Apache من لوحة التحكم. نصل للمشروع عبر المتصفح باستخدام الرابط `localhost/project-name`. تتيح هذه الطريقة تحويل الصفحات الثابتة إلى صفحات حيوية؛ فبدلاً من كتابة كل عناصر القائمة (List) يدوياً، يمكننا تخزين البيانات في مصفوفة برمجية واستخدام حلقة `foreach` لتوليد عناصر الـ HTML تلقائياً، مع استغلال إطارات العمل مثل Bootstrap لتنسيق المخرجات بشكل عصري."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Embedded Code`:</strong> The practice of inserting code from one programming language into another (e.g., PHP inside HTML).",
+            "<strong>`Apache Server`:</strong> A widely-used web server software responsible for processing PHP code and serving it to client browsers.",
+            "<strong>`htdocs`:</strong> The default directory in XAMPP/Apache where all web-accessible project files must be stored.",
+            "<strong>`localhost`:</strong> A hostname that means 'this computer', used to access the network services that are running on the host via the loopback network interface."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<!-- index.php combining PHP and HTML -->\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <title>PHP Dynamic Page</title>\n    <link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\">\n</head>\n<body>\n    <div class=\"container mt-5\">\n        <h1>User List</h1>\n        <ul class=\"list-group\">\n            <?php\n            $users = [\"Yehia\", \"Ali\", \"Donia\"];\n            foreach ($users as $user) {\n                // Embedding PHP inside HTML tags\n                echo \"<li class='list-group-item'>$user</li>\";\n            }\n            ?>\n        </ul>\n    </div>\n</body>\n</html>"
+        }
+      ]
+    }
+  ]
+}

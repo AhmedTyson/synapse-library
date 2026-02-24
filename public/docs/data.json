@@ -1,0 +1,287 @@
+{
+  "title": "OOP Simplified",
+  "subtitle": "Interview Prep • Bilingual Guide",
+  "icon": "fa-solid fa-code",
+  "sections": [
+    {
+      "title": "1. Introduction: From Procedural to OOP",
+      "icon": "fa-solid fa-circle-question",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في البداية، البرمجة كانت بتعتمد بشكل أساسي على الأسلوب \"الإجرائي\" (`Procedural Programming`)، وده معناه إن البرنامج بيتقسم لمجموعة من الوظائف (`Functions`) والمتغيرات (`Variables`) اللي بتتعامل مع البيانات دي. المشكلة الحقيقية بتظهر لما المشروع يبدأ يكبر؛ الوظائف بتبقى متوزعة في كل حتة، والكود بيبدأ يتكرر. أي تعديل بسيط في وظيفة واحدة ممكن يبوظ أجزاء تانية كتير، والحالة دي بنسميها \"`Spaghetti Code`\" لأن الكود بيبقى متداخل ومعقد جداً والاعتمادية (`Interdependency`) بين أجزاء البرنامج بتبقى كابوس. الـ `OOP` جه عشان يحل الأزمة دي ويضمن لنا سهولة الصيانة على المدى الطويل (`Maintainability`) عن طريق تجميع المتغيرات والوظائف المرتبطة ببعض في وحدة واحدة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Procedural Programming`:</strong> Divides a program into a set of functions where data is stored in separate variables and operated on by functions.",
+            "<strong>`Object-Oriented Programming (OOP)`:</strong> A style that groups related variables and functions into a single unit called an \"Object.\"",
+            "<strong>`Spaghetti Code`:</strong> A term for code with high interdependency and poor structure, making it fragile and difficult to scale."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "2. The Concept of the Object",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عشان نفهم يعني إيه \"كائن\" (`Object`)، ممكن نتخيل العربية؛ العربية ليها مواصفات (زي النوع واللون) وليها أفعال بتقوم بيها (زي إنها تتحرك أو تقف). في البرمجة، المواصفات دي بنسميها `Properties` والأفعال بنسميها `Methods`. مثال عملي من المتصفح هو الـ `localStorage Object`؛ ده كائن بيسمحلك تخزن بيانات، وله خاصية (`Property`) اسمها `length` بتعرفك عدد العناصر، ووظائف (`Methods`) زي `setItem` و `removeItem` عشان تتعامل مع البيانات دي."
+        },
+        {
+          "type": "image",
+          "src": "./assets/oop-car-analogy.webp",
+          "alt": "OOP Car Analogy",
+          "caption": "<strong>Visual Summary:</strong> The Car is an `Object`. Its physical state (Color, Model) are `Properties`. Its actions (Drive, Stop) are `Methods`."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "Terminology (English)",
+            "Car Analogy Example",
+            "Technical Example (Local Storage)"
+          ],
+          "rows": [
+            ["`Object`", "The Car itself", "`localStorage`"],
+            ["`Properties`", "Make, Model, Color", "`length`"],
+            ["`Methods`", "Start, Stop, Move", "`setItem()`, `removeItem()`"]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "3. The First Pillar: Encapsulation",
+      "icon": "fa-solid fa-box-archive",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "مبدأ \"الكبسولة\" أو `Encapsulation` مش مجرد إننا \"نقلنا\" المتغيرات لمكان تاني؛ الفكرة إننا ربطنا البيانات بالوظائف اللي بتعالجها."
+        },
+        {
+          "type": "callout",
+          "style": "tip",
+          "title": "تشبيه \"الموظف\" و \"صاحب الشأن\"",
+          "content": "١. <strong>الأسلوب الإجرائي (الموظف الحكومي):</strong> تخيل إن الموظف ده مبيحفظش أسامي ولا بيانات. كل ما تروحله عشان \"يحسبلك الراتب\"، لازم تشيل على ضهرك شنطة فيها (المرتب الأساسي، عدد الساعات، الضرايب، الحوافز) وتديهمله في إيده.<br><br><span style=\"color: #f87171;\">💡 الكابوس الحقيقي:</span> لو الدولة غيرت \"قانون الضرايب\" وضفت ورقة جديدة، هتضطر تلف على كل مكاتب الجمهورية اللي بتنادي الموظف ده وتديهم \"الورقة الجديدة\" في إيديهم عشان البرنامج ميوقفش! (ده اللي بنسميه `Fragile Code`).<br><br>٢. <strong>أسلوب الـ OOP (صاحب الشركة):</strong> هنا الدالة هي \"صاحب الشأن\" والبيانات هي \"مستنداته\" اللي شايلها في درج مكتبه (`Object`). لما تحب تعرف الراتب، كل اللي بتعمله إنك بتخبط على الباب وتقوله: \"احسبلي الراتب لو سمحت\". <br><br><span style=\"color: #4ade80;\">✅ راحة البال:</span> هو بيفتح درجه، بيطلع ورقه، وبيحسب مع نفسه. لو \"قانون الضرايب\" اتغير، هو بيغير الورقة اللي في درجه \"جوه مكتبه\" من غير ما يشغلك ولا يخليك تشيل ورق زيادة. البرنامج بره بيفضل ينادي نفس الأمر: `employee.getWage()` والشغل بيمشي عادي."
+        },
+        {
+          "type": "arabic",
+          "content": "لما بنستخدم الـ `Encapsulation`، الدالة بتبقى \"مستكفية ذاتياً\" بكلمة `this` . ده بيسهل إننا نغير في \"قلب\" الـ `Object` من غير ما نكسر باقي البرنامج."
+        },
+        {
+          "type": "summary",
+          "title": "Summary of Benefits",
+          "items": [
+            "`Simplicity`: Calling `employee.getWage()` is cleaner than passing multiple arguments.",
+            "`Maintenance`: Change the formula in one place without touching the rest of the app.",
+            "`Decoupling`: The external code doesn't need to know **what** data the function needs to work."
+          ]
+        },
+        {
+          "type": "quote",
+          "content": "The best functions are those with no parameters.",
+          "author": "Uncle Bob"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "content": "Procedural Implementation (3 Parameters):"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let baseSalary = 50_000;\nlet overtime = 10;\nlet rate = 20;\n\nfunction getWage(baseSalary, overtime, rate) {\n  return baseSalary + (overtime * rate);\n}"
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "content": "OOP Implementation (0 Parameters):"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const employee = {\n  baseSalary: 50_000,\n  overtime: 10,\n  rate: 20,\n  getWage() {\n    return this.baseSalary + (this.overtime * this.rate);\n  }\n};"
+        }
+      ]
+    },
+    {
+      "title": "4. The Second Pillar: Abstraction",
+      "icon": "fa-solid fa-eye-slash",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ `Abstraction` أو \"التجريد\" بيشبه جهاز الـ `DVD`؛ إنت بتتعامل مع زراير بسيطة من بره (`Play`, `Stop`) ودي اللي بنسميها الـ `Interface`. إنت مش محتاج تعرف التعقيدات اللي بتحصل جوه في البوردة والدوائر الكهربائية.<br><br><span style=\"color: var(--accent); font-weight: bold;\">💡 معلومة مهمة:</span> الـ `Private Methods` هي الأداة اللي بنستخدمها عشان نحقق الـ `Abstraction`. إحنا بنستخدم الـ `Encapsulation` عشان \"نخبي\" التفاصيل المعقدة، والنتيجة النهائية لده هي الـ `Abstraction` (واجهة بسيطة)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>Simpler Interface:</strong> Understanding an object with a few exposed features is much easier than dealing with its entire internal logic.",
+            "<strong>Reduced Impact of Change (Isolation):</strong> لما بنغير في الـ `Private methods` أو الـ `internal logic` ، التغيير ده \"مش بيسرب\" (`leak`) لبره، لأن مفيش كود خارجي بيعتمد على التفاصيل المستخبية دي. ده بيحمي التطبيق كله من الانهيار لما نعدل جزء داخلي."
+          ]
+        },
+        {
+          "type": "comparison",
+          "title": "الفرق بين الكبسلة (Encapsulation) والتجريد (Abstraction)",
+          "left": {
+            "title": "الكبسلة (Encapsulation)",
+            "items": [
+              "بتركز على <strong>إزاي (How)</strong> نحمي الداتا.",
+              "هي <strong>الوسيلة</strong> (تجميع الكود في مكان مقفول).",
+              "بتهتم بـ <strong>إخفاء</strong> التفاصيل."
+            ]
+          },
+          "right": {
+            "title": "التجريد (Abstraction)",
+            "items": [
+              "بتركز على <strong>إيه (What)</strong> اللي بيتم استخدامه.",
+              "هي <strong>الهدف</strong> (إننا نشوف واجهة بسيطة).",
+              "بتهتم بـ <strong>إظهار</strong> المعلومات المهمة فقط."
+            ]
+          }
+        },
+        {
+          "type": "callout",
+          "style": "info",
+          "title": "مثال الموبايل (The Smartphone Analogy)",
+          "content": "- <strong>الكبسلة (Encapsulation):</strong> هي \"جسم الموبايل\" اللي لامم جواه البطارية والأسلاك. المكونات دي متجمعة في \"كبسولة\" واحدة، وممنوع حد يلمسها من جوه عشان ميبوظش الموبايل (Encapsulation = Protection).<br><br>- <strong>التجريد (Abstraction):</strong> هو \"الشاشة والزراير\". إنت ليك دعوة بس إنك تدوس على أيقونة البرنامج فيفتح، مش فارق معاك إيه اللي حصل جوه عشان البرنامج يشتغل. (Abstraction = Simplification)."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "content": "Code Example: Encapsulation vs Abstraction"
+        },
+        {
+          "type": "arabic",
+          "content": "شوف المثال ده بلغة `JavaScript`؛ إزاي بنستخدم الـ `Encapsulation` (الخزنة) عشان نحقق الـ `Abstraction` (الواجهة البسيطة):"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "class Smartphone {\n  // 1. Encapsulation: Keeping internals hidden\n  #batteryPercent = 85; \n\n  #connectToCellTower() {\n    // Complex logic involving frequencies and signals...\n    return \"Signal Found\";\n  }\n\n  // 2. Abstraction: Simple public interface\n  makeCall(number) {\n    if (this.#batteryPercent > 0) {\n      this.#connectToCellTower();\n      console.log(`Calling ${number}...`);\n    }\n  }\n}\n\nconst myPhone = new Smartphone();\nmyPhone.makeCall(\"0123456789\"); \n\n// --- THE PROTECTION (Encapsulation) ---\n// myPhone.#connectToCellTower(); // ❌ Error!"
+        },
+        {
+          "type": "arabic",
+          "content": "• <strong>الكبسلة (Lines 3-8):</strong> استخدمنا علامة الـ `#` عشان نخلي البيانات والوظائف المعقدة `Private`. إنت كدة \"كبسلت\" السمتويات الحساسة جوه.<br>• <strong>التجريد (Lines 20-21):</strong> المستخدم ملوش دعوة بإشارات الراديو، هو بيستدعي وظيفة واحدة بس اسمها `makeCall` وهي بتخلص كل حاجة \"تحت الحوض\"."
+        }
+      ]
+    },
+    {
+      "title": "5. The Third Pillar: Inheritance",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "مبدأ \"الوراثة\" (`Inheritance`) هو الوسيلة اللي بنقضي بيها على تكرار الكود (`Redundant code`). تخيل لو عندك عناصر في صفحة الويب؛ كلهم بيشتركوا في حاجات معينة. بدل ما نكتب الكود ده لكل عنصر لوحده، بنعمل `Object` عام (`Parent`) والباقي بيورث منه."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Inheritance`:</strong> Sharing properties and methods to avoid redundancy.",
+            "<strong>Shared Attributes:</strong> Properties like `hidden` and `innerHTML` , and methods like `click()` and `focus()` are defined once in the Parent."
+          ]
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "content": "Example: Hierarchy of HTML Elements"
+        },
+        {
+          "type": "arabic",
+          "content": "ده مثال حي من لغة جافا سكريبت؛ كل العناصر اللي بتشوفها في المتصفح بتورث من كائن أساسي اسمه `HTMLElement` . لو عندنا مربع نص (`TextBox`)، هو بيورث وظائف أساسية من الأب، وبيزود عليها وظيفته الخاصة:"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// The Parent Class (General Element)\nclass HTMLElement {\n  value = \"\"; // Property\n  focus() { console.log(\"Element focused!\"); }\n  click() { console.log(\"Element clicked!\"); }\n}\n\n// The Child Class (Specific Element)\nclass TextBox extends HTMLElement {\n  selectText() { \n    console.log(`Value is: ${this.value}`); // Access inherited property\n    console.log(\"All text selected!\"); \n  }\n}\n\nconst myInput = new TextBox();\nmyInput.value = \"Hello OOP!\";\nmyInput.selectText(); // Uses both property and method"
+        }
+      ]
+    },
+    {
+      "title": "6. The Fourth Pillar: Polymorphism",
+      "icon": "fa-solid fa-wand-magic-sparkles",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "كلمة `Polymorphism` معناها \"تعدد الأشكال\" (`Many forms`). تخيّ ل إنك معاك <strong>ريموت كنترول شامل (Universal Remote)</strong>؛ فيه زرار واحد اسمه \"تشغيل\". لو وجّهته للتلفزيون هيفتح الشاشة، ولو وجّهته للتكييف هيشغل التبريد. الزرار هو هو، بس \"الفعل\" اختلف حسب \"الجهاز\".<br><br>في البرمجة، الـ `element.render()` هي بالظبط الزرار ده. إنت بتبعت أمر \"ارسم نفسك\" لكل العناصر، وكل عنصر بيرسم نفسه بطريقته الخاصة."
+        },
+        {
+          "type": "callout",
+          "style": "info",
+          "title": "ليه بنقول إن element.render() بتنظف الكود؟",
+          "content": "تخيل لو عندك ٥٠ نوع من العناصر في الموقع (أزرار، حقول نص، صور...). <br><br><strong>١. الأسلوب القديم (العذاب):</strong> هتضطر تكتب دالة ضخمة فيها ٥٠ سطر `if/else` أو `switch` عشان تشيك على نوع كل عنصر وتنادي الدالة الخاصة بيه.<br><strong>٢. أسلوب الـ OOP (الاحتراف):</strong> بتنادي سطر واحد بس: `element.render()` . المتصفح بيعرف لوحده هو واقف على أنهي Object وبينفذ الكود بتاعه."
+        },
+        {
+          "type": "heading",
+          "level": 4,
+          "content": "The Comparison (Before & After):"
+        },
+        {
+          "type": "heading",
+          "level": 5,
+          "content": "Procedural (The Old Way):"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "function renderAll(elements) {\n  for (let elem of elements) {\n    if (elem.type === 'text') \n       renderTextBox();\n    else if (elem.type === 'select') \n       renderSelect();\n    else if (elem.type === 'check') \n       renderCheckBox();\n    // If you add a new type, you MUST edit here!\n  }\n}"
+        },
+        {
+          "type": "heading",
+          "level": 5,
+          "content": "OOP (The Polymorphic Way):"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "function renderAll(elements) {\n  for (let elem of elements) {\n    // One line works for ALL types!\n    elem.render(); \n  }\n}"
+        },
+        {
+          "type": "arabic",
+          "content": "<strong>إزاي ده بيحصل تقنياً؟</strong> عن طريق حاجة اسمها `Method Overriding` . كل كلاس موروث (Child) بيعيد تعريف دالة الـ `render()` بتاعته عشان تناسبه، بس بيفضلوا كلهم اسمهم `render()` . <br><em>(Each object—TextBox, Checkbox, etc.—has its own version of the render method).</em>"
+        }
+      ]
+    },
+    {
+      "title": "7. Summary: The Benefits of OOP",
+      "icon": "fa-solid fa-table-list",
+      "blocks": [
+        {
+          "type": "table",
+          "className": "summary-table",
+          "headers": [
+            "Pillar",
+            "Definition (English)",
+            "Core Benefit (Arabic)",
+            "Real-world Analogy"
+          ],
+          "rows": [
+            [
+              "`Encapsulation`",
+              "Grouping related variables and functions.",
+              "تقليل التعقيد وزيادة إمكانية إعادة الاستخدام.",
+              "Employee Wage Object"
+            ],
+            [
+              "`Abstraction`",
+              "Hiding internal complexity/private methods.",
+              "تبسيط الواجهة وعزل تأثير التغييرات الداخلية.",
+              "DVD Player (Buttons vs. Board)"
+            ],
+            [
+              "`Inheritance`",
+              "Sharing common properties/methods.",
+              "التخلص من تكرار الكود (No Redundancy).",
+              "HTML Elements Hierarchy"
+            ],
+            [
+              "`Polymorphism`",
+              "Methods behaving differently per object.",
+              "تنظيف الكود (Refactoring) من الـ switch/case.",
+              "Universal render() method"
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

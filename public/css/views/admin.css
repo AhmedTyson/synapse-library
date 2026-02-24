@@ -1,0 +1,38 @@
+/* ═══════════════════════════════════
+   ADMIN DASHBOARD
+   ═══════════════════════════════════ */
+
+.admin-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.admin-panel {
+  background: var(--bg-panel);
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.admin-panel-title {
+  margin-top: 0;
+  font-size: 18px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-res {
+  margin-top: 16px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.color-field {
+  padding: 4px;
+  height: 42px;
+  cursor: pointer;
+}

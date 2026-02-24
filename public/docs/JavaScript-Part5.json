@@ -1,0 +1,235 @@
+{
+  "title": "JavaScript Full Course: Part 5",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "44. Inheritance (الوراثة `Inheritance`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الوراثة (`Inheritance`) هي مفهوم قوي جداً في البرمجة الموجهة للكائنات (`OOP`) بيسمح لفئة فرعية جديدة (`Child class`) إنها تورث الخواص والدوال من فئة رئيسية تانية موجودة مسبقاً (`Parent class`). المفهوم ده بيساعد جداً في عملية إعادة استخدام الكود (`Code Reusability`) وبيمنعنا من تكرار نفس الخواص في فئات كتير بتشترك في نفس الصفات؛ وده بيطبق مبدأ شهير في البرمجة اسمه (`DRY` - `Don`'`t Repeat Yourself`). عشان نخلي فئة تورث من فئة تانية بنستخدم الكلمة المفتاحية `extends`. الكائنات اللي بيتم استنساخها من الفئة الابن بتقدر توصل لكل خواص ودوال الفئة الأب كأنها بتاعتها بالظبط، بالإضافة لإنها تقدر تمتلك خواصها ودوالها المستقلة بيها (زي إن كل الحيوانات بتاكل وتنام، لكن الأرنب بيجري والسمكة بتعوم)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Inheritance`:</strong> An OOP concept that allows a new class to inherit the properties and methods of an existing class, establishing a parent-child relationship.",
+            "<strong>`extends`:</strong> The keyword used in a class declaration to create a child class that inherits from a parent class."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Parent Class (Super Class)\nclass Animal {\n    alive = true;\n\n    eat() {\n        console.log(`This ${this.name} is eating`);\n    }\n    sleep() {\n        console.log(`This ${this.name} is sleeping`);\n    }\n}\n\n// Child Class 1 inheriting from Animal\nclass Rabbit extends Animal {\n    name = \"rabbit\";\n\n    // Unique method only for Rabbit\n    run() {\n        console.log(`This ${this.name} is running`);\n    }\n}\n\n// Child Class 2 inheriting from Animal\nclass Fish extends Animal {\n    name = \"fish\";\n\n    // Unique method only for Fish\n    swim() {\n        console.log(`This ${this.name} is swimming`);\n    }\n}\n\nconst rabbit = new Rabbit();\nconst fish = new Fish();\n\n// Rabbit inherits alive property and eat/sleep methods\nconsole.log(rabbit.alive); // true\nrabbit.eat(); // \"This rabbit is eating\"\n\n// Rabbit uses its unique method\nrabbit.run(); // \"This rabbit is running\"\n\n// Fish cannot use run(), but has its own unique method\n// fish.run(); // TypeError: fish.run is not a function\nfish.swim(); // \"This fish is swimming\""
+        }
+      ]
+    },
+    {
+      "title": "45. `super` Keyword (الكلمة المرجعية `super`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم الكلمة المرجعية `super` جوه الفئات (`Classes`) عشان تستدعي الدالة البانية (`Constructor`) الخاصة بالفئة الأب (`Super class`)، أو عشان توصل لخواصها ودوالها بشكل مباشر. القاعدة البرمجية الصارمة هنا بتلزمنا إننا لو بنبني دالة بانية جوه فئة ابن، لازم نستدعي `super()` ونمرر ليها المعاملات المشتركة قبل ما نحاول نستخدم الكلمة المرجعية `this` جوه الابن، وإلا الجافا سكريبت هتطلع خطأ (`ReferenceError`). الميزة هنا إن أي خواص مشتركة بين كل الأبناء (زي الاسم والعمر) بيتم تعريفها مرة واحدة بس في الأب ونبعتها من الابن باستخدام `super`. كمان بنقدر نستخدم الـ `super` دي عشان نوسع أو نضيف على وظيفة دالة موجودة أساساً في الفئة الأب عن طريق كتابة `super.methodName()`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`super` Keyword:</strong> A keyword used in child classes to call the constructor or access the properties and methods of its parent class (the super class)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Parent Class\nclass Animal {\n    constructor(name, age) {\n        this.name = name;\n        this.age = age;\n    }\n\n    move(speed) {\n        console.log(`The ${this.name} moves at a speed of ${speed}mph`);\n    }\n}\n\n// Child Class\nclass Rabbit extends Animal {\n    constructor(name, age, runSpeed) {\n        // Must call super() to send common properties to the parent constructor\n        super(name, age); \n        this.runSpeed = runSpeed; // Unique property to Rabbit\n    }\n\n    run() {\n        console.log(`This ${this.name} can run`);\n        // Extending the parent's move method using super\n        super.move(this.runSpeed);\n    }\n}\n\n// Child Class\nclass Fish extends Animal {\n    constructor(name, age, swimSpeed) {\n        super(name, age);\n        this.swimSpeed = swimSpeed;\n    }\n\n    swim() {\n        console.log(`This ${this.name} can swim`);\n        super.move(this.swimSpeed);\n    }\n}\n\nconst rabbit = new Rabbit(\"rabbit\", 1, 25);\nconst fish = new Fish(\"fish\", 2, 12);\n\nconsole.log(rabbit.name); // \"rabbit\"\nconsole.log(rabbit.age); // 1\n\n// Invokes both the local run method and the parent's move method\nrabbit.run(); \n// Output: \n// \"This rabbit can run\"\n// \"The rabbit moves at a speed of 25mph\""
+        }
+      ]
+    },
+    {
+      "title": "46. Getters and Setters (دوال جلب وتعيين القيم `Getters and Setters`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دوال الـ (`Getters`) والـ (`Setters`) هما طرق برمجية خاصة بيُستخدموا للتحكم الآمن في قراءة وتعديل خواص الكائن. دالة الـ (`Getter`) بتخلي الخاصية قابلة للقراءة والاسترجاع، بينما الـ (`Setter`) بتخليها قابلة للتعديل وتعيين قيم جديدة. الميزة البرمجية الأكبر لاستخدامهم هي إننا بنقدر نعمل عملية تحقق وفلترة (`Validation`) على أي بيانات قبل ما يتم تخزينها؛ عشان نمنع المستخدم أو المطور من إدخال بيانات ضارة أو غير منطقية (زي إدخال نصوص في حقل مخصص للارتفاع، أو أرقام بالسالب في الأعمار). من العرف البرمجي المتفق عليه إن الخواص الداخلية (`Private properties`) اللي بنتعامل معاها بالدوال دي بيتم تسميتها بشرطة سفلية في البداية (`Underscore` `_`) عشان ننبه أي مطور إن دي خاصية داخلية ومينفعش يتلاعب بيها أو يوصلها بشكل مباشر بره دوال الـ `Get`/`Set` بتاعتها. وكمان بنقدر بالـ `Getters` نحسب قيم وهمية ونخليها تتقرأ كأنها خواص عادية (زي حساب المساحة من الطول والعرض)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Getters (`get`)`:</strong> Special methods that bind an object property to a function that will be called when that property is looked up, making the property readable.",
+            "<strong>`Setters (`set`)`:</strong> Special methods that bind an object property to a function to be called when there is an attempt to set that property, allowing for data validation before making the property writable.",
+            "<strong>`Private Property Convention (`_`)`:</strong> Prefixing a property name with an underscore is a naming convention to signal that a property is intended to be private and should not be accessed directly outside of the class."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "class Rectangle {\n    constructor(width, height) {\n        // These assignments automatically trigger the setter methods below\n        this.width = width;\n        this.height = height;\n    }\n\n    // SETTER for width (Includes Validation)\n    set width(newWidth) {\n        if (newWidth > 0) {\n            // Assigns to a private property\n            this._width = newWidth;\n        } else {\n            console.error(\"Width must be a positive number\");\n        }\n    }\n\n    // SETTER for height\n    set height(newHeight) {\n        if (newHeight > 0) {\n            this._height = newHeight;\n        } else {\n            console.error(\"Height must be a positive number\");\n        }\n    }\n\n    // GETTER for width\n    get width() {\n        return this._width;\n    }\n\n    // GETTER for height\n    get height() {\n        return this._height;\n    }\n\n    // GETTER for a calculated value (can be accessed like a regular property)\n    get area() {\n        // Appends 'cm^2' and formats to 1 decimal place\n        return `${(this._width * this._height).toFixed(1)} cm^2`;\n    }\n}\n\n// Creating an object with bad data (Triggers Setter errors)\nconst badRect = new Rectangle(-1000000, \"Pizza\"); \n// Output: \n// \"Width must be a positive number\"\n// \"Height must be a positive number\"\n\n// Creating an object with valid data\nconst goodRect = new Rectangle(3, 4);\n\n// Accessing properties via Getters\nconsole.log(goodRect.width);  // 3\nconsole.log(goodRect.height); // 4\nconsole.log(goodRect.area);   // \"12.0 cm^2\""
+        }
+      ]
+    },
+    {
+      "title": "47. Destructuring (التفكيك `Destructuring`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر تقنية التفكيك (`Destructuring`) طريقة قوية ومريحة في الجافا سكريبت بتسمح لنا باستخراج القيم من المصفوفات (`Arrays`) أو الكائنات (`Objects`) وتعيينها لمتغيرات منفصلة في سطر واحد. المدرب قدم خمس أمثلة عملية لفهم التقنية دي:\nالمثال الأول هو تبديل قيم متغيرين ببعض (`Swap`) عن طريق إنشاء مصفوفة جديدة في اليمين وتفكيكها في الشمال.\nالمثال التاني هو تبديل أماكن عنصرين جوه مصفوفة باستخدام نفس الفكرة.\nالمثال التالت هو استخراج عناصر من مصفوفة وتخزينها في متغيرات منفصلة، مع إمكانية استخدام (`Rest Parameters`) عشان نجمع باقي العناصر في مصفوفة جديدة.\nالمثال الرابع بيتعامل مع الكائنات (`Objects`)، وبنقدر من خلاله نسحب قيم خواص معينة ونخزنها في متغيرات، وكمان بنقدر نحدد قيم افتراضية (`Default values`) لو الخاصية دي مش موجودة في الكائن.\nالمثال الخامس والأخير هو تمرير كائن كمعامل لدالة (`Function`)، وبدل ما نستقبل الكائن كله، بنقوم بتفكيكه مباشرة جوه أقواس المعاملات (`Parameters`) عشان نستخرج الخواص اللي محتاجينها بس."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Destructuring`:</strong> A JavaScript expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables in a concise way.",
+            "<strong>`Array Destructuring`:</strong> Uses straight brackets `[]` to unpack iterables based on their position/index.",
+            "<strong>`Object Destructuring`:</strong> Uses curly braces `{}` to unpack object properties based on their key names."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Example 1: Swap the value of two variables\nlet a = 1;\nlet b = 2;\n[a, b] = [b, a];\nconsole.log(a, b); // 2, 1\n\n// Example 2: Swap two elements in an array\nconst colors = [\"red\", \"green\", \"blue\", \"black\", \"white\"];\n[colors, colors] = [colors, colors];\nconsole.log(colors); // [\"white\", \"green\", \"blue\", \"black\", \"red\"]\n\n// Example 3: Assign array elements to variables using Rest Parameters\nconst [firstColor, secondColor, thirdColor, ...extraColors] = colors;\nconsole.log(firstColor); // \"white\"\nconsole.log(extraColors); // [\"black\", \"red\"]\n\n// Example 4: Extract values from objects with default values\nconst person1 = {\n    firstName: \"SpongeBob\",\n    lastName: \"SquarePants\",\n    age: 30,\n    job: \"fry cook\"\n};\n\nconst person2 = {\n    firstName: \"Patrick\",\n    lastName: \"Star\",\n    age: 34\n};\n\n// Destructuring with a default value for 'job'\nconst { firstName, lastName, age, job = \"unemployed\" } = person2;\nconsole.log(firstName, job); // \"Patrick\", \"unemployed\"\n\n// Example 5: Destructure in function parameters\nfunction displayPerson({ firstName, lastName, age, job = \"unemployed\" }) {\n    console.log(`Name: ${firstName} ${lastName}`);\n    console.log(`Age: ${age}`);\n    console.log(`Job: ${job}`);\n}\n\ndisplayPerson(person1); \n// Uses \"fry cook\"\ndisplayPerson(person2); \n// Falls back to \"unemployed\""
+        }
+      ]
+    },
+    {
+      "title": "48. Nested Objects (الكائنات المتداخلة `Nested Objects`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "بالنسبة للكائنات المتداخلة (`Nested Objects`)، فهي عبارة عن كائنات موجودة بالكامل جوه كائنات تانية (`Child object enclosed by a Parent object`). المفهوم ده بيسمح لنا بتمثيل هياكل بيانات معقدة جداً؛ زي إن كائن \"الشخص\" يكون جواه كائن تاني مخصص لـ \"العنوان\" بيحتوي على الشارع والمدينة، أو كائن لعربة التسوق جواه كائنات تانية لكل منتج. عشان نقدر نوصل للبيانات المتداخلة دي، بنستخدم النقطة المتسلسلة (`Property Accessor`) زي `person.address.city`. المدرب كمان وضح إزاي نقدر نعمل حلقة تكرار `for...in` عشان نمر على كل الخواص اللي جوه الكائن الداخلي. في النهاية، المدرب عمل مثال متقدم باستخدام الفئات (`Classes`) لإنشاء كائن \"عنوان\" جوه دالة البناء (`Constructor`) الخاصة بكائن \"الشخص\" مع استخدام معامل النشر (`Spread Operator`) لتمرير البيانات."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Nested Objects`:</strong> Objects that are assigned as the value of a property inside another object, allowing for the creation of complex, hierarchical data structures.",
+            "<strong>`for...in` Loop:</strong> A loop that iterates over all enumerable string properties of an object."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Standard Nested Object and Accessing Properties\nconst person = {\n    fullName: \"SpongeBob SquarePants\",\n    age: 30,\n    isStudent: true,\n    hobbies: [\"karate\", \"jellyfishing\", \"cooking\"],\n    address: {\n        street: \"124 Conch St.\",\n        city: \"Bikini Bottom\",\n        country: \"Int. Waters\"\n    }\n};\n\n// Accessing properties inside the nested object\nconsole.log(person.address.street); // \"124 Conch St.\"\n\n// Iterating through a nested object using for...in\nfor (const property in person.address) {\n    console.log(person.address[property]); \n    // Outputs the values: \"124 Conch St.\", \"Bikini Bottom\", \"Int. Waters\"\n}\n\n// Code block 2: Nested Objects using Classes\nclass Address {\n    constructor(street, city, country) {\n        this.street = street;\n        this.city = city;\n        this.country = country;\n    }\n}\n\nclass Person {\n    constructor(name, age, ...address) {\n        this.name = name;\n        this.age = age;\n        // Instantiating a nested Address object using spread parameters\n        this.address = new Address(...address); \n    }\n}\n\nconst person1 = new Person(\"SpongeBob\", 30, \"124 Conch St.\", \"Bikini Bottom\", \"Int. Waters\");\nconsole.log(person1.address.city); // \"Bikini Bottom\""
+        }
+      ]
+    },
+    {
+      "title": "49. Array of Objects (مصفوفة الكائنات `Array of Objects`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في بعض الأحيان بنحتاج ندمج بين المصفوفات والكائنات، وده بيظهر في مصفوفة الكائنات (`Array of Objects`). المدرب أنشأ مصفوفة بتحتوي على 5 كائنات بتمثل مجموعة من الفواكه، كل كائن له خواص زي الاسم واللون والسعرات الحرارية. عشان نوصل لخاصية معينة، بنحدد الأول مكان الكائن في المصفوفة باستخدام الفهرس (`Index`)، وبعدين بنستخدم النقطة عشان نوصل للخاصية. بنقدر نستخدم دوال المصفوفات العادية زي `push` لإضافة كائن جديد، و `pop` لحذف الأخير. الأهم من كده هو دمج دوال المصفوفات المتقدمة (`Higher-Order Functions`) مع مصفوفة الكائنات: استخدمنا `forEach` عشان نطبع كل كائن، واستخدمنا `map` عشان ننشئ مصفوفة جديدة بتحتوي على أسماء الفواكه بس، واستخدمنا `filter` عشان نطلع الفواكه اللي لونها أصفر بس أو اللي سعراتها الحرارية أقل من 100، وأخيراً استخدمنا `reduce` بشكل متقدم لإننا نرجع الكائن الكامل اللي بيحتوي على أعلى سعرات حرارية عن طريق مقارنة الخاصية دي في كل دورة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Array of Objects`:</strong> A data structure where each element within an array is an object, commonly used to store lists of structured data (like a database response)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const fruits = [\n    { name: \"apple\", color: \"red\", calories: 95 },\n    { name: \"orange\", color: \"orange\", calories: 45 },\n    { name: \"banana\", color: \"yellow\", calories: 105 },\n    { name: \"coconut\", color: \"white\", calories: 159 },\n    { name: \"pineapple\", color: \"yellow\", calories: 37 }\n];\n\n// Accessing properties\nconsole.log(fruits.name); // \"apple\"\n\n// Array Methods (Adding/Removing Objects)\nfruits.push({ name: \"grapes\", color: \"purple\", calories: 62 });\nfruits.pop(); // Removes grapes\n\n// 1. forEach() - Looping through objects\nfruits.forEach(fruit => console.log(fruit.name));\n\n// 2. map() - Returning a new array of specific properties\nconst fruitNames = fruits.map(fruit => fruit.name);\nconsole.log(fruitNames); // [\"apple\", \"orange\", \"banana\", \"coconut\", \"pineapple\"]\n\n// 3. filter() - Returning a new array of objects matching a condition\nconst yellowFruits = fruits.filter(fruit => fruit.color === \"yellow\");\nconst lowCalFruits = fruits.filter(fruit => fruit.calories < 100);\nconsole.log(yellowFruits); // Array of banana and pineapple objects\n\n// 4. reduce() - Returning a single object (The one with the max calories)\nconst maxFruit = fruits.reduce((max, fruit) => {\n    // Ternary operator: if current fruit calories > max record holder, return current fruit, else keep max\n    return fruit.calories > max.calories ? fruit : max;\n});\nconsole.log(maxFruit); // { name: \"coconut\", color: \"white\", calories: 159 }"
+        }
+      ]
+    },
+    {
+      "title": "50. Sorting (`sort()` Method) (ترتيب المصفوفات `sort()`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دالة الـ `sort` بنستخدمها عشان نرتب عناصر المصفوفة. لكن المدرب وضح نقطة في غاية الأهمية؛ الدالة دي بترتب العناصر كنصوص (`Strings`) بناءً على الترتيب المعجمي (`Lexicographic order`) مش الترتيب الأبجدي البسيط، وده معناه إنها بتتعامل مع الأرقام كأنها كلمات. فمثلاً لو بنرتب أرقام، رقم 10 هييجي قبل رقم 2 لإن الحرف الأول فيه (1) أصغر من (2). عشان نحل المشكلة دي ونرتب الأرقام بشكل صحيح، لازم نمرر دالة مقارنة (`Callback function`) مخصصة جوه الـ `sort`، الدالة دي بتاخد معاملين (`A` و `B`) وبنطرحهم من بعض (`a - b` للترتيب التصاعدي، و `b - a` للتنازلي). كمان المدرب طبق الفكرة دي على مصفوفة كائنات؛ بحيث نقدر نرتب الأشخاص بناءً على أعمارهم أو درجاتهم. ولو حابين نرتب كائنات بناءً على خاصية نصية زي الاسم، بنستخدم دالة تانية مدمجة اسمها `localeCompare` عشان تقارن النصوص ببعض بشكل أبجدي سليم."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`sort()`:</strong> A method that sorts the elements of an array in place and returns the sorted array. By default, it sorts elements as strings in lexicographic order.",
+            "<strong>`Lexicographic Order`:</strong> Ordering based on the dictionary order of strings (alphabet + numbers + symbols), which evaluates characters sequentially.",
+            "<strong>`Comparison Function`:</strong> A function passed to `sort()` that defines the custom sort order (e.g., `(a, b) => a - b`).",
+            "<strong>`localeCompare()`:</strong> A string method that returns a number indicating whether a reference string comes before, or after, or is the same as the given string in sort order."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Default String Sorting\nlet fruits = [\"apple\", \"orange\", \"banana\", \"coconut\"];\nfruits.sort();\nconsole.log(fruits); // [\"apple\", \"banana\", \"coconut\", \"orange\"]\n\n// Code block 2: Number Sorting (Ascending and Descending)\nlet numbers =;\n// Ascending order\nnumbers.sort((a, b) => a - b); \nconsole.log(numbers); //\n// Descending order\nnumbers.sort((a, b) => b - a);\n\n// Code block 3: Sorting Array of Objects\nconst people = [\n    { name: \"SpongeBob\", age: 30, gpa: 3.0 },\n    { name: \"Patrick\", age: 37, gpa: 1.5 },\n    { name: \"Squidward\", age: 51, gpa: 2.5 },\n    { name: \"Sandy\", age: 27, gpa: 4.0 }\n];\n\n// Sorting numerically by age (Ascending)\npeople.sort((a, b) => a.age - b.age);\n\n// Sorting strings alphabetically by name using localeCompare\npeople.sort((a, b) => a.name.localeCompare(b.name));"
+        }
+      ]
+    },
+    {
+      "title": "51. Shuffling an Array (خلط عناصر المصفوفة `Shuffling`)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لخلط عناصر المصفوفة بشكل عشوائي، المدرب حذر جداً من استخدام دالة `sort` مع `Math.random() - 0.5`؛ لإن الطريقة دي نتايجها مش متساوية (`Not perfectly uniform`) وبتكون بطيئة جداً وغير فعالة مع المصفوفات الكبيرة. الطريقة الاحترافية والأصح هي استخدام خوارزمية مشهورة اسمها (`Fisher-Yates Algorithm`). الخوارزمية دي بتعتمد على عمل حلقة تكرار `for` بتبدأ من آخر عنصر في المصفوفة وبترجع لورا. في كل دورة، بنولد رقم عشوائي (`Index`) بين الصفر ومكان العنصر الحالي. بعدين بنستخدم تقنية التفكيك (`Destructuring`) اللي شرحناها عشان نبدل مكان العنصر الحالي مع العنصر صاحب الفهرس العشوائي. المدرب نصح بعمل الخوارزمية دي جوه دالة منفصلة عشان نقدر نستدعيها بسهولة في أي وقت، خصوصاً في برمجة الألعاب اللي بتحتاج عشوائية زي خلط الكوتشينة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Fisher-Yates Algorithm`:</strong> An highly efficient, uniform algorithm used to shuffle a sequence of elements randomly. It iterates through the array in reverse, swapping the current element with a randomly chosen element from the remaining unshuffled portion."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const cards = [\"A\", 2, 3, 4, 5, 6, 7, 8, 9, 10, \"J\", \"Q\", \"K\"];\n\n// BAD WAY (Inefficient and not perfectly uniform)\n// cards.sort(() => Math.random() - 0.5);\n\n// GOOD WAY: Fisher-Yates Algorithm\nfunction shuffle(array) {\n    // Start from the last element and iterate backwards\n    for(let i = array.length - 1; i > 0; i--) {\n        // Generate a random index between 0 and i\n        const random = Math.floor(Math.random() * (i + 1));\n        \n        // Swap elements using array destructuring\n        [array[i], array[random]] = [array[random], array[i]];\n    }\n}\n\nshuffle(cards);\nconsole.log(cards); // Elements are now perfectly shuffled"
+        }
+      ]
+    },
+    {
+      "title": "52. Date Objects (كائنات التاريخ والوقت `Date Objects`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر كائنات الـ `Date` هي الطريقة الأساسية في الجافا سكريبت للتعامل مع التواريخ والأوقات وتعديلها. لإنشاء كائن تاريخ، بنستخدم الكلمة المفتاحية `new Date()`. لو مستخدمناش أي معاملات، البرنامج هيجيب التاريخ والوقت الحاليين. بنقدر كمان نمرر معاملات مخصصة بترتيب ثابت (السنة، الشهر، اليوم، الساعة، الدقيقة، الثانية، الأجزاء من الثانية) مع ملاحظة مهمة جداً إن الشهور بتبدأ من الصفر (يعني يناير 0 وديسمبر 11). كمان نقدر نمرر التاريخ كنص (`String`)، أو كنطاق زمني بالـ (`Milliseconds`) بيتحسب من نقطة بداية افتراضية (`Epoch`) وهي 31 ديسمبر 1969. الكائن ده بيوفر لنا دوال (`Getters`) لاستخراج أي جزء من التاريخ زي `getFullYear` أو `getDate` أو `getDay` (اللي بترجع يوم الأسبوع كـ رقم من 0 لـ 6)، وكمان بيوفر دوال (`Setters`) لتعديل أي جزء زي `setFullYear`. أخيرًا، المدرب وضح إننا نقدر نستخدم معاملات المقارنة العادية زي الأكبر من أو الأصغر من لمقارنة تاريخين ببعض."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Date` Object:</strong> A built-in object in JavaScript that represents a single moment in time in a platform-independent format.",
+            "<strong>`Epoch (Epic) Time`:</strong> A specific date and time (typically January 1, 1970, UTC) from which a computer measures system time in milliseconds.",
+            "<strong>`Getters (Date)`:</strong> Methods like `getFullYear()`, `getMonth()`, `getDate()`, `getDay()`, and `getHours()` used to extract specific components of a Date object.",
+            "<strong>`Setters (Date)`:</strong> Methods like `setFullYear()`, `setMonth()`, and `setDate()` used to modify specific components of a Date object."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Creating Date Objects\nconst date1 = new Date(); // Current date and time\n// Year, Month (0-indexed), Day, Hour, Min, Sec, Ms\nconst date2 = new Date(2024, 0, 1, 2, 3, 4, 5); \nconst date3 = new Date(\"2024-01-02T12:00:00Z\"); // String representation\nconst date4 = new Date(1700000000000); // Milliseconds since Epoch\n\n// Code block 2: Extracting Date components (Getters)\nconst now = new Date();\nconst year = now.getFullYear();\nconst month = now.getMonth(); // 0-11\nconst dayOfMonth = now.getDate();\nconst dayOfWeek = now.getDay(); // 0 is Sunday, 1 is Monday...\nconst hours = now.getHours();\n\n// Code block 3: Modifying Date components (Setters)\nconst customDate = new Date();\ncustomDate.setFullYear(2025);\ncustomDate.setMonth(0); // January\ncustomDate.setDate(1);\n\n// Code block 4: Comparing Dates\nconst dateA = new Date(\"2023-12-31\");\nconst dateB = new Date(\"2024-01-01\");\n\nif (dateB > dateA) {\n    console.log(\"Happy New Year!\");\n}"
+        }
+      ]
+    },
+    {
+      "title": "53. Closures (الانغلاق `Closures`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يعتبر الـ (`Closure`) من المفاهيم العميقة في الجافا سكريبت، وهو باختصار عبارة عن دالة (`Function`) بيتم تعريفها جوه دالة تانية (`Outer Function`)، والدالة الداخلية دي بيكون ليها صلاحية كاملة إنها تشوف وتستخدم المتغيرات الموجودة في الدالة الأب حتى بعد ما الدالة الأب تنتهي. الميزة الكبرى للمفهوم ده هي حماية المتغيرات (`Encapsulation` / `Private variables`) والحفاظ على حالتها (`State Maintenance`). المدرب وضح ده بمثال لبرنامج عداد (`Counter`)؛ لو المتغير كان في النطاق العام (`Global`)، أي حد يقدر يغيره ويبوظ البرنامج. ولو كان جوه الدالة العادية، قيمته هتتصفر كل مرة بنستدعي الدالة. لكن باستخدام الـ `Closure`، بنعمل دالة خارجية بتنشئ المتغير، وبترجع لينا كائن (`Object`) بيحتوي على دوال داخلية زي (زيادة، نقصان، وجلب القيمة). بكده، بنحافظ على قيمة المتغير التراكمية من غير ما يتصفر، وفي نفس الوقت بنمنع أي كود خارجي إنه يتلاعب بيه بشكل مباشر لإن المتغير بيكون مخفي. الأسلوب ده بيُستخدم بكثرة في مكتبات وإطارات عمل زي `React` و `Vue` و `Angular`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Closure`:</strong> A feature in JavaScript where an inner function has access to the outer (enclosing) function's variables and scope, even after the outer function has finished executing.",
+            "<strong>`State Maintenance`:</strong> The ability of a closure to remember and preserve the current data (state) of its variables between consecutive function calls.",
+            "<strong>`Private Variables`:</strong> Variables that cannot be accessed or modified directly from the outside global scope, protecting them from unintended interference."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic Closure\nfunction outer() {\n    let message = \"Hello\"; // Private variable\n    \n    function inner() {\n        console.log(message); // Inner function has access to outer variable\n    }\n    \n    inner();\n}\nouter(); // Outputs: Hello\n\n// Code block 2: Counter Program using Closures (State Maintenance & Encapsulation)\nfunction createCounter() {\n    let count = 0; // Private state variable\n\n    function increment() {\n        count++;\n        console.log(`Count increased to ${count}`);\n    }\n\n    function getCount() {\n        return count;\n    }\n\n    // Returning an object containing references to the inner functions\n    return { increment, getCount };\n}\n\nconst counter = createCounter();\ncounter.increment(); // Count increased to 1\ncounter.increment(); // Count increased to 2\nconsole.log(counter.getCount()); // 2\nconsole.log(counter.count); // undefined (Private variable is hidden from the outside)\n\n// Code block 3: Game Score Tracker\nfunction createGame() {\n    let score = 0; // Private score\n\n    function increaseScore(points) {\n        score += points;\n        console.log(`+${points}pts`);\n    }\n\n    function decreaseScore(points) {\n        score -= points;\n        console.log(`-${points}pts`);\n    }\n\n    function getScore() {\n        return score;\n    }\n\n    return { increaseScore, decreaseScore, getScore };\n}\n\nconst game = createGame();\ngame.increaseScore(5);\ngame.increaseScore(6);\ngame.decreaseScore(3);\nconsole.log(`The final score is ${game.getScore()} points`); // 8 points"
+        }
+      ]
+    }
+  ]
+}

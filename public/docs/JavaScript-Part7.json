@@ -1,0 +1,260 @@
+{
+  "title": "JavaScript Full Course: Part 7",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "64. DOM Navigation (التنقل بين عناصر الصفحة `DOM Navigation`)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عملية التنقل في الـ `DOM` (`DOM Navigation`) هي كيفية استخدام هيكل الشجرة بتاع المستند عشان نتحرك من عنصر للتاني (زي إننا نروح للأب، للابن، أو للأخ). المدربين وضحوا مجموعة من الخواص المهمة جداً:\n- `firstElementChild` و `lastElementChild`: بيجيبوا أول وأخر عنصر \"إبن\" جوه العنصر اللي إحنا ماسكينه، وبيتجاهلوا المسافات البيضاء والتعليقات. (في خواص تانية اسمها `firstChild` بتجيب أي نود حتى لو كانت نص مسافة، بس غالباً بنعتمد على الـ `Element`).\n- `nextElementSibling` و `previousElementSibling`: بيجيبوا العنصر \"الأخ\" اللي بعد أو اللي قبل العنصر بتاعنا في نفس المستوى جوه الأب.\n- `parentElement`: بترجع العنصر \"الأب\" اللي بيحتضن العنصر اللي إحنا محددينه. نقدر نستخدم ده عشان لما ندوس على زرار، نمسح الأب بالكامل من الصفحة.\n- `children`: بترجع كل العناصر الأبناء جوه (`HTMLCollection`).\nالاستخدام القوي للخواص دي بيظهر لما نكون مش عارفين ندي `ID` لكل عنصر في الصفحة (عشان العدد كبير)، فبنمسك عنصر واحد وبنتنقل منه للي جنبه أو اللي جواه."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`DOM Navigation`:</strong> The process of navigating through the structure of an HTML document (moving between parent, child, and sibling nodes) using JavaScript properties.",
+            "<strong>`firstElementChild` / `lastElementChild`:</strong> Properties that return the first or last child element node of a specified element.",
+            "<strong>`nextElementSibling` / `previousElementSibling`:</strong> Properties that return the element immediately following or preceding the specified element within its parent's children list.",
+            "<strong>`parentElement`:</strong> A property that returns the DOM node's parent Element.",
+            "<strong>`children`:</strong> A property that returns a live HTMLCollection of the child elements of a node."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Structure -->\n<ul id=\"fruits\">\n    <li id=\"apple\">Apple</li>\n    <li id=\"orange\">Orange</li>\n    <li id=\"banana\">Banana</li>\n</ul>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// 1. firstElementChild & lastElementChild\nconst fruitsList = document.getElementById(\"fruits\");\nconst first = fruitsList.firstElementChild; // <li>Apple</li>\nconst last = fruitsList.lastElementChild; // <li>Banana</li>\nfirst.style.backgroundColor = \"yellow\";\n\n// 2. nextElementSibling & previousElementSibling\nconst orange = document.getElementById(\"orange\");\nconst nextSibling = orange.nextElementSibling; // <li>Banana</li>\nconst prevSibling = orange.previousElementSibling; // <li>Apple</li>\nnextSibling.style.fontWeight = \"bold\";\n\n// 3. parentElement\nconst apple = document.getElementById(\"apple\");\nconst parent = apple.parentElement; // <ul id=\"fruits\">\n// Removes the entire list (Parent) from the DOM\n// parent.remove(); \n\n// 4. children\nconst allChildren = fruitsList.children; // HTMLCollection of all 3 <li>s\nArray.from(allChildren).forEach(child => {\n    console.log(child.textContent);\n});"
+        }
+      ]
+    },
+    {
+      "title": "65. Creating and Appending Elements (إنشاء وإضافة عناصر الصفحة)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لإضافة عناصر جديدة لصفحة الويب باستخدام الجافا سكريبت، المدربين وضحوا إن العملية بتتم على 3 خطوات أساسية. الخطوة الأولى هي \"إنشاء العنصر\" باستخدام دالة `createElement` وبنمرر ليها اسم الوسم (زي `h1` أو `div`). في المرحلة دي، العنصر بيكون موجود في الذاكرة بس ومش ظاهر في الصفحة. بنقدر كمان ننشئ نصوص مجردة باستخدام `createTextNode`، أو حتى تعليقات باستخدام `createComment`. الخطوة التانية هي \"إضافة الخصائص\"، وهنا بنبدأ نعدل على العنصر اللي أنشأناه؛ زي إننا نديله `id` أو `className` أو نعدل الـ `textContent` بتاعه. الخطوة التالتة والأخيرة هي \"إضافة العنصر لنموذج المستند (`DOM`)\" عشان يظهر للمستخدم. للقيام بده، بنستخدم دوال زي `append` و `appendChild` عشان نضيف العنصر كـ \"آخر إبن\" (`Last Child`) جوه العنصر الأب، أو نستخدم `prepend` عشان نضيفه كـ \"أول إبن\" (`First Child`). لو عايزين نتحكم بدقة أكبر ونحط العنصر الجديد قبل عنصر محدد موجود بالفعل، بنستخدم دالة `insertBefore` وبنمرر ليها العنصر الجديد كمعامل أول، والعنصر اللي عايزين نحط الجديد قبله كمعامل تاني."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`document.createElement(tagName)`:</strong> A method used to create a specified HTML element dynamically in memory.",
+            "<strong>`document.createTextNode(text)`:</strong> A method that creates a new Text node containing the specified string.",
+            "<strong>`append()` / `appendChild()`:</strong> Methods used to attach a node or text to the end of a parent element's child list.",
+            "<strong>`prepend()`:</strong> A method used to insert a set of Node objects or string objects before the first child of the parent element.",
+            "<strong>`insertBefore(newNode, referenceNode)`:</strong> A method that inserts a node before a reference node as a child of a specified parent node."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Step 1: Create the element\nconst newH1 = document.createElement(\"h1\");\nconst myText = document.createTextNode(\"Hello from JS\");\n\n// Step 2: Add attributes and properties\nnewH1.id = \"myH1\";\nnewH1.className = \"heading-class\";\nnewH1.style.color = \"tomato\";\nnewH1.style.textAlign = \"center\";\nnewH1.appendChild(myText); // Appending text node to H1\n\n// Step 3: Append the element to the DOM\n// Appends as the last child of the body\ndocument.body.append(newH1); \n\n// Alternatively, prepending as the first child of a specific container\nconst box1 = document.getElementById(\"box1\");\nbox1.prepend(newH1);\n\n// Inserting an element exactly between two existing elements\nconst box2 = document.getElementById(\"box2\");\n// Inserts newH1 inside the body, right before box2\ndocument.body.insertBefore(newH1, box2);"
+        }
+      ]
+    },
+    {
+      "title": "66. Advanced Insertion and Removal Methods (طرق الإدراج المتقدمة وحذف العناصر)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب وضح إن بالإضافة لدوال الإدراج الداخلية (`append` و `prepend`) اللي بتضيف العنصر \"جوه\" الأب، في دوال متقدمة بتضيف العناصر \"بره\" العنصر المحدد وفي نفس مستواه (كأشقاء `Siblings`). الدالة الأولى هي `before` ودي بتضيف العنصر الجديد أو النص قبل العنصر المحدد مباشرة. الدالة التانية هي `after` ودي بتضيف العنصر بعده مباشرة. بالنسبة لعملية حذف العناصر، عندنا طريقتين: الأولى هي الطريقة القديمة `removeChild`، ودي بتتطلب إننا نحدد العنصر الأب الأول، وبعدين نطلب منه يحذف إبن معين جواه. الطريقة التانية والأحدث هي دالة `remove`، ودي بتتحط مباشرة على العنصر اللي عايزين نحذفه وبتشيله تماماً من شجرة الـ `DOM` بدون ما نحتاج نحدد الأب بتاعه. المدرب نبه إن استخدام `remove` بيمسح العنصر من الكود تماماً، وده بيختلف عن إخفاء العنصر بـ `display: none` اللي بيسيبه في الكود بس بيخفيه من العرض."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`before()`:</strong> A method that inserts a set of Node or string objects in the children list of this element's parent, just before this element itself.",
+            "<strong>`after()`:</strong> A method that inserts a set of Node or string objects just after this element.",
+            "<strong>`remove()`:</strong> A method that entirely removes the element from the DOM tree.",
+            "<strong>`removeChild(node)`:</strong> A method that removes a child node from the DOM and returns the removed node."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const myDiv = document.getElementById(\"my-div\");\nconst createdP = document.createElement(\"p\");\ncreatedP.textContent = \"I am a new paragraph\";\n\n// Inserting outside the element (Siblings)\nmyDiv.before(\"Text inserted before the div\");\nmyDiv.after(createdP); // Paragraph inserted directly after the div\n\n// Removing elements\n// Method 1: The older way (Requires targeting the parent)\nconst parentList = document.getElementById(\"fruits\");\nconst appleItem = document.getElementById(\"apple\");\nparentList.removeChild(appleItem);\n\n// Method 2: The modern way (Directly removes the element entirely)\nmyDiv.remove();"
+        }
+      ]
+    },
+    {
+      "title": "67. Cloning Elements (استنساخ العناصر `Cloning`)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عملية الاستنساخ (`Cloning`) بتسمح لنا ناخد نسخة مطابقة لعنصر موجود بالفعل في الصفحة ونحطها في مكان تاني من غير ما نأثر على العنصر الأصلي. بنستخدم دالة `cloneNode` عشان نعمل النسخة دي. الدالة دي بتقبل معامل منطقي (`Boolean`) اسمه `deep`. لو مررنا القيمة `false` (أو سبناها فاضية لإنها القيمة الافتراضية)، البرنامج هيعمل استنساخ سطحي (`Shallow Clone`)؛ يعني هياخد العنصر بخصائصه (`Attributes`) زي الكلاس والـ `ID`، لكن مش هياخد أي نصوص جواه ولا هياخد العناصر الأبناء اللي جواه. لكن لو مررنا القيمة `true`، هيعمل استنساخ عميق (`Deep Clone`) وهياخد العنصر بكل محتوياته ونصوصه. المدرب حذر من نقطة في غاية الأهمية؛ وهي إن الاستنساخ بينسخ كمان الـ `id` بتاع العنصر. وبما إن الـ `id` مينفعش يتكرر في نفس الصفحة، لازم نعدل الـ `id` بتاع النسخة الجديدة برمجياً قبل ما نضيفها لصفحة الـ `HTML` عشان نتجنب أي أخطاء."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`cloneNode(deep)`:</strong> A method that returns a duplicate of the node on which this method was called.",
+            "<strong>`Deep Clone (`true`)`:</strong> Copies the node and its entire subtree, including text and child elements.",
+            "<strong>`Shallow Clone (`false`)`:</strong> Copies only the node and its attributes, leaving it empty of any inner text or children."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const originalParagraph = document.querySelector(\"p\");\n\n// Shallow Clone (false): Copies only the <p> tag and attributes, no text\nconst shallowClone = originalParagraph.cloneNode(false);\n\n// Deep Clone (true): Copies the <p> tag, attributes, and all inner text/children\nconst deepClone = originalParagraph.cloneNode(true);\n\n// CRITICAL: Change the ID of the cloned element to prevent duplicates in the DOM\ndeepClone.id = originalParagraph.id + \"-clone\";\n\n// Append the new cloned element to the body\ndocument.body.appendChild(deepClone);"
+        }
+      ]
+    },
+    {
+      "title": "68. Events and Event Listeners (الأحداث ومراقبات الأحداث)",
+      "icon": "fa-solid fa-bolt",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الأحداث (`Events`) هي أي أكشن أو تفاعل بيحصل في صفحة الويب، زي إن المستخدم يضغط على زرار، أو يحرك الماوس، أو الصفحة تحمل بالكامل. نقدر نربط الأحداث دي بدوال عشان تنفذ كود معين. الطريقة القديمة هي استخدام خصائص زي `onclick` سواء جوه الـ `HTML` مباشرة أو في الجافا سكريبت، بس عيبها إنها بتسمح بربط دالة واحدة بس للحدث؛ لو كتبنا دالة تانية هتمسح الأولى (`Override`). الطريقة الاحترافية والأقوى هي استخدام دالة `addEventListener`. الدالة دي بتاخد معاملين: نوع الحدث (زي \"`click`\")، والدالة اللي هتتنفذ (`Callback`). الميزة الكبرى هنا إننا نقدر نضيف أكتر من حدث لنفس العنصر في نفس الوقت من غير ما يلغوا بعض. كمان المدرب وضح تقنية متقدمة جداً؛ وهي إننا نربط الحدث بكائن المستند الأساسي `document` بدل العنصر نفسه. بنعمل كده لما نكون عايزين نضيف حدث لعنصر لسه متنشأش أساساً في الصفحة (مثلاً زرار هيظهر بعدين). في الحالة دي، بنراقب ضغطات الماوس في الصفحة كلها، ولما الضغطة تحصل، بنتأكد عن طريق خاصية الـ `target` إن الضغطة دي جت على العنصر اللي إحنا نقصده بناءً على الكلاس بتاعه."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Events`:</strong> Actions or occurrences that happen in the system being programmed, which the system tells you about so your code can react to them.",
+            "<strong>`addEventListener(type, listener)`:</strong> A method that sets up a function that will be called whenever the specified event is delivered to the target.",
+            "<strong>`Event Delegation`:</strong> A technique involving adding event listeners to a parent element instead of adding them to the descendant elements, checking `event.target` to see if the desired element was interacted with."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const myBtn = document.getElementById(\"btn\");\n\n// Method 1: Traditional inline event handler (Can be overridden)\nmyBtn.onclick = function() {\n    console.log(\"Clicked using onclick!\");\n}\n\n// Method 2: addEventListener (Professional way, allows multiple listeners)\nmyBtn.addEventListener(\"click\", () => {\n    console.log(\"Action 1 executed\");\n});\n\nmyBtn.addEventListener(\"click\", () => {\n    console.log(\"Action 2 executed without overriding Action 1\");\n});\n\n// Event Delegation (Attaching an event to elements that don't exist yet)\ndocument.addEventListener(\"click\", function(event) {\n    // Check if the clicked target has a specific class (e.g., a dynamically cloned paragraph)\n    if(event.target.classList.contains(\"clone\")) {\n        console.log(\"I am a dynamically cloned element!\");\n    }\n});"
+        }
+      ]
+    },
+    {
+      "title": "69. Mouse Events (أحداث الماوس)",
+      "icon": "fa-solid fa-bolt",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "أحداث الماوس بتسمح للبرنامج يتفاعل مع حركة أو ضغطات فارة المستخدم. المدربين ركزوا على 4 أحداث أساسية: حدث الـ `click` اللي بيشتغل لما نضغط على العنصر. وحدث `mouseover` (أو `mouseenter`) اللي بيشتغل لما مؤشر الماوس يدخل جوه حدود العنصر (زي تأثير الـ `Hover` في الـ `CSS`). وحدث `mouseout` (أو `mouseleave`) اللي بيشتغل لما الماوس يخرج بره حدود العنصر. وأخيراً حدث `contextmenu` اللي بيشتغل لما المستخدم يضغط كليك يمين. لما أي حدث من دول بيحصل، المتصفح بيبعت أوتوماتيكياً كائن اسمه `event` للدالة بتاعتنا. الكائن ده مليان تفاصيل عن الحدث؛ زي إحداثيات الماوس وقت الضغطة، وأهم حاجة جواه هي خاصية `event.target` اللي بتشاور على العنصر نفسه اللي الحدث حصل عليه عشان نقدر نعدل فيه زي تغيير لونه أو النص اللي جواه. كمان نقدر نستخدم دالة `preventDefault()` جوه الحدث عشان نمنع السلوك الافتراضي للمتصفح؛ زي منع ظهور القائمة الافتراضية بتاعة المتصفح لما ندوس كليك يمين، عشان نظهر قايمة مخصصة لينا إحنا."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`mouseover` / `mouseenter`:</strong> Events fired when a pointing device is moved onto the element that has the listener attached.",
+            "<strong>`mouseout` / `mouseleave`:</strong> Events fired when a pointing device is moved off the element that has the listener attached.",
+            "<strong>`contextmenu`:</strong> An event fired when the user attempts to open a context menu (typically by right-clicking).",
+            "<strong>`event.target`:</strong> A property of the event object that references the element that dispatched the event."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const myBox = document.getElementById(\"myBox\");\n\n// Hover / Mouse Enter Event\nmyBox.addEventListener(\"mouseover\", (event) => {\n    event.target.style.backgroundColor = \"yellow\";\n    event.target.textContent = \"Don't do it!\";\n});\n\n// Leave / Mouse Out Event\nmyBox.addEventListener(\"mouseout\", (event) => {\n    event.target.style.backgroundColor = \"lightgreen\";\n    event.target.textContent = \"Click Me\";\n});\n\n// Click Event\nmyBox.addEventListener(\"click\", (event) => {\n    event.target.style.backgroundColor = \"tomato\";\n    event.target.textContent = \"Ouch!\";\n});\n\n// Context Menu (Right Click) and preventDefault\ndocument.addEventListener(\"contextmenu\", (event) => {\n    event.preventDefault(); // Stops the browser's default right-click menu from showing\n    console.log(\"Custom right-click menu logic goes here.\");\n});"
+        }
+      ]
+    },
+    {
+      "title": "70. Keyboard Events (أحداث لوحة المفاتيح)",
+      "icon": "fa-solid fa-bolt",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "للتعامل مع لوحة المفاتيح، الجافا سكريبت بتوفر حدثين أساسيين: حدث `keydown` بيشتغل بمجرد ما المستخدم يضغط على أي زرار ويفضل دايس عليه، وحدث `keyup` بيشتغل لما المستخدم يرفع إيده من على الزرار. المدرب نبه إن في حدث تالت قديم اسمه `keypress` بس مبقاش مدعوم في كل المتصفحات ومينفعش نعتمد عليه تاني. عشان نعرف المستخدم داس على أنهي زرار بالظبط، بنستخدم كائن الـ `event` ونوصل لخاصية جواه اسمها `event.key` اللي بترجع اسم الزرار (زي حرف \"`q`\" أو \"`ArrowUp`\" للسهم لفوق). في تطبيق عملي ممتع، المدرب عمل صندوق بيتحرك في الشاشة باستخدام أسهم الكيبورد. ربط حدث الـ `keydown` بكائن المستند الأساسي `document`، واستخدم جملة السويتش `switch` عشان يغير إحداثيات الـ `X` والـ `Y` بناءً على السهم اللي اتداس. ولإن الأسهم دي وظيفتها الافتراضية إنها بتعمل سكرول (`Scroll`) للصفحة، استخدمنا `event.preventDefault()` عشان نمنع الصفحة من النزول والطلوع والتحكم يكون مقتصر بس على تحريك الصندوق."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`keydown`:</strong> An event fired when a key is pressed down. It fires repeatedly while the key is held down.",
+            "<strong>`keyup`:</strong> An event fired when a key is released.",
+            "<strong>`event.key`:</strong> A property of the keyboard event object that returns the value of the key pressed by the user."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let x = 0;\nlet y = 0;\nconst moveAmount = 10;\nconst myBox = document.getElementById(\"myBox\");\n\n// Listen for keys pressed anywhere on the document\ndocument.addEventListener(\"keydown\", event => {\n    \n    // Only proceed if the pressed key is an Arrow key\n    if(event.key.startsWith(\"Arrow\")){\n        \n        event.preventDefault(); // Prevents the browser's default scrolling behavior\n        \n        switch(event.key){\n            case \"ArrowUp\":\n                y -= moveAmount;\n                break;\n            case \"ArrowDown\":\n                y += moveAmount;\n                break;\n            case \"ArrowLeft\":\n                x -= moveAmount;\n                break;\n            case \"ArrowRight\":\n                x += moveAmount;\n                break;\n        }\n        \n        // Update CSS coordinates (Box must have 'position: relative' or 'absolute')\n        myBox.style.top = `${y}px`;\n        myBox.style.left = `${x}px`;\n    }\n});\n\n// Keyup Event to trigger an action when the key is released\ndocument.addEventListener(\"keyup\", event => {\n    console.log(`Key released: ${event.key}`);\n});"
+        }
+      ]
+    },
+    {
+      "title": "71. Form Events and Validation (أحداث النماذج والتحقق من صحتها)",
+      "icon": "fa-solid fa-bolt",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عند التعامل مع النماذج (`Forms`) وحقول الإدخال، عندنا 3 أحداث رئيسية: حدث `focus` بيشتغل لما المستخدم يضغط جوه الحقل عشان يبدأ يكتب. حدث `blur` بيشتغل لما المستخدم يخلص كتابة ويضغط بره الحقل، وده الوقت المثالي جداً اللي نقدر نشيك فيه على البيانات اللي هو كتبها (`Validation`). الحدث التالت هو `submit` وده بيحصل لما المستخدم يضغط على زرار الإرسال. المدرب وضح استراتيجية قوية للـ `Validation`؛ وهي إننا ننشئ متغيرات كإشارات (`Flags`) ونخلي قيمتها المبدئية `false` كأن القوانين متنفذتش. بعدين لما المستخدم يبعت الفورم، بنشيك على الحقول: بنتأكد إن الحقل مش فاضي باستخدام عدم التطابق التام مع قيمة فارغة `!==\"\"`، وبنتأكد إن عدد الحروف (`Length`) مش بيتخطى رقم معين. لو الشروط دي اتحققت، بنغير الـ `Flags` لـ `true`. ولو شرط واحد بس فيهم فشل، بنستخدم دالة `event.preventDefault()` عشان نمنع الفورم من إنها تعمل إعادة تحميل (`Refresh`) أو تبعت البيانات للسيرفر وهي ناقصة، وبكده بنوفر ريكويستات على السيرفر ونعالج المشاكل من جهة العميل (`Client-side`) الأول."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`focus`:</strong> An event fired when an element has received focus, such as clicking inside an input field.",
+            "<strong>`blur`:</strong> An event fired when an element has lost focus, typically moving the cursor out of an input field.",
+            "<strong>`submit`:</strong> An event fired when a `<form>` is submitted.",
+            "<strong>`Client-side Validation`:</strong> The process of ensuring that user input is clean, correct, and useful in the browser before sending it to the server."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Form Setup -->\n<form id=\"myForm\">\n    <input type=\"text\" id=\"user\" placeholder=\"Username (Max 10 chars)\">\n    <input type=\"text\" id=\"age\" placeholder=\"Age\">\n    <button type=\"submit\">Submit</button>\n</form>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const form = document.getElementById(\"myForm\");\nconst userInput = document.getElementById(\"user\");\nconst ageInput = document.getElementById(\"age\");\n\n// Input blur event for live validation feedback\nuserInput.addEventListener(\"blur\", () => {\n    if(userInput.value.length > 10) {\n        console.log(\"Username is too long!\");\n    }\n});\n\n// Form submit event\nform.addEventListener(\"submit\", (event) => {\n    let userValid = false;\n    let ageValid = false;\n\n    // Validation Logic\n    if(userInput.value !== \"\" && userInput.value.length <= 10) {\n        userValid = true;\n    }\n\n    if(ageInput.value !== \"\") {\n        ageValid = true;\n    }\n\n    // If any validation fails, stop the form from submitting\n    if(userValid === false || ageValid === false) {\n        event.preventDefault(); // Stops the page from refreshing and sending data\n        console.log(\"Validation failed. Please correct the fields.\");\n    }\n});"
+        }
+      ]
+    },
+    {
+      "title": "72. Event Simulation (محاكاة الأحداث `Event Simulation`)",
+      "icon": "fa-solid fa-bolt",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "محاكاة الأحداث (`Event Simulation`) هي تقنية بنستخدمها عشان نخلي حدث معين يشتغل بشكل برمجي أوتوماتيكي من غير ما المستخدم يتدخل أو يعمل الأكشن بنفسه. يعني بدل ما أستنى المستخدم يدوس على الزرار أو يعمل فوكس على حقل، أنا بخلي الكود هو اللي يعمل كده. بنعمل ده عن طريق استدعاء اسم الحدث كدالة مباشرة. المدرب ضرب مثال قوي جداً بنشوفه في مواقع زي جوجل درايف أو مواقع البنوك؛ لما بيتبعتلك كود تفعيل (`Verification Code`) من 4 أرقام وكل رقم ليه مربع إدخال لوحده. بمجرد ما المستخدم بيكتب أول رقم، الجافا سكريبت بتعمل أوتوماتيكياً محاكاة لحدث الـ `blur` عشان تخرجه من المربع الأول، وبتعمل محاكاة لحدث الـ `focus` عشان تنقله فوراً للمربع التاني يكتب فيه، وده بيوفر تجربة مستخدم ممتازة وسريعة. كمان نقدر نعمل محاكاة لحدث الـ `click` عشان نخفي رابط معين وندوس عليه برمجياً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Event Simulation`:</strong> The process of programmatically triggering DOM events (like click, focus, or blur) via JavaScript code, mirroring actions as if a real user performed them.",
+            "<strong>`element.focus()` / `element.blur()`:</strong> Methods that programmatically set or remove keyboard focus to/from the specified element.",
+            "<strong>`element.click()`:</strong> A method that simulates a mouse click on an element."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const inputOne = document.getElementById(\"input-1\");\nconst inputTwo = document.getElementById(\"input-2\");\nconst hiddenLink = document.getElementById(\"hidden-link\");\n\n// Simulate a focus event on page load without user interaction\nwindow.onload = function() {\n    inputOne.focus(); \n}\n\n// Simulate blur and focus to auto-jump to the next input field\ninputOne.addEventListener(\"keyup\", function() {\n    // If the user typed 1 character\n    if(this.value.length === 1) {\n        this.blur();      // Programmatically remove focus from input 1\n        inputTwo.focus(); // Programmatically shift focus to input 2\n    }\n});\n\n// Simulate a click on a link\ndocument.getElementById(\"auto-click-btn\").addEventListener(\"click\", () => {\n    hiddenLink.click(); // Triggers the link's action programmatically\n});"
+        }
+      ]
+    },
+    {
+      "title": "73. ClassList Property (إدارة الفئات `classList`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "خاصية الـ `classList` بتعتبر من أهم وأقوى الخواص في الجافا سكريبت للتعامل مع كلاسات الـ `CSS` الخاصة بأي عنصر. بتوفر لنا مجموعة دوال جاهزة ومرنة جداً. دالة `add` بتضيف كلاس جديد للعنصر، ودالة `remove` بتحذفه. الدالة العبقرية هي `toggle`، دي بتعكس الحالة؛ لو الكلاس موجود بتشيله، ولو مش موجود بتضيفه، ودي ممتازة جداً في القوائم المنسدلة (`Dropdowns`) وتغيير الوضع المظلم (`Dark Mode`). دالة `replace` بتاخد معاملين وبتبدل كلاس قديم بكلاس جديد. ودالة `contains` بنستخدمها كشرط للتحقق؛ بترجع `true` لو العنصر بيحتوي على الكلاس ده و `false` لو لأ. أخيراً عندنا دالة `item` اللي بنمرر ليها رقم الفهرس (`Index`) عشان ترجعلنا اسم الكلاس الموجود في الترتيب ده. استخدام الـ `classList` بيخلينا نجهز كل الستايلات بتاعتنا في ملف الـ `CSS` على هيئة كلاسات، وبس نبدل بين الكلاسات دي برمجياً بدل ما نكتب الستايلات سطر سطر في الجافا سكريبت."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`classList`:</strong> A DOM property that returns a live DOMTokenList collection of the class attributes of the element.",
+            "<strong>`add(className)` / `remove(className)`:</strong> Methods to add or remove one or multiple CSS classes.",
+            "<strong>`toggle(className)`:</strong> A method that removes a given class if it is present and adds it if it is absent.",
+            "<strong>`replace(oldClass, newClass)`:</strong> A method that replaces an existing class with a new class.",
+            "<strong>`contains(className)`:</strong> A method that returns a boolean indicating if an element has the specified class."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const myButton = document.getElementById(\"myButton\");\n\n// 1. Add a class\nmyButton.classList.add(\"enabled\");\n\n// 2. Remove a class\nmyButton.classList.remove(\"hidden\");\n\n// 3. Toggle a class (Useful for hover effects or active states)\nmyButton.addEventListener(\"mouseover\", () => {\n    myButton.classList.toggle(\"hover-state\");\n});\n\nmyButton.addEventListener(\"mouseout\", () => {\n    myButton.classList.toggle(\"hover-state\");\n});\n\n// 4. Replace one class with another and 5. Contains\nmyButton.addEventListener(\"click\", (event) => {\n    // Check if the button contains the 'disabled' class\n    if(event.target.classList.contains(\"disabled\")) {\n        console.log(\"Button is already disabled!\");\n        event.target.textContent = \"Cannot click!\";\n    } else {\n        // Replace 'enabled' with 'disabled'\n        event.target.classList.replace(\"enabled\", \"disabled\");\n    }\n});"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,228 @@
+{
+  "title": "JavaScript Full Course: Part 4",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "34. `map()` Method (دالة التعيين `map`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر دالة الـ `map` شبه الـ `forEach` بالظبط من ناحية إنها بتستقبل دالة (`Callback`) وبتنفذها على كل عنصر من عناصر المصفوفة، وبتقبل نفس المعاملات (`Element`, `Index`, `Array`). لكن الاختلاف الجوهري والقوي جداً بينهم، هو إن الـ `map` مش بتعدل على المصفوفة الأصلية إطلاقاً؛ إنما هي بترجع مصفوفة جديدة (`New Array`) بالكامل بتحتوي على النتائج اللي الدالة رجعتها. المدرب أظهر أمثلة لتربيع وتكعيب الأرقام وتخزينهم في مصفوفات جديدة لحفظ الأرقام الأصلية بدون تعديل. كمان قدم مثال احترافي وهو إعادة ترتيب طريقة عرض التواريخ؛ بحيث استخدم دالة الـ `split` لتقسيم التاريخ لأجزاء، وبعدها غير الترتيب ودمجهم تاني باستخدام الـ (`Template Literals`)، وبكده طلع مصفوفة جديدة بتواريخ مترتبة من غير ما يخرب المصفوفة القديمة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`map()`:</strong> A built-in array method that creates and returns a new array populated with the results of calling a provided callback function on every element in the calling array. It does not mutate the original array."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Preserving original arrays while doing math\nconst numbers =;\n\nfunction square(element) {\n    return Math.pow(element, 2);\n}\n\nconst squares = numbers.map(square);\nconsole.log(squares); // New array:\nconsole.log(numbers); // Original untouched:\n\n\n// Code block 2: Reformatting an array of dates\nconst dates = [\"2024-1-10\", \"2025-2-20\", \"2026-3-30\"];\n\nfunction formatDates(element) {\n    // Splits \"YYYY-M-DD\" into an array: [\"YYYY\", \"M\", \"DD\"]\n    const parts = element.split(\"-\"); \n    // Rearranges to \"M/DD/YYYY\"\n    return `${parts}/${parts}/${parts}`; \n}\n\nconst formattedDates = dates.map(formatDates);\nconsole.log(formattedDates); \n// Outputs: [\"1/10/2024\", \"2/20/2025\", \"3/30/2026\"]"
+        }
+      ]
+    },
+    {
+      "title": "35. `filter()` Method (دالة التصفية `filter`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دالة الـ `filter` بنستخدمها عشان ننشئ مصفوفة جديدة بتحتوي فقط على العناصر اللي عدت من اختبار (`Test`) أو شرط معين. الدالة دي بتشتغل إزاي؟ بتاخد دالة (`Callback`) بتطرح شرط بيتم اختباره على كل عنصر؛ لو نتيجة الشرط ده رجعت `true` (يعني العنصر نجح في الاختبار)، العنصر ده بيتنقل ويدخل في المصفوفة الجديدة. لو رجعت `false`، العنصر ده بيتم تجاهله ومبيضافش. المدرب وضح أكتر من تطبيق عملي على المفهوم ده: زي إننا نصفي مصفوفة أرقام ونجيب الأرقام الزوجية أو الفردية بس باستخدام باقي القسمة (`Modulus`)، أو إننا نصفي مصفوفة أعمار ونطلع منها البالغين بس (اللي عمرهم 18 سنة أو أكتر)، أو نصفي كلمات بناءً على طول الكلمة (عدد الحروف أقل أو أكبر من رقم معين). وكل ده بيرجع لينا مصفوفة جديدة نظيفة مفلترة حسب شروطنا."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`filter()`:</strong> An array method that creates a new array filled with elements that pass a test (returning a truthy value) provided by a callback function."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Filtering Even and Odd Numbers\nlet numbers =;\n\nfunction isEven(element) {\n    return element % 2 === 0; // Returns true if even\n}\n\nfunction isOdd(element) {\n    return element % 2 !== 0; // Returns true if odd\n}\n\nlet evenNums = numbers.filter(isEven);\nlet oddNums = numbers.filter(isOdd);\n\nconsole.log(evenNums); //\nconsole.log(oddNums);  //\n\n\n// Code block 2: Filtering Ages\nconst ages =;\n\nfunction isAdult(element) {\n    return element >= 18;\n}\n\nconst adults = ages.filter(isAdult);\nconsole.log(adults); //\n\n\n// Code block 3: Filtering Words by Length\nconst words = [\"apple\", \"orange\", \"banana\", \"kiwi\", \"pomegranate\", \"coconut\"];\n\nfunction getShortWords(element) {\n    return element.length <= 6;\n}\n\nconst shortWords = words.filter(getShortWords);\nconsole.log(shortWords); // [\"apple\", \"orange\", \"banana\", \"kiwi\"]"
+        }
+      ]
+    },
+    {
+      "title": "36. `reduce()` Method (دالة التقليص `reduce`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "دالة الـ `reduce` بتعتبر من أقوى الدوال المدمجة مع المصفوفات. وظيفتها إنها بتمسك كل عناصر المصفوفة وبتقوم بتقلصيهم أو دمجهم عشان ترجع في النهاية قيمة واحدة بس (`Single Value`). الـ `Callback` دالة هنا بتاخد معاملين أساسيين: الـ `accumulator` (المجمع أو الحصالة اللي بنخزن فيها النتيجة التراكمية)، والـ `element` (العنصر الحالي اللي عليه الدور). في كل دورة (`Iteration`)، الدالة بترجع نتيجة بتتحط أوتوماتيكياً في الـ `accumulator` للدورة اللي بعدها. المدرب شرح إننا بنستخدمها عشان نجمع الأسعار في سلة مشتريات (بنجمع العنصر الحالي على المجمع). وكمان وضح إننا نقدر نستخدمها عشان نطلع أكبر أو أصغر قيمة في مصفوفة، عن طريق استخدام دالة زي `Math.max()` لمقارنة المجمع (اللي بيمثل صاحب الرقم القياسي الحالي) مع العنصر الجديد اللي جاي عليه الدور."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`reduce()`:</strong> An array method that executes a user-supplied \"reducer\" callback function on each element of the array, passing in the return value from the calculation on the preceding element. The final result is a single reduced value.",
+            "<strong>`Accumulator`:</strong> A parameter in the `reduce` callback that holds the accumulated value previously returned in the last invocation of the callback."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Summing an array of prices\nconst prices =;\n\nfunction sum(accumulator, element) {\n    return accumulator + element;\n}\n\nconst total = prices.reduce(sum);\nconsole.log(`$${total.toFixed(2)}`); // Outputs: $105.00\n\n\n// Code block 2: Finding the Maximum Value in an array\nconst grades =;\n\nfunction getMax(accumulator, element) {\n    // Accumulator acts as the current record holder\n    return Math.max(accumulator, element); \n}\n\nconst maximum = grades.reduce(getMax);\nconsole.log(maximum); // Outputs: 95"
+        }
+      ]
+    },
+    {
+      "title": "37. Function Expressions (تعبيرات الدوال)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعبيرات الدوال (`Function Expressions`) هي طريقة لتعريف الدالة كقيمة، وبنقدر نخزنها جوه متغير، أو نمررها مباشرة كقيمة لدالة تانية. دي بتختلف عن الإعلان العادي للدوال (`Function Declarations`) اللي بيكون فيها الدالة ليها اسم وبنكتبها كبلوك كود مستقل. استخدام الـ `Function Expressions` بيخلينا نعمل دوال مجهولة الاسم (`Anonymous Functions`) ونمررها فوراً جوا الدوال اللي بتحتاج `Callbacks` زي `setTimeout`، و `map`، و `filter`، و `reduce`. الميزة الكبيرة هنا إننا بنحافظ على نظافة النطاق العام (`Global Namespace`)، لإننا مش بنخترع أسماء دوال كتير هنستخدمها مرة واحدة بس وننساها. مجرد ما بنعرفها كمتغير بنقدر نستدعيها باسم المتغير ده، أو بنكتبها مباشرة جوه أقواس الدالة التانية من غير أي اسم خالص."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Function Expression`:</strong> A way to define a function as a value and assign it to a variable or pass it as an argument.",
+            "<strong>`Anonymous Function`:</strong> A function declared without any named identifier, frequently used in function expressions and callbacks.",
+            "<strong>`setTimeout(callback, milliseconds)`:</strong> A built-in JavaScript function that calls a function or evaluates an expression after a specified number of milliseconds."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Function Expression assigned to a constant\nconst hello = function() {\n    console.log(\"Hello\");\n}\nhello(); // Invoking the function using the constant name\n\n// Code block 2: Passing an Anonymous Function Expression to setTimeout\n// Waits 3000ms (3 seconds) then executes the anonymous function\nsetTimeout(function() {\n    console.log(\"Hello from setTimeout\");\n}, 3000); \n\n// Code block 3: Using Function Expressions inside Array Methods\nconst numbers =;\n\n// Instead of declaring a separate function and passing its name, we pass the expression directly\nconst squares = numbers.map(function(element) {\n    return Math.pow(element, 2);\n});\n\nconst evenNums = numbers.filter(function(element) {\n    return element % 2 === 0;\n});\n\nconst total = numbers.reduce(function(accumulator, element) {\n    return accumulator + element;\n});\n\nconsole.log(squares);  //\nconsole.log(evenNums); //\nconsole.log(total);    // 21"
+        }
+      ]
+    },
+    {
+      "title": "38. Arrow Functions (الدوال السهمية `Arrow Functions`)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في لغة الجافا سكريبت، تعتبر الدوال السهمية (`Arrow Functions`) طريقة مختصرة ومكثفة جداً لكتابة تعبيرات الدوال (`Function Expressions`). الدوال دي ممتازة جداً للدوال البسيطة اللي بنستخدمها مرة واحدة بس. الصيغة بتاعتها بتبدأ بكتابة المعاملات (`Parameters`) جوه أقواس، وبعدين بنرسم سهم `=>`، وبعدها بنكتب الكود اللي المفروض يتنفذ. في حالة إن الدالة بتاخد معامل واحد بس، بنقدر نستغنى عن الأقواس اللي حوالين المعامل. كمان لو الكود اللي هيتنفذ عبارة عن سطر واحد بس (`Statement` واحدة)، بنقدر نستغنى عن الأقواس المعقوفة الخاصة ببلوك الكود (`Curly braces`) وكمان بنستغنى عن كتابة كلمة `return` لإنها بتحصل بشكل ضمني وترجع القيمة تلقائياً. المدرب وضح إزاي نقدر نستخدم الدوال السهمية دي عشان نختصر الكود الخاص بدوال المصفوفات زي `map` و `filter` و `reduce` وكمان لاستخدامها كـ (`Callback`) مع دالة `setTimeout`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Arrow Function`:</strong> A concise syntax for writing function expressions, typically used for short, single-use functions. It utilizes an arrow `=>` token to separate the parameters from the function body."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Normal Function Expression vs Arrow Function\nconst helloNormal = function(name, age) {\n    console.log(`Hello ${name}`);\n    console.log(`You are ${age} years old`);\n}\n\n// Equivalent Arrow Function\nconst helloArrow = (name, age) => {\n    console.log(`Hello ${name}`);\n    console.log(`You are ${age} years old`);\n}\nhelloArrow(\"Bro\", 25);\n\n// Code block 2: Using Arrow Functions with setTimeout\nsetTimeout(() => window.alert(\"Hello\"), 3000);\n\n// Code block 3: Using Arrow Functions with Array Methods\nconst numbers =;\n\n// Map with Arrow Function\nconst squares = numbers.map(element => Math.pow(element, 2));\n\n// Filter with Arrow Function (Implicit return)\nconst evenNums = numbers.filter(element => element % 2 === 0);\n\n// Reduce with Arrow Function\nconst total = numbers.reduce((accumulator, element) => accumulator + element);\n\nconsole.log(squares);\nconsole.log(evenNums);\nconsole.log(total);"
+        }
+      ]
+    },
+    {
+      "title": "39. Objects (الكائنات `Objects`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يعتبر الكائن (`Object`) عبارة عن مجموعة من الخواص (`Properties`) والدوال (`Methods`) المرتبطة ببعضها. الخواص دي بتمثل الحاجات اللي الكائن بيمتلكها (زي الاسم أو العمر أو الوظيفة)، وبتتكتب على هيئة أزواج من المفاتيح والقيم (`Key-Value pairs`) مفصولة بفاصلة. أما الدوال (`Methods`) فهي عبارة عن الأفعال أو السلوكيات اللي الكائن بيقدر يقوم بيها. الكائنات في البرمجة بتُستخدم عشان تمثل أشياء من العالم الحقيقي زي الأشخاص، أو المنتجات، أو الأماكن. عشان نوصل لأي خاصية أو دالة جوه الكائن ونتعامل معاها، بنكتب اسم الكائن وبعده نقطة (`Dot Notation`) وبعدين بنكتب اسم الخاصية أو بنستدعي الدالة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Object`:</strong> A data structure that stores a collection of related properties and/or methods, representing real-world entities.",
+            "<strong>`Properties`:</strong> Values or attributes that belong to an object (what an object *has*).",
+            "<strong>`Methods`:</strong> Functions that belong to an object (what an object can *do*)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Creating an Object\nconst person1 = {\n    firstName: \"SpongeBob\",\n    lastName: \"SquarePants\",\n    age: 30,\n    isEmployed: true,\n    \n    // Method using a function expression\n    sayHello: function() {\n        console.log(\"Hi! I am SpongeBob!\");\n    },\n    \n    // Method using an arrow function\n    eat: () => console.log(\"I am eating a Krabby Patty\")\n};\n\nconst person2 = {\n    firstName: \"Patrick\",\n    lastName: \"Star\",\n    age: 42,\n    isEmployed: false,\n    sayHello: () => console.log(\"Hey, I'm Patrick...\"),\n    eat: () => console.log(\"I am eating roast beef, chicken, and pizza\")\n};\n\n// Accessing Object Properties and Methods\nconsole.log(person1.firstName); // \"SpongeBob\"\nconsole.log(person1.age); // 30\nconsole.log(person2.isEmployed); // false\n\nperson1.sayHello(); // \"Hi! I am SpongeBob!\"\nperson2.eat(); // \"I am eating roast beef, chicken, and pizza\""
+        }
+      ]
+    },
+    {
+      "title": "40. `this` Keyword (الكلمة المرجعية `this`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الكلمة المرجعية `this` إشارة للكائن اللي بيتم استخدامها جواه، والنتيجة بتاعتها بتعتمد بالكامل على السياق الحالي (`Immediate Context`). لو استخدمنا `this` جوه دالة تابعة لكائن معين (`Method`)، فهي بتعود على الكائن ده نفسه، وبنقدر من خلالها نوصل لخواص الكائن ده من جواه ونستدعيها. المشكلة اللي المدرب حذر منها هي إننا منقدرش نستخدم الـ `this` مع الدوال السهمية (`Arrow Functions`) لو عايزين نشير للكائن؛ لإن الدالة السهمية مش بتعمل سياق خاص بيها، فبتخلي `this` تشير لكائن النافذة الأساسي للمتصفح (`Window Object`) بدل ما تشير للكائن اللي إحنا شغالين عليه، وده هيأدي لإن النتيجة ترجع `undefined`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`this` Keyword:</strong> A reference to the object where `this` is used. Its value depends on the immediate context in which it appears.",
+            "<strong>`Window Object`:</strong> The global object in a web browser that represents the browser window. Using `this` alone outside of an object, or inside an arrow function within an object, refers back to this global Window object."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const person1 = {\n    name: \"SpongeBob\",\n    faveFood: \"hamburgers\",\n    \n    // Using 'this' properly inside a regular function expression\n    sayHello: function() {\n        // Output: \"Hi! I am SpongeBob\"\n        console.log(`Hi! I am ${this.name}`); \n    },\n    eat: function() {\n        console.log(`${this.name} is eating ${this.faveFood}`);\n    }\n};\n\nconst person2 = {\n    name: \"Patrick\",\n    faveFood: \"pizza\",\n    \n    // WRONG: Using 'this' inside an arrow function\n    eat: () => {\n        // Output: \"undefined is eating undefined\" (refers to Window object)\n        console.log(`${this.name} is eating ${this.faveFood}`);\n    }\n};\n\nperson1.sayHello();\nperson1.eat();\nperson2.eat(); \n\n// Using 'this' outside any object references the Window object\nconsole.log(this);"
+        }
+      ]
+    },
+    {
+      "title": "41. Constructors (الدوال البانية `Constructors`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم الـ (`Constructors`) كطريقة أو دالة خاصة لتعريف الخواص والدوال للكائنات بشكل أوتوماتيكي وديناميكي. الفكرة هنا إننا لو محتاجين ننشئ كائنات كتير جداً ليها نفس تركيبة الخواص (زي إنشاء بيانات لـ 3 سيارات مختلفة)، كتابة كل كائن بشكل يدوي بالـ (`Curly braces`) هتكون عملية مرهقة جداً ومكررة. الدالة البانية بتحل المشكلة دي عن طريق إنها بتستقبل البيانات كمعاملات (`Arguments`)، وبنستخدم معاها الكلمة المرجعية `this` عشان نخصص القيم الممررة دي لتكون خواص للكائن الجديد. ولما نحب ننشئ كائن جديد فعلياً، بنستدعي الدالة البانية دي مسبوقة بالكلمة المفتاحية `new`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Constructor`:</strong> A special method or function used for defining and initializing the properties and methods of newly created objects.",
+            "<strong>`new` Keyword:</strong> A keyword used to invoke a constructor function, telling JavaScript to instantiate a brand new object based on that constructor's blueprint."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Constructor Function\nfunction Car(make, model, year, color) {\n    // Assigning received arguments to the object's properties using 'this'\n    this.make = make;\n    this.model = model;\n    this.year = year;\n    this.color = color;\n    \n    // Adding a method to the constructed objects\n    this.drive = function() {\n        console.log(`You drive the ${this.model}`);\n    }\n}\n\n// Instantiating Objects using the 'new' keyword\nconst car1 = new Car(\"Ford\", \"Mustang\", 2024, \"red\");\nconst car2 = new Car(\"Chevrolet\", \"Camaro\", 2025, \"blue\");\nconst car3 = new Car(\"Dodge\", \"Charger\", 2026, \"silver\");\n\n// Accessing properties and methods\nconsole.log(car1.make); // \"Ford\"\nconsole.log(car2.color); // \"blue\"\nconsole.log(car3.year); // 2026\n\ncar1.drive(); // \"You drive the Mustang\"\ncar2.drive(); // \"You drive the Camaro\""
+        }
+      ]
+    },
+    {
+      "title": "42. Classes (الفئات `Classes`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "بالنسبة للـ (`Classes`)، فهي ميزة تم إضافتها في إصدار الجافا سكريبت (`ES6`) عشان توفر طريقة أنضف وأكثر هيكلة وتنظيماً للتعامل مع الكائنات مقارنة بالدوال البانية التقليدية اللي شرحناها. الفئة (`Class`) بتشتغل كأنها قالب أو مخطط هندسي (`Blueprint`) بنبني على أساسه كائنات جديدة. جوه الفئة دي، بنستخدم كلمة `constructor` عشان نعرّف الدالة البانية الأساسية اللي بتستقبل الخواص وبتعينها. كمان بنقدر نضيف دوال (`Methods`) للفئة بشكل مباشر ونظيف جداً من غير ما نكتب كلمة `function`، والدوال دي بتكون متاحة لكل الكائنات اللي بيتم استنساخها من الفئة دي."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Class`:</strong> An ES6 feature that provides a more structured and cleaner syntax to create objects and deal with object-oriented programming (OOP) concepts compared to traditional constructor functions."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Creating a Class\nclass Product {\n    // Constructor method within the class\n    constructor(name, price) {\n        this.name = name;\n        this.price = price;\n    }\n\n    // Methods are written cleanly without the 'function' keyword\n    displayProduct() {\n        console.log(`Product: ${this.name}`);\n        console.log(`Price: $${this.price.toFixed(2)}`);\n    }\n\n    calculateTotal(salesTax) {\n        return this.price + (this.price * salesTax);\n    }\n}\n\n// Instantiating objects from the Class\nconst product1 = new Product(\"Shirt\", 19.99);\nconst product2 = new Product(\"Pants\", 22.50);\nconst product3 = new Product(\"Underwear\", 100.00);\n\nconst salesTax = 0.05; // 5% tax\n\n// Using Class Methods\nproduct1.displayProduct();\nconst total = product1.calculateTotal(salesTax);\nconsole.log(`Total price (with tax): $${total.toFixed(2)}`);"
+        }
+      ]
+    },
+    {
+      "title": "43. Static Keyword (الكلمة المفتاحية `static`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الكلمة المفتاحية `static` وسيلة لتعريف خواص أو دوال بتنتمي للفئة (`Class`) نفسها بشكل مباشر، ومش بتنتمي للكائنات (`Objects`) المستنسخة من الفئة دي. باختصار شديد، الفئة هي المالك الوحيد لأي حاجة بنكتب قبلها `static`. عشان نوصل لخاصية أو دالة ستاتيكية، بنكتب اسم الفئة نفسها متبوعاً بالنقطة، ومينفعش نوصلها أبداً عن طريق أسماء الكائنات اللي أنشأناها. المدرب ضرب مثال بكائن `Math` المدمج اللي بيحتوي على قيم ستاتيكية زي `Math.PI` بنقدر نوصلها باسم الكائن مباشرة. وكمان عمل مثال عملي قوي لفئة اسمها (`User`) بتحتوي على عداد ستاتيكي وظيفته يحسب إجمالي عدد المستخدمين اللي تم إنشاؤهم من الفئة دي، والعداد ده بيزيد كل مرة الدالة البانية بتشتغل فيها."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`static` Keyword:</strong> A keyword that defines properties or methods that belong to the class itself, rather than to the individual objects (instances) created from that class."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Static Properties and Methods for utility\nclass MathUtil {\n    static PI = 3.14159;\n\n    static getDiameter(radius) {\n        return radius * 2;\n    }\n    \n    static getArea(radius) {\n        return this.PI * radius * radius;\n    }\n}\n\n// Accessed directly via the Class Name, not an object\nconsole.log(MathUtil.PI); \nconsole.log(MathUtil.getDiameter(10));\nconsole.log(MathUtil.getArea(10));\n\n\n// Code block 2: Tracking instance creation using Static\nclass User {\n    static userCount = 0; // Belongs to the User class\n\n    constructor(username) {\n        this.username = username;\n        User.userCount++; // Increments the static variable every time an object is made\n    }\n\n    // Static Method\n    static getUserCount() {\n        console.log(`There are ${User.userCount} users online`);\n    }\n}\n\nconst user1 = new User(\"SpongeBob\");\nconst user2 = new User(\"Patrick\");\nconst user3 = new User(\"Sandy\");\n\nconsole.log(user1.username); // \"SpongeBob\"\n\n// user1.userCount would be undefined. It must be accessed via the Class:\nconsole.log(User.userCount); // 3\nUser.getUserCount(); // \"There are 3 users online\""
+        }
+      ]
+    }
+  ]
+}

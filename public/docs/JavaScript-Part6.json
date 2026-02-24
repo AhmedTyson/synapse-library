@@ -1,0 +1,258 @@
+{
+  "title": "JavaScript Full Course: Part 6",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "54. `setTimeout()` Function (دالة تأخير التنفيذ `setTimeout`)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر دالة `setTimeout` وسيلة مدمجة في الجافا سكريبت بتسمح لنا بجدولة تنفيذ دالة معينة بعد مرور وقت محدد بنحسبه بالملي ثانية (`Milliseconds`). المدرب وضح إن الوقت ده بيكون تقريبي (`Approximate`) وبيعتمد على ضغط العمل على بيئة تشغيل الجافا سكريبت، فمينفعش نعتمد عليها في حاجات بتحتاج دقة متناهية زي ساعة الإيقاف مثلاً. الدالة دي بتاخد معاملين أساسيين: الـ (`Callback function`) اللي عايزين ننفذها، والوقت بالملي ثانية (3000 ملي ثانية يعني 3 ثواني). بنقدر نمرر الدالة كـ `Callback` عادي، أو نستخدم دالة مجهولة الاسم (`Anonymous`)، أو دالة سهمية (`Arrow Function`). كمان نقدر نلغي أو نوقف المؤقت ده قبل ما يشتغل عن طريق دالة `clearTimeout()`، بس عشان نعمل كده لازم نخزن دالة الـ `setTimeout` جوه متغير عشان يرجعلنا مُعرف فريد (`ID`)، وبنمرر الـ `ID` ده لدالة الإلغاء."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`setTimeout(callback, delay)`:</strong> A built-in JavaScript function used to schedule the execution of a specific function after a set delay in milliseconds.",
+            "<strong>`clearTimeout(timeoutId)`:</strong> A function used to cancel a previously established timeout before it executes, requiring the unique ID returned by `setTimeout()`."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic setTimeout using an Arrow Function\nsetTimeout(() => window.alert(\"Hello\"), 3000); \n\n// Code block 2: Clearing a timeout before it triggers\nconst timeoutId = setTimeout(() => console.log(\"This will not run\"), 3000);\nclearTimeout(timeoutId); // Cancels the timeout immediately\n\n// Code block 3: Practical example with Start and Clear buttons\nlet timerId;\n\nfunction startTimer() {\n    timerId = setTimeout(() => window.alert(\"Hello after 3 seconds\"), 3000);\n    console.log(\"Timer started\");\n}\n\nfunction clearTimer() {\n    clearTimeout(timerId);\n    console.log(\"Timer cleared\");\n}"
+        }
+      ]
+    },
+    {
+      "title": "55. Digital Clock Program (برنامج الساعة الرقمية)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب قام بتطبيق عملي لإنشاء ساعة رقمية بتحدث نفسها باستمرار. الفكرة بتعتمد على استخدام دالة `setInterval` (ودي بتشبه `setTimeout` بس بتكرر تنفيذ الكود كل فترة زمنية محددة، وهنا حددناها بـ 1000 ملي ثانية عشان تتحدث كل ثانية). جوه الدالة دي، بننشئ كائن تاريخ جديد `new Date()` عشان نسحب منه الساعات والدقائق والثواني. عشان نخلي الساعة تظهر بنظام 12 ساعة بدل نظام الـ 24 ساعة العسكري، المدرب استخدم المعامل الثلاثي (`Ternary Operator`) لمعرفة إذا كانت الساعات أكبر من أو تساوي 12 عشان يحدد إن الوقت مساءً (`PM`) أو صباحاً (`AM`). وكمان استخدم باقي القسمة `hours % 12` عشان يحول الساعة 13 لساعة 1 وهكذا، ولو النتيجة كانت صفر (الساعة 12 منتصف الليل) بيحولها لـ 12. المشكلة اللي ظهرت إن الأرقام الفردية (زي 1 أو 5) بتتعرض كخانة واحدة، وعشان نحافظ على شكل الساعة الاحترافي (01 و 05)، تم تحويل الأرقام لنصوص (`Strings`) واستخدام دالة `padStart(2, \"0\")` عشان نحشيها بصفر على الشمال لو كانت أقل من خانتين."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`setInterval(callback, delay)`:</strong> A function that repeatedly calls a function or executes a code snippet, with a fixed time delay between each call.",
+            "<strong>`Time Formatting`:</strong> The process of converting 24-hour military time to a standard 12-hour format with AM/PM identifiers, often requiring modulus math and string padding."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Function to continuously update the clock\nfunction updateClock() {\n    const now = new Date();\n    let hours = now.getHours();\n    \n    // Determine AM or PM\n    const meridiem = hours >= 12 ? \"PM\" : \"AM\";\n    \n    // Convert to 12-hour format\n    hours = hours % 12 || 12; \n    \n    // Convert to strings and pad with leading zeros\n    hours = hours.toString().padStart(2, \"0\");\n    const minutes = now.getMinutes().toString().padStart(2, \"0\");\n    const seconds = now.getSeconds().toString().padStart(2, \"0\");\n    \n    const timeString = `${hours}:${minutes}:${seconds} ${meridiem}`;\n    \n    document.getElementById(\"clock\").textContent = timeString;\n}\n\n// Call initially, then update every 1000 milliseconds (1 second)\nupdateClock();\nsetInterval(updateClock, 1000);"
+        }
+      ]
+    },
+    {
+      "title": "56. Stopwatch Program (برنامج ساعة الإيقاف)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يعتبر هذا المشروع تطبيقاً متقدماً لدمج كائنات التاريخ (`Date`) مع دالة `setInterval`. البرنامج بيتكون من 3 زراير (ابدأ، إيقاف، إعادة ضبط). الفكرة الرياضية هنا بتعتمد على حفظ وقت البداية عن طريق `Date.now()` (اللي بترجع الوقت الحالي بالملي ثانية من وقت الـ `Epoch`). لما الساعة بتشتغل، بنحسب الوقت المنقضي (`Elapsed Time`) عن طريق طرح وقت البداية من الوقت الحالي في كل دورة تحديث. المدرب استخدم معادلات رياضية عشان يحول الملي ثواني لساعات ودقائق وثواني باستخدام القسمة وباقي القسمة ودالة `Math.floor` للتخلص من الكسور. وبعدين زي ما عمل في الساعة الرقمية، حول النواتج دي لنصوص واستخدم `padStart` عشان يضمن إن العرض دايماً يكون خانتين. متغير `isRunning` كان ضروري جداً كإشارة (`Flag`) عشان يمنع المستخدم من إنه يشغل كذا مؤقت فوق بعض لو داس على زرار \"ابدأ\" أكتر من مرة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Date.now()`:</strong> A static method of the Date object that returns the number of milliseconds elapsed since the Epoch (January 1, 1970).",
+            "<strong>`Elapsed Time`:</strong> The total accumulated time calculated by subtracting the precise start time from the current precise time."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const display = document.getElementById(\"display\");\nlet timer = null;\nlet startTime = 0;\nlet elapsedTime = 0;\nlet isRunning = false;\n\nfunction start() {\n    if (!isRunning) {\n        startTime = Date.now() - elapsedTime;\n        timer = setInterval(update, 10); // Update every 10 milliseconds\n        isRunning = true;\n    }\n}\n\nfunction stop() {\n    if (isRunning) {\n        clearInterval(timer);\n        elapsedTime = Date.now() - startTime;\n        isRunning = false;\n    }\n}\n\nfunction reset() {\n    clearInterval(timer);\n    startTime = 0;\n    elapsedTime = 0;\n    isRunning = false;\n    display.textContent = \"00:00:00:00\";\n}\n\nfunction update() {\n    const currentTime = Date.now();\n    elapsedTime = currentTime - startTime;\n\n    // Math formulas to convert milliseconds\n    let hours = Math.floor(elapsedTime / (1000 * 60 * 60));\n    let minutes = Math.floor(elapsedTime / (1000 * 60) % 60);\n    let seconds = Math.floor(elapsedTime / 1000 % 60);\n    let milliseconds = Math.floor(elapsedTime % 1000 / 10);\n\n    // Padding strings\n    hours = String(hours).padStart(2, \"0\");\n    minutes = String(minutes).padStart(2, \"0\");\n    seconds = String(seconds).padStart(2, \"0\");\n    milliseconds = String(milliseconds).padStart(2, \"0\");\n\n    display.textContent = `${hours}:${minutes}:${seconds}:${milliseconds}`;\n}"
+        }
+      ]
+    },
+    {
+      "title": "57. ES6 Modules (وحدات الجافا سكريبت `ES6 Modules`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُعد الوحدات (`Modules`) ملفات خارجية بتحتوي على كود جافا سكريبت قابل لإعادة الاستخدام في ملفات تانية. الميزة دي (اللي ظهرت في تحديث `ES6` سنة 2015) بتحل مشكلة إن الأكواد تكون كلها سايحة على بعض في ملف واحد كبير ومعقد. بنقدر نكتب متغيرات، دوال، أو فئات (`Classes`) جوه ملف، وبنسبقها بكلمة `export` عشان نسمح للملفات التانية إنها تستوردها. في الملف التاني، بنستخدم كلمة `import` مع تقنية التفكيك (`Object Destructuring` `{}`) عشان نسحب الحاجات اللي محتاجينها بس من مسار الملف. القاعدة الأساسية والمهمة جداً عشان ده يشتغل، إننا لازم نروح لملف الـ `HTML`، وفي وسم الـ `<script>` الرئيسي نكتب `type=\"module\"`، لإن من غيرها المتصفح مش هيفهم إننا بنستخدم نظام الوحدات وهيطلع خطأ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`ES6 Modules`:</strong> An ECMAScript 2015 feature that allows JavaScript code to be split into separate files, exporting and importing reusable functions, variables, or classes.",
+            "<strong>`export`:</strong> A keyword used to expose variables or functions from a module so they can be accessed by other programs.",
+            "<strong>`import`:</strong> A keyword used to bring in specific exported members from an external module file into the current scope."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Setup: Declaring the script as a module -->\n<script type=\"module\" src=\"index.js\"></script>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// File 1: mathUtil.js (The Module to be exported)\nexport const PI = 3.14159;\n\nexport function getCircumference(radius) {\n    return 2 * PI * radius;\n}\n\nexport function getArea(radius) {\n    return PI * radius * radius;\n}"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// File 2: index.js (Importing the Module)\n// Using object destructuring to import only what we need\nimport { PI, getCircumference, getArea } from './mathUtil.js';\n\nconsole.log(PI); // 3.14159\nconst circumference = getCircumference(10);\nconsole.log(`${circumference.toFixed(2)} cm`); // 62.83 cm"
+        }
+      ]
+    },
+    {
+      "title": "58. Synchronous vs. Asynchronous JavaScript (التزامن وعدم التزامن)",
+      "icon": "fa-solid fa-clock",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "بالنسبة للفرق بين الأكواد المتزامنة والغير متزامنة؛ فالكود المتزامن (`Synchronous`) هو الكود اللي بيتنفذ سطر بسطر بالترتيب (`Line by line`)، البرنامج بيستنى كل مهمة تخلص بالكامل عشان ينقل للي بعدها. لكن الكود الغير متزامن (`Asynchronous`) بيسمح بتنفيذ عمليات متعددة في نفس الوقت من غير ما يوقف باقي البرنامج. المدرب شبه الموضوع بـ (المسافر عبر الزمن) اللي بيخرج بره خط الزمن العادي وبيخلي العالم يكمل من غيره. الأكواد دي بنستخدمها دايماً مع العمليات اللي بتاخد وقت غير محدد، زي قراءة ملف، أو طلب بيانات من سيرفر، أو استخدام `setTimeout`. لو حطينا كود بيستغرق 3 ثواني، الجافا سكريبت مش هتقف تستناه، دي هتكمل قراءة وطباعة باقي الكود، ولما الـ 3 ثواني يخلصوا هتنفذ الكود المتأخر. وعشان ننظم اللخبطة دي ونخلي حاجات معينة تستنى حاجات تانية، بنستخدم طرق زي الـ `Callbacks`، أو تقنيات أحدث زي الـ `Promises` والـ `Async`/`Await`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Synchronous Code`:</strong> Code that executes consecutively line-by-line in a sequential manner. It blocks the execution flow until the current operation completes.",
+            "<strong>`Asynchronous Code`:</strong> Code that allows multiple operations to be performed concurrently without waiting. It does not block the execution flow."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block: Demonstrating Asynchronous execution order\nfunction func1(callback) {\n    // This timeout acts asynchronously (simulating a slow network request)\n    setTimeout(() => {\n        console.log(\"Task 1 (Async) Complete\");\n        callback(); // Executes func2 only AFTER Task 1 is fully complete\n    }, 3000);\n}\n\nfunction func2() {\n    console.log(\"Task 2 Complete\");\n    console.log(\"Task 3 Complete\");\n    console.log(\"Task 4 Complete\");\n}\n\n// Invoking func1 and passing func2 as a callback to ensure sequence\nfunc1(func2);\n\n// Output:\n// (Waits 3 seconds...)\n// Task 1 (Async) Complete\n// Task 2 Complete\n// Task 3 Complete\n// Task 4 Complete"
+        }
+      ]
+    },
+    {
+      "title": "59. Error Handling (`try / catch / finally`) (التعامل مع الأخطاء)",
+      "icon": "fa-solid fa-bug",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الأخطاء (`Errors`) كائنات بتظهر لما يحصل مشكلة في الكود، والمشكلة الكبيرة إن الخطأ لو متساب من غير معالجة بيعمل إيقاف كامل للبرنامج (`Interrupts the flow`) وأي كود تحته مش بيتنفذ. عشان نعالج ده بياقة واحترافية، بنحط أي كود \"خطر\" محتمل يعمل مشكلة جوه بلوك اسمه `try`. لو حصل خطأ هنا، البرنامج مش هيقفل، إنما هيمرر كائن الخطأ ده لبلوك تاني اسمه `catch` عشان نعرض رسالة الخطأ أو نتصرف معاه باستخدام `console.error`. في بلوك تالت اختياري اسمه `finally`، وده بيتنفذ في كل الحالات سواء حصل خطأ أو لأ، وعادة بنستخدمه عشان نقفل بيه اتصالات قواعد البيانات أو الملفات اللي فتحناها عشان ننضف الذاكرة (`Cleanup`). كمان المدرب وضح إننا نقدر نفتعل وننشئ أخطاء بنفسنا عن طريق كلمة `throw new Error()` لو المستخدم دخل بيانات مش منطقية (زي محاولة القسمة على صفر أو إدخال حروف بدل الأرقام)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Error Object`:</strong> An object created to represent a problem that occurs during program execution (e.g., `TypeError`, `ReferenceError`).",
+            "<strong>`try` block:</strong> A block used to enclose potentially dangerous code that might throw an error.",
+            "<strong>`catch` block:</strong> A block that intercepts an error thrown in the `try` block, allowing developers to handle it gracefully without crashing the program.",
+            "<strong>`finally` block:</strong> An optional block that always executes regardless of whether an error occurred, typically used for cleanup operations.",
+            "<strong>`throw`:</strong> A keyword used to intentionally generate a custom error."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic Try / Catch / Finally\ntry {\n    // Attempting to print an undefined variable will cause a ReferenceError\n    console.log(x); \n} catch (error) {\n    // Prevents program crash and logs the error gracefully\n    console.error(error); \n} finally {\n    console.log(\"This always executes (Cleanup goes here)\");\n}\nconsole.log(\"You have reached the end of the program\"); // This will print\n\n\n// Code block 2: Throwing Custom Errors based on user input\ntry {\n    const dividend = Number(window.prompt(\"Enter a dividend:\"));\n    const divisor = Number(window.prompt(\"Enter a divisor:\"));\n\n    if (isNaN(dividend) || isNaN(divisor)) {\n        throw new Error(\"Values must be numbers!\");\n    }\n    if (divisor === 0) {\n        throw new Error(\"You can't divide by zero!\");\n    }\n\n    const result = dividend / divisor;\n    console.log(result);\n\n} catch (error) {\n    console.error(error); // Catches our custom thrown errors\n}"
+        }
+      ]
+    },
+    {
+      "title": "60. Calculator Program (برنامج الآلة الحاسبة)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في هذا التطبيق العملي، تم بناء آلة حاسبة بتجمع بين كل مهارات الـ `DOM` ومعالجة الأخطاء. الآلة بتتكون من شاشة عرض (`Input`) واخدة خاصية `readonly` عشان تمنع المستخدم يكتب بالكيبورد مباشرة. وتحتها شبكة زراير للعمليات والأرقام متصممة بـ `CSS Grid`. في الجافا سكريبت، عندنا 3 دوال رئيسية: الأولى للإضافة (`Append`) بتاخد الحرف اللي دُسنا عليه وتلزقه في شاشة العرض. التانية دالة المسح (`Clear`) بتفضي الشاشة وتخليها نص فارغ. التالتة والأهم هي دالة الحساب (`Calculate`) واللي بتعتمد على دالة مدمجة في الجافا سكريبت اسمها `eval()`. الدالة دي سحرية، بتاخد أي نص رياضي (زي \"5+5\") وتحسبه وتطلع النتيجة. بس لإن المستخدم ممكن يدوس على علامات ورا بعضها (زي \"7+=\") وده هيعمل خطأ برمجي (`Syntax Error`)، المدرب حط دالة الـ `eval` جوه `try/catch`، بحيث لو المعادلة فيها مشكلة، يمسك الخطأ ويعرض على شاشة الآلة الحاسبة كلمة \"`Error`\"."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`eval()`:</strong> A built-in JavaScript function that evaluates JavaScript code represented as a string, processing mathematical expressions instantly.",
+            "<strong>`readonly`:</strong> An HTML attribute applied to input fields indicating that the user cannot directly modify its value via keyboard input."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Structure -->\n<div id=\"calculator\">\n    <input id=\"display\" readonly>\n    <div id=\"keys\">\n        <!-- Buttons pass their characters to the function -->\n        <button onclick=\"appendToDisplay('+')\">+</button>\n        <button onclick=\"appendToDisplay('7')\">7</button>\n        <!-- Additional numbers and operators... -->\n        <button onclick=\"calculate()\">=</button>\n        <button onclick=\"clearDisplay()\">C</button>\n    </div>\n</div>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// JavaScript Implementation\nconst display = document.getElementById(\"display\");\n\nfunction appendToDisplay(input) {\n    display.value += input;\n}\n\nfunction clearDisplay() {\n    display.value = \"\";\n}\n\nfunction calculate() {\n    try {\n        // eval computes the string expression (e.g., \"5+5\" becomes 10)\n        display.value = eval(display.value);\n    } catch (error) {\n        // Gracefully handles invalid syntax like \"7+=\"\n        display.value = \"Error\";\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "61. The Document Object Model - DOM (نموذج كائنات المستند `DOM`)",
+      "icon": "fa-solid fa-boxes-stacked",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يعتبر الـ `DOM` عبارة عن واجهة برمجية (`API`) بيقدمها المتصفح، بتخلينا نشوف صفحة الـ `HTML` على هيئة كائن (`Object`) جوه الجافا سكريبت. لما الصفحة بتحمل، المتصفح بيبني نموذج شجري (`Tree-like structure`) لكل العناصر اللي فيها (من أول الجذر اللي هو الـ `HTML` لحد الفروع زي الـ `Head` والـ `Body`). الكائن الرئيسي ده اسمه `document`، وجواه خواص ودوال كتير جداً بتسمح لنا نتحكم في كل فتفوتة في الصفحة. المدربين (`Bro Code` و `Elzero`) وضحوا إننا نقدر نكتب `console.dir(document)` عشان نشوف الشجرة دي بكل تفاصيلها في المفتش (`DevTools`). من خلال الـ `document` بنقدر نوصل لعنوان الصفحة ونعدله (`document.title`)، ونوصل لجسم الصفحة ونغير خلفيته (`document.body.style`)، وكمان نوصل للصور واللينكات والفورمز بشكل مباشر ونقرأ أو نعدل بياناتهم من غير ما الصفحة تعمل إعادة تحميل (`Refresh`). باختصار، الـ `DOM` هو الكوبري اللي بيربط بين الجافا سكريبت وعناصر الـ `HTML`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Document Object Model (DOM)`:</strong> A programming interface that represents the page so that programs can change the document structure, style, and content. The DOM represents the document as nodes and objects.",
+            "<strong>`console.dir()`:</strong> A console method that displays an interactive list of the properties of a specified JavaScript object.",
+            "<strong>`DOM Tree`:</strong> The hierarchical representation of HTML elements where elements are structured as parents, children, and siblings."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Examining the entire document object and its properties\nconsole.dir(document);\n\n// Accessing and modifying basic document properties\nconsole.log(document.title); // Reads the current page title\ndocument.title = \"My Dynamic Website\"; // Changes the page title dynamically\n\n// Accessing the body element directly\ndocument.body.style.backgroundColor = \"hsl(0, 0%, 15%)\"; // Changes background to dark gray\n\n// Accessing specific collections directly from the document object\nconsole.log(document.images); // Returns all <img> tags\nconsole.log(document.links);  // Returns all <a> tags\nconsole.log(document.forms);  // Returns all <form> tags\n\n// Example: Accessing the first form, then the first input within it, to read its value\n// Assuming there is a form with an input on the page\nif(document.forms.length > 0) {\n    console.log(document.forms.elements.value);\n}"
+        }
+      ]
+    },
+    {
+      "title": "62. Element Selectors (محددات العناصر `Element Selectors`)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم محددات العناصر للوصول لأي جزء في صفحة الـ `HTML` عشان نتلاعب بيه برمجياً. المدربين وضحوا 5 طرق رئيسية:\n1. `getElementById`: بتجيب عنصر واحد بس بناءً على المُعرف الفريد بتاعه (الـ `ID`).\n2. `getElementsByClassName`: بتجيب كل العناصر اللي بتشترك في كلاس (`Class`) معين، وبترجعهم في حاجة اسمها (`HTMLCollection`).\n3. `getElementsByTagName`: بتجيب كل العناصر اللي ليها نفس اسم الوسم (زي كل البراجرافات أو كل الـ `Divs`)، وبترجع برضو (`HTMLCollection`).\n4. `querySelector`: دي طريقة مرنة جداً بتسمح لك تكتب جوه الأقواس سلكتور زي بتاع الـ `CSS` بالظبط (زي `.class` أو `#id`)، بس دي بترجع \"أول عنصر\" يطابق الشرط ده بس.\n5. `querySelectorAll`: دي بتجيب كل العناصر اللي بتطابق السلكتور، بس بترجعهم في حاجة اسمها (`NodeList`).\nفي ملاحظة قوية جداً تم توضيحها: الـ (`HTMLCollection`) يعتبر هيكل بيانات \"حي\" (`Live`) بس مفهوش دالة `forEach` للعمل حلقات تكرار، وعشان نلف عليه لازم نحوله لمصفوفة باستخدام `Array.from()`. بينما الـ (`NodeList`) يعتبر هيكل \"ثابت\" (`Static`) ولكنه بيحتوي على دالة `forEach` جاهزة نقدر نستخدمها مباشرة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`getElementsByClassName()`:</strong> A method returning a live HTMLCollection of elements with the given class name.",
+            "<strong>`getElementsByTagName()`:</strong> A method returning a live HTMLCollection of elements with the given tag name.",
+            "<strong>`querySelector()`:</strong> A method returning the first Element within the document that matches the specified CSS selector.",
+            "<strong>`querySelectorAll()`:</strong> A method returning a static NodeList representing a list of the document's elements that match the specified CSS selectors.",
+            "<strong>`HTMLCollection vs NodeList`:</strong> HTMLCollections are live (automatically update when DOM changes) but lack array methods. NodeLists are static (don't update automatically) but include a native `forEach` method."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// 1. getElementById (Returns a single element)\nconst myHeading = document.getElementById(\"my-heading\");\nmyHeading.style.textAlign = \"center\";\n\n// 2. getElementsByClassName (Returns an HTMLCollection)\nconst fruits = document.getElementsByClassName(\"fruits\");\n// HTMLCollections do NOT have forEach. Must be typecast to an Array.\nArray.from(fruits).forEach(fruit => {\n    fruit.style.backgroundColor = \"yellow\";\n});\n\n// 3. getElementsByTagName (Returns an HTMLCollection)\nconst h4Elements = document.getElementsByTagName(\"h4\");\nfor (let h4 of h4Elements) { // Enhanced for loop works on HTMLCollections\n    h4.style.backgroundColor = \"lightblue\";\n}\n\n// 4. querySelector (Returns the FIRST matching element)\nconst firstFruit = document.querySelector(\".fruits\"); \nfirstFruit.style.color = \"red\"; // Only targets the first element with class 'fruits'\n\n// 5. querySelectorAll (Returns a NodeList)\nconst allFruits = document.querySelectorAll(\".fruits\");\n// NodeLists DO have a built-in forEach method\nallFruits.forEach(fruit => {\n    fruit.style.fontWeight = \"bold\";\n});"
+        }
+      ]
+    },
+    {
+      "title": "63. Element Content and Attributes (محتوى وخصائص العناصر `Content & Attributes`)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "للتحكم في المحتوى الداخلي للعناصر، الجافا سكريبت بتقدم طريقتين بيعملوا نفس الوظيفة تقريباً بس باختلاف جوهري. خاصية `innerHTML` بترجع وتسمح بتعديل المحتوى شاملاً وسوم الـ `HTML` (يعني لو ضفت وسم `<br>` المتصفح هيقراه كسطر جديد). أما خاصية `textContent` فبترجع المحتوى كنص بيور (`Raw text`) وتتجاهل أي وسوم، ولو حاولت تضيف وسم هتطبعه كنص مكتوب. \nبالنسبة لخصائص العناصر (`Attributes`) زي الـ `src` في الصور أو الـ `href` في اللينكات، نقدر نعدلها بطريقتين: الطريقة المباشرة باستخدام النقطة (زي `element.src = value`)، أو باستخدام دوال مخصصة وهي:\n- `getAttribute`: بتسحب قيمة الخاصية.\n- `setAttribute`: بتعين خاصية جديدة أو بتعدل خاصية موجودة.\n- `hasAttribute`: بتختبر هل الخاصية دي موجودة ولا لأ وبترجع `true` أو `false`.\n- `removeAttribute`: بتحذف الخاصية بالكامل من العنصر."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`innerHTML`:</strong> A property that gets or sets the HTML or XML markup contained within the element.",
+            "<strong>`textContent`:</strong> A property that gets or sets the text content of a node and its descendants, treating all content as raw text.",
+            "<strong>`getAttribute(name)`:</strong> Returns the value of a specified attribute on the element.",
+            "<strong>`setAttribute(name, value)`:</strong> Sets the value of an attribute on the specified element.",
+            "<strong>`hasAttribute(name)`:</strong> Returns a Boolean value indicating whether the specified element has the specified attribute or not.",
+            "<strong>`removeAttribute(name)`:</strong> Removes the element's specified attribute."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Selecting Elements\nconst myDiv = document.querySelector(\".my-div\");\nconst myLink = document.getElementById(\"my-link\");\nconst myImg = document.querySelector(\"img\");\n\n// innerHTML vs textContent\n// innerHTML renders the <span> tag\nmyDiv.innerHTML = \"Hello from <span style='color:blue'>JS</span>\"; \n// textContent outputs the literal characters <span>\nmyDiv.textContent = \"Hello from <span style='color:blue'>JS</span>\"; \n\n// Direct Attribute Manipulation\nmyImg.src = \"new-image.jpg\";\nmyImg.alt = \"New Image Description\";\n\n// Using Attribute Methods\nif(myLink.hasAttribute(\"href\")){\n    // Retrieves the current link value\n    console.log(myLink.getAttribute(\"href\")); \n    \n    // Updates the link to a new URL\n    myLink.setAttribute(\"href\", \"https://google.com\"); \n    \n    // Adds a new attribute dynamically\n    myLink.setAttribute(\"title\", \"Go to Google\"); \n}\n\n// Removing an attribute\nmyLink.removeAttribute(\"class\");"
+        }
+      ]
+    }
+  ]
+}

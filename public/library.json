@@ -1,0 +1,134 @@
+{
+  "libraryTitle": "Synapse Library",
+  "librarySubtitle": "Knowledge Base • Powered by Synapse",
+  "categories": [
+    {
+      "id": "javascript",
+      "title": "JavaScript",
+      "description": "Complete JavaScript mastery — from basics to senior-level patterns.",
+      "icon": "fa-brands fa-js",
+      "color": "#f7df1e",
+      "docs": [
+        {
+          "file": "docs/data.json",
+          "title": "OOP Simplified",
+          "subtitle": "Interview Prep • Bilingual Guide",
+          "sections": 5
+        },
+        {
+          "file": "docs/JavaScript-Part1.json",
+          "title": "JavaScript Full Course: Part 1",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 11
+        },
+        {
+          "file": "docs/JavaScript-Part2.json",
+          "title": "JavaScript Full Course: Part 2",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 11
+        },
+        {
+          "file": "docs/JavaScript-Part3.json",
+          "title": "JavaScript Full Course: Part 3",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 11
+        },
+        {
+          "file": "docs/JavaScript-Part4.json",
+          "title": "JavaScript Full Course: Part 4",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part5.json",
+          "title": "JavaScript Full Course: Part 5",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part6.json",
+          "title": "JavaScript Full Course: Part 6",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part7.json",
+          "title": "JavaScript Full Course: Part 7",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part8.json",
+          "title": "JavaScript Full Course: Part 8",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part9.json",
+          "title": "JavaScript Full Course: Part 9",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part10.json",
+          "title": "JavaScript Full Course: Part 10",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part11.json",
+          "title": "JavaScript Full Course: Part 11",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part12.json",
+          "title": "JavaScript Full Course: Part 12",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part13.json",
+          "title": "JavaScript Full Course: Part 13",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        },
+        {
+          "file": "docs/JavaScript-Part14.json",
+          "title": "JavaScript Full Course: Part 14",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        }
+      ]
+    },
+    {
+      "id": "php",
+      "title": "PHP",
+      "description": "Master PHP from the ground up — web development, OOP, and frameworks.",
+      "icon": "fa-brands fa-php",
+      "color": "#777bb4",
+      "docs": [
+        {
+          "file": "docs/PHP-Part1.json",
+          "title": "PHP Mastery: Part 1",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 11
+        },
+        {
+          "file": "docs/PHP-Part2.json",
+          "title": "PHP Mastery: Part 2",
+          "subtitle": "Made by Tyson • For Beginners",
+          "sections": 10
+        }
+      ]
+    },
+    {
+      "id": "pythonpython",
+      "title": "PythonPython",
+      "description": "",
+      "icon": "fa-solid fa-folder",
+      "color": "#a855f7",
+      "docs": []
+    }
+  ]
+}

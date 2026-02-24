@@ -1,0 +1,292 @@
+{
+  "title": "PHP Mastery: Part 1",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-solid fa-code",
+  "sections": [
+    {
+      "title": "1. Introduction to PHP and Setup",
+      "icon": "fa-solid fa-server",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر لغة بي إتش بي (PHP) اختصاراً في الأصل لجملة \"Personal Home Pages\"، وتغيرت لاحقاً لتصبح \"Hypertext Preprocessor\". بدأت اللغة في عام 1994 بهدف تحويل صفحات الويب من صفحات ثابتة (Static) مبنية بـ HTML إلى صفحات ديناميكية وتفاعلية. تظل لغة الـ PHP اليوم لغة قوية وصامدة، وعليها طلب عالٍ جداً، خصوصاً في سوق العمل الحر (Freelance) للشركات الصغيرة والمتوسطة. تتميز اللغة بالمرونة والسهولة في كتابة الكود الخاص بها (Syntax) مقارنة بلغات أخرى كثيرة، وتعد نقطة بداية ممتازة لمن يرغب في تغيير مساره المهني (Shift Career). يدعم اللغة إطار عمل قوي جداً اسمه (Laravel)، والذي يسمح ببناء الواجهة الخلفية (Back-end) وتطبيقات الـ API بشكل مستقل، مع إمكانية دمجها مع تقنيات مثل React أو Vue في الواجهة الأمامية."
+        },
+        {
+          "type": "callout",
+          "style": "tip",
+          "title": "تجهيز بيئة العمل (Development Setup)",
+          "content": "ننصح بتحميل حزمة (XAMPP)، وهي حزمة توفر لك الـ PHP مع خادم Apache و MySQL و phpMyAdmin لتهيئة البيئة بكل سهولة. نقوم بضبط متغيرات النظام (Environment Variables) في الويندوز، ونضيف مسار مجلد الـ PHP إلى الـ Path حتى نتمكن من تشغيل أوامر الـ PHP مباشرة من موجه الأوامر (Terminal) دون الحاجة لربطها فوراً بخادم ويب. نستخدم محرر الأكواد (Visual Studio Code) كبيئة تطوير، مع تحميل إضافة (PHP extension from DevSense) لتسهيل كتابة الكود وتشغيله واكتشاف الأخطاء."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`PHP (Hypertext Preprocessor)`:</strong> A widely-used open-source general-purpose scripting language that is especially suited for web development and can be embedded into HTML.",
+            "<strong>`XAMPP`:</strong> A completely free, easy to install Apache distribution containing MariaDB, PHP, and Perl.",
+            "<strong>`Environment Variables`:</strong> Variables that describe the environment in which programs run, specifically used here to globally register the PHP executable's path in the OS."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "bash",
+          "code": "# Verify PHP Installation via Windows Terminal\nphp -v\n# Expected Output: PHP 8.2.x (cli) ..."
+        }
+      ]
+    },
+    {
+      "title": "2. Basic Syntax and Output",
+      "icon": "fa-solid fa-terminal",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تبدأ كتابة كود الـ PHP باستخدام وسم الفتح المخصص للغة `<?php`، وهو أمر ضروري لكي يفهم المحلل (Interpreter) أن ما بداخل هذا الوسم هو كود برمجي. تعتبر الطريقة الحديثة والأساسية لتعلم اللغة بشكل متعمق هي كتابة كود بي إتش بي صرف (Pure PHP) دون دمجه مع الـ HTML في البداية، لكي نستوعبها كلغة برمجة مجردة. تستخدم الدالة `echo` المحجوزة في اللغة لطباعة النصوص والمخرجات على الشاشة أو في موجه الأوامر. تقبل دالة الـ `echo` أكثر من نص (String) كمدخلات متتالية عن طريق الفصل بينهم بفاصلة. توجد دالة أخرى للإخراج تُسمى `print`، ولكنها تختلف عن `echo` في أنها تقبل مدخل (Expression) واحد فقط، ولا يمكنها طباعة أكثر من نص في نفس السطر. يجب إنهاء كل سطر برمجي بفاصلة منقوطة (Semicolon). ويعتبر السطر الأخير استثناءً اختيارياً إذا كان الكود يحتوي على سطر واحد فقط، ولكن يُفضل دائماً كتابتها كقاعدة عامة. تُعد الكلمات `echo` و `print` في الأصل دوال (Functions)، ولكن يمكن كتابتها بدون الأقواس (Parentheses) بأمان."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Echo`:</strong> A language construct used to output one or more strings separated by commas.",
+            "<strong>`Print`:</strong> A language construct used to output a single string expression.",
+            "<strong>`Semicolon (;)`:</strong> A punctuation mark used to strictly terminate a statement or command in PHP."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Using echo for output\necho \"Hello World\";\necho \"Hello\", \" World\", \" Another Hello\"; // Multiple strings allowed\n\n// Using print for output\nprint \"Hello World\";\n// print \"Hello\", \"World\"; // This will throw a syntax error\n\n// Newline escape sequence\necho \"Line 1\\n\";\necho \"Line 2\\n\";"
+        }
+      ]
+    },
+    {
+      "title": "3. Variables and Data Types",
+      "icon": "fa-solid fa-database",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يتم تعريف المتغيرات في لغة الـ PHP ببساطة عن طريق استخدام علامة الدولار (Dollar Sign) متبوعة باسم المتغير. يعتبر المتغير بمثابة وعاء أو مكان محجوز في الذاكرة يتم فيه تخزين نوع من أنواع البيانات للتعامل معها لاحقاً. لا تحتاج في الـ PHP إلى تحديد نوع البيانات للمتغير يدوياً، لأنها لغة تعتمد على الكتابة المرنة (Loosely Typed)، حيث يكتشف المحلل النوع تلقائياً وقت التشغيل (Runtime). تشمل أنواع البيانات الأساسية (Primitive Types) النصوص (String)، الأرقام الصحيحة (Integer)، الأرقام ذات الفواصل العشرية (Float)، القيم المنطقية (Boolean)، وقيمة الفراغ (Null). يُمكن للمتغير الواحد أن يغير نوع بياناته في نفس الملف إذا أسندت إليه قيمة جديدة، وهذا ما يسمى بإعادة التعيين الديناميكي (Dynamic Reassignment). يتجاهل المحلل البرمجي عند الطباعة القيمة (Null) والقيمة المنطقية (False) ويُخرج مساحة فارغة، بينما يطبع القيمة (True) على هيئة الرقم واحد (1). تُستخدم التعليقات (Comments) لإضافة ملاحظات للمبرمجين داخل الكود، وتكون إما باستخدام علامة الشباك `#` أو السلاش المزدوج `//` للسطر الواحد، أو باستخدام `/* */` للأسطر المتعددة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Variable`:</strong> A named memory location used to store data, prefixed securely with a `$` sign in PHP.",
+            "<strong>`Loosely Typed Language`:</strong> A language where variables are not strictly bound to a single data type and can change types flexibly at runtime.",
+            "<strong>`Primitive Types`:</strong> Fundamental data types provided natively by the language (String, Integer, Float, Boolean, Null)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Primitive Types & Reassignment\n$name = \"Yehia\"; // String\n$name = 10;      // Reassigned to Integer (int)\n$name = 10.5;    // Reassigned to Float\n$name = true;    // Reassigned to Boolean (bool) - Outputs '1'\n$name = null;    // Reassigned to Null - Outputs nothing\n\n/*\n   This is a multi-line comment.\n   It does not appear in the execution output.\n*/\n# Single line comment\n// Another single line comment"
+        }
+      ]
+    },
+    {
+      "title": "4. Constants and Trade-offs",
+      "icon": "fa-solid fa-lock",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم الثوابت (Constants) لحفظ قيم لا تتغير طوال فترة تشغيل البرنامج، لتجنب استخدام \"النصوص السحرية\" (Magic Strings) المبعثرة والتي يصعب صيانتها. تُعرف الثوابت باستخدام الدالة الجاهزة `define()`، وتُستدعى باسمها مباشرة دون الحاجة لاستخدام علامة الدولار. يُفضل كمعيار تسمية (Naming Convention) أن يكون اسم الثابت بحروف إنجليزية كبيرة (All Caps)، مع استخدام علامة الشرطة السفلية (Underscore) للفصل بين الكلمات. تتسبب محاولة تغيير أو إعادة تعيين قيمة الثابت في إظهار رسالة تحذير أو خطأ توضح أن الثابت تم تعريفه مسبقاً. توفر اللغات ذات الأنواع الصارمة (Strongly Typed) مثل الجافا سرعة أكبر في تنفيذ العمليات الحسابية المعقدة لأن الأنواع محددة مسبقاً وقت الترجمة (Compilation)، بينما تعاني الـ PHP كقاعدة عامة من بطء نسبي في هذه النقطة بسبب اكتشاف الأنواع وقت التشغيل (Runtime Trade-off)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Constant`:</strong> An identifier for a simple value that is completely immutable during the execution of the script.",
+            "<strong>`define()`:</strong> A built-in PHP function used to declare a constant dynamically at runtime.",
+            "<strong>`Trade-off`:</strong> A software engineering compromise where gaining one advantage (like PHP's flexibility) results in losing another (like strict execution speed)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Defining a constant\ndefine(\"MY_WEBSITE\", \"google.com\");\n\necho MY_WEBSITE . \"\\n\";\necho MY_WEBSITE . \"\\n\";\n\n// Trying to redefine will throw a warning\n// define(\"MY_WEBSITE\", \"yehia.tech\"); \n\n// Constants provide maintainability: Change \"google.com\" once, and it reflects everywhere."
+        }
+      ]
+    },
+    {
+      "title": "5. Arithmetic and Assignment Operators",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم المعاملات الحسابية (Arithmetic Operators) للقيام بالعمليات الرياضية كالجمع (+) والطرح (-) والضرب (*) والقسمة (/). تختلف علامة الضرب في البرمجة عن الرياضيات، حيث نستخدم رمز النجمة (Asterisk) للضرب، والسلاش (Slash) للقسمة. يقوم المحلل في لغة بي إتش بي تلقائياً بتحويل نوع البيانات المحفوظ في الذاكرة بناءً على ناتج العملية؛ فناتج قسمة أرقام صحيحة قد ينتج عنه متغير من نوع فواصل عشرية (Float) بشكل آلي. تُستخدم علامة النسبة المئوية (%) للحصول على باقي القسمة (Modulo أو Remainder)، وهي مفيدة لمعرفة الباقي الصحيح من عمليات القسمة المطولة. يتم دمج النصوص والمتغيرات ببعضها في عمليات الإخراج باستخدام عملية تُعرف بدمج النصوص (String Concatenation)، ونستخدم فيها رمز النقطة (.). تُستخدم عوامل التعيين (Assignment Operators) لاختصار كتابة العمليات الحسابية التي تتم على المتغير نفسه (مثل استخدام `+=` أو `-=`)، ولكن من الأفضل كتابة العملية بشكل صريح للمبتدئين لتجنب اللبس."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Arithmetic Operators`:</strong> Symbols used to perform common mathematical operations.",
+            "<strong>`Modulo (Remainder)`:</strong> An operator (`%`) that returns the remainder of dividing the first operand by the second.",
+            "<strong>`String Concatenation`:</strong> The operation of joining character strings end-to-end, executed in PHP using the dot (`.`) operator.",
+            "<strong>`Assignment Operators`:</strong> Operators that shorthand the process of performing an operation and assigning the result back to the exact same variable (e.g., `+=`, `*=`)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n$coffeeQuantity = 3;\n$coffeePrice = 3.5;\n\n// Standard Arithmetic\n$coffeeTotal = $coffeeQuantity * $coffeePrice;\n\n// Modulo / Remainder\n$remainder = 3 % 2; // Outputs 1\n\n// String Concatenation \necho \"Total is: \" . $coffeeTotal . \"\\n\";\n\n// Explicit Assignment vs Shorthand Assignment\n$x = 1;\n$x = $x + 1; // Explicit (Recommended for readability)\n$x += 1;     // Shorthand Assignment Operator"
+        }
+      ]
+    },
+    {
+      "title": "6. Control Structures: If, Switch, and Match",
+      "icon": "fa-solid fa-code-branch",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم هياكل التحكم (Control Structures) لتوجيه مسار الكود واتخاذ القرارات بناءً على مدخلات وشروط محددة. تعتمد جملة `if` على تقييم الشرط كقيمة منطقية (Boolean Evaluation)، فإذا كان التقييم صحيحاً (True) يُنفذ الكود المرفق. تُستخدم `else` كحالة افتراضية (Catch-all) إذا لم يتحقق أي شرط مسبق، ونستخدم `elseif` للتحقق من شروط متتالية. الكود يخرج من الهيكل فور تحقق أول شرط صحيح. تُعد جملة `switch` بديلاً أكثر ترتيباً ووضوحاً من الـ `if` في حالة المساواة الصريحة (Exact Equality)، كحالات الرد الآلي وتحديد الخيارات. يلتزم المبرمج بكتابة الكلمة المفتاحية `break` في نهاية كل حالة (Case) داخل الـ `switch` لمنع البرنامج من الدخول في الحالات التي تليها (Fall-through). تُقدم لغة بي إتش بي (بداية من الإصدار 8.0) هيكل `match` كبديل أحدث وأكثر اختصاراً من الـ `switch`، حيث يُرجع قيمة صريحة مباشرة في خطوة إسناد واحدة ولا يحتاج لكتابة `break`."
+        },
+        {
+          "type": "table",
+          "headers": [
+            "وجه المقارنة",
+            "switch Statement",
+            "match Expression"
+          ],
+          "rows": [
+            [
+              "**الإنهاء (Break)**",
+              "يتطلب كتابة `break` صراحة لمنع التداخل.",
+              "لا يحتاج إلى `break`، فهو ينتهي تلقائياً لكل مسار."
+            ],
+            [
+              "**الإرجاع (Return)**",
+              "لا يُرجع قيمة بل يُنفذ أوامر الطباعة أو العمليات.",
+              "يُرجع قيمة يمكن تخزينها في متغير بشكل مباشر."
+            ]
+          ]
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Control Structure`:</strong> Blocks of code that dictate the exact flow of execution based on evaluated conditions.",
+            "<strong>`Switch Statement`:</strong> A control structure used to perform different actions based on different exact match values, evaluated sequentially.",
+            "<strong>`Match Expression`:</strong> Introduced in PHP 8.0, an expression-based equivalent to `switch` that is shorter, strictly typed by default, and returns a value directly."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n$grade = 75;\n\n// If-Else Implementation\nif ($grade >= 90) {\n    echo \"A+ Grade\";\n} elseif ($grade >= 80) {\n    echo \"B+ Grade\";\n} elseif ($grade >= 70) {\n    echo \"C+ Grade\";\n} else {\n    echo \"F Grade\"; // Catch-all fallback\n}\n\n// Switch Implementation\n$menuOption = 2;\nswitch ($menuOption) {\n    case 1:\n        echo \"Arabic Selected\";\n        break;\n    case 2:\n    case 3:\n        echo \"English or French Selected\"; // OR Logic in switch\n        break;\n    default:\n        echo \"No option found\";\n        break;\n}\n\n// Match Expression Implementation (PHP 8.0+)\n$result = match ($menuOption) {\n    1 => \"Arabic Selected\",\n    2, 3 => \"English or French Selected\",\n    default => \"No option found\",\n};\necho $result;"
+        }
+      ]
+    },
+    {
+      "title": "7. Logical Operators and Equality",
+      "icon": "fa-solid fa-vial",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم المعاملات المنطقية (Logical Operators) للربط بين الشروط المتعددة، وتحديداً معامل (AND) ومعامل (OR). تطلب علامة الـ (AND) التي تُكتب `&&` تحقق صحة جميع الشروط بلا استثناء ليتم تنفيذ الكود. تكتفي علامة الـ (OR) التي تُكتب `||` بتحقق صحة شرط واحد فقط على الأقل لإعطاء نتيجة صحيحة (True). تُفرق لغة الـ PHP جوهرياً بين علامة المساواة المزدوجة `==` والمساواة الصارمة `===`. تكتفي المساواة المزدوجة بمقارنة القيم فقط (Loose Equality)، لذا يعتبر الرقم 3 كنص مطابقاً للرقم 3 كعدد صحيح. تُعتبر المساواة الصارمة (Strict Equality) هي الممارسة الأفضل (Best Practice) لأنها تقارن القيم مع نوع البيانات في نفس الوقت، مما يحمي من أخطاء تحويل الأنواع التلقائي المزعجة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Logical AND (&&)`:</strong> An operator that returns true only if both interconnected operands are explicitly true.",
+            "<strong>`Logical OR (||)`:</strong> An operator that returns true if at least one of the interconnected operands evaluates to true.",
+            "<strong>`Loose Equality (==)`:</strong> Compares values for equality after automatic type juggling (ignores data types).",
+            "<strong>`Strict Equality (===)`:</strong> Compares both values and precise data types strictly without casting."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n$x = 3;   // Integer\n$y = \"3\"; // String\n\n// Loose Equality\nif ($x == $y) {\n    echo \"Is Equal (Values match)\\n\"; // Executed\n}\n\n// Strict Equality\nif ($x === $y) {\n    echo \"Is Strictly Equal\\n\"; // NOT Executed\n}\n\n// Logical Operators\n$grade = 90;\n$attendance = \"yes\";\n\nif ($grade >= 90 && $attendance === \"yes\") {\n    echo \"Top Graduate\\n\"; // Requires BOTH to be true\n}"
+        }
+      ]
+    },
+    {
+      "title": "8. Loops: While, Do-While, and For",
+      "icon": "fa-solid fa-arrows-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُقدم حلقات التكرار (Loops) حلاً لعملية التكرار البرمجي عن طريق إعادة تنفيذ الكود بشكل آلي بناءً على شرط صحيح. تعتمد حلقة الـ `while` على ثلاثة أركان أساسية: العداد كخطوة البداية (Start)، شرط الاستمرار (Condition)، وخطوة الزيادة (Increment/Step) التي تمنعنا من الدخول في حلقة لانهائية (Infinite Loop) تؤدي لانهيار البرنامج. تُعتبر حلقة الـ `do-while` مشابهة جداً، ولكنها تمتاز بأنها تُنفذ الكود المكتوب مرة واحدة على الأقل قبل التحقق من الشرط. تقوم حلقة الـ `for` بتجميع وتلخيص أركان حلقة التكرار الثلاثة في سطر برمجي واحد، مما يرفع من مستوى قابلية قراءة الكود وصيانته (Maintainability). تُستخدم الكلمة المفتاحية `break` لإيقاف وكسر الحلقة برمجياً في أي وقت، حتى ولو كان الشرط الأصلي لا يزال صحيحاً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Loop`:</strong> A programming construct that repeats a block of code continually as long as a specified condition is met.",
+            "<strong>`Infinite Loop`:</strong> A logical error where a loop never terminates because its condition never becomes false, severely consuming hardware resources.",
+            "<strong>`Break Statement`:</strong> A keyword used to immediately break out of and exit a loop prematurely."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// While Loop Example\n$counter = 1;\nwhile ($counter <= 10) {\n    echo $counter . \"\\n\";\n    $counter++; // Increment to prevent infinite loop\n}\n\n// For Loop Example (Refactored)\nfor ($i = 1; $i <= 10; $i++) {\n    echo $i . \"\\n\";\n}\n\n// Interactive Loop with Break\nwhile (true) {\n    echo \"Enter a positive number (negative to exit): \";\n    $number = fgets(STDIN); // Reads input from CLI\n    \n    if ($number < 0) {\n        echo \"You entered a negative number. Bye!\\n\";\n        break; // Breaks out of the infinite while(true) loop\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "9. Functions and Type Declarations",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الدوال (Functions) الأداة الأساسية لتحقيق مبدأ إعادة استخدام الكود (Code Reusability)، وتمنع تكرار اللوجيك المكتوب في أماكن متعددة. يتم تعريف الدالة باستخدام الكلمة المحجوزة `function` متبوعة باسم الدالة، ويُفضل استخدام نمط (Camel Case) أو (Snake Case) في التسمية لضمان وضوح الكود. تستقبل الدالة مدخلات تُعرف بالـ (Parameters)، وتقوم بمعالجتها داخل جسم الدالة (Body) لتنفيذ وظيفة معينة. يُفضل دائماً تطبيق مبدأ المسؤولية الواحدة (Single Responsibility Principle)، بحيث تقوم الدالة بعملية المعالجة وإرجاع النتيجة باستخدام `return`، بدلاً من طباعة الناتج مباشرة باستخدام `echo` داخلها، مما يمنع تداخل المهام (Mixed Concerns). بداية من إصدار بي إتش بي 7.0 وما بعده، أصبح بإمكاننا تحديد نوع البيانات للمدخلات (Type Hinting) ونوع البيانات المرجع (Return Type). توفر لغة الـ PHP مرونة إضافية بداية من الإصدار 8.0 باستخدام الـ (Union Types)، والتي تسمح بقبول أكثر من نوع بيانات للمدخل الواحد باستخدام علامة `|` (مثل `int|float`)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Function`:</strong> A reusable block of code designed to perform a single, specific task, optionally taking inputs and returning an output.",
+            "<strong>`Parameters / Arguments`:</strong> Variables defined in the function declaration that act as placeholders for the actual values passed to the function.",
+            "<strong>`Return Statement`:</strong> A keyword used to exit a function immediately and pass a specific evaluated value back to the caller.",
+            "<strong>`Type Hinting`:</strong> Explicitly declaring the expected data type of a function parameter or its return value.",
+            "<strong>`Union Types`:</strong> A feature allowing a variable to accept two or more specific types (e.g., `int|float`).",
+            "<strong>`Variadic Parameters (Splat Operator ...)`:</strong> An operator that collects a variable number of arguments into a single array parameter."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Procedural basic function without strict types\nfunction sumTwoNumbers($x, $y) {\n    return $x + $y;\n}\n\n$result = sumTwoNumbers(10, 15);\necho $result . \"\\n\"; // Outputs 25\n\n// Refactored function with Strict Types and Validation\nfunction addNumbers(int $firstNumber, int $secondNumber): int {\n    if ($firstNumber < 0 || $secondNumber < 0) {\n        return -1; // Returning an error code instead of echoing\n    }\n    return $firstNumber + $secondNumber;\n}\n\n// Function with Union Types and Optional Parameters (?int)\nfunction calculateTotal(int|float $price, int|float $tax, ?int $discount = null): float {\n    $total = $price + $tax;\n    if ($discount !== null) {\n        $total -= $discount;\n    }\n    return $total;\n}\n\n// Variadic Function using Splat Operator (...)\nfunction sumAllNumbers(...$numbers): int {\n    // Uses built-in array_sum to calculate the total of the array\n    return array_sum($numbers); \n}\n\necho sumAllNumbers(10, 20, 30, 40); // Outputs 100"
+        }
+      ]
+    },
+    {
+      "title": "10. Call by Value vs. Call by Reference",
+      "icon": "fa-solid fa-link",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "يمرر المبرمج المتغيرات للدوال افتراضياً في لغة الـ PHP بطريقة تُعرف بـ (Call by Value). يعني الاستدعاء بالقيمة أن الدالة تأخذ \"نسخة\" من المتغير الأصلي وتضعه في مكان جديد في الذاكرة. أي تعديل يتم على هذا المتغير داخل الدالة لا يؤثر إطلاقاً على المتغير الأصلي خارجها. توجد طريقة أخرى مستوحاة من لغات مثل الـ C++ تُسمى (Call by Reference)، ويتم تفعيلها بوضع علامة `&` قبل اسم الباراميتر في تعريف الدالة. يُجبر الاستدعاء بالمرجع الدالة على عدم أخذ نسخة، بل إنشاء مؤشر (Pointer) يشاور مباشرة على العنوان الأصلي للمتغير في الذاكرة (Memory Address). يتسبب أي تعديل على المتغير داخل الدالة في حالة الـ (Reference) في تغيير قيمة المتغير الأصلي في النطاق الخارجي (Global Scope). يُعتبر هذا الأسلوب مفيداً جداً عند التعامل مع هياكل بيانات ضخمة (Data Structures) لتوفير استهلاك الذاكرة، ولكن يجب استخدامه بحذر شديد لتجنب تعديل البيانات الأصلية عن طريق الخطأ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Call by Value`:</strong> Passing a copy of the actual variable's value to the function. Modifications inside the function do not affect the original variable.",
+            "<strong>`Call by Reference (&)`:</strong> Passing the memory address of the variable to the function. Modifications inside the function directly alter the original variable."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Call by Value Example\nfunction addOneByValue($number) {\n    $number++; // Increments the local copy only\n    return $number;\n}\n\n$a = 10;\n$resultValue = addOneByValue($a);\necho \"A is: \" . $a . \"\\n\"; // Outputs 10\necho \"Result is: \" . $resultValue . \"\\n\"; // Outputs 11\n\n\n// Call by Reference Example\nfunction addOneByReference(&$number) {\n    $number++; // Directly increments the original variable in memory\n    return $number;\n}\n\n$b = 25;\n$resultRef = addOneByReference($b);\necho \"B is: \" . $b . \"\\n\"; // Outputs 26 (Original was mutated)\necho \"Result is: \" . $resultRef . \"\\n\"; // Outputs 26"
+        }
+      ]
+    },
+    {
+      "title": "11. Indexed Arrays and Manipulations",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُعد المصفوفات (Arrays) من أهم هياكل البيانات (Data Structures) في البرمجة، وتُستخدم لحفظ مجموعة من البيانات المتتالية في وعاء متغير واحد في الذاكرة. تبدأ المصفوفات الرقمية (Indexed Arrays) دائماً في ترقيم العناصر (Indexing) من الرقم صفر (0)، وليس من الرقم واحد. يقبل الـ PHP بطبيعته المرنة وضع أنواع بيانات مختلفة داخل نفس المصفوفة (Mixed Data Types)، مثل نصوص وأرقام وقيم منطقية معاً، وهذا غير مسموح به في اللغات الصارمة مثل جافا. يُحذر المحلل البرمجي من محاولة طباعة مصفوفة كاملة باستخدام `echo` ويُصدر خطأ (Array to string conversion)، ولطباعة محتوى المصفوفة لغرض الاختبار والتنقيح (Debugging) نستخدم دالة `print_r()`. للحصول على آخر مكان (Last Index) في المصفوفة، نقوم بحساب إجمالي عدد العناصر باستخدام دالة `count()` ونطرح منه واحد. تُستخدم الدوال الجاهزة للتعديل على المصفوفات بمرونة: دالة `array_push()` لإضافة عنصر في نهاية المصفوفة، ودالة `array_pop()` لاستخراج وحذف العنصر الأخير. تتيح دالة `array_merge()` دمج مصفوفتين منفصلتين في مصفوفة واحدة جديدة للتعامل معهما ككيان واحد."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Array`:</strong> A composite data structure that holds an ordered collection of values under a single variable name.",
+            "<strong>`Zero-based Indexing`:</strong> The standard convention where the first element of an array is accessed using the index 0.",
+            "<strong>`print_r()`:</strong> A built-in PHP function used to print human-readable information about a variable, highly useful for inspecting arrays.",
+            "<strong>`array_push()`:</strong> Pushes one or more elements onto the end of an array.",
+            "<strong>`array_pop()`:</strong> Pops and returns the last element off the end of an array, shortening the array by one element."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "php",
+          "code": "<?php\n// Array Initialization (Mixed Types)\n$names = [\"Yehia\", \"Donia\", \"Ali\", 15, true];\n\n// Accessing an element\necho $names[0] . \"\\n\"; // Outputs \"Yehia\"\n// echo $names; // Fatal Error: Array to string conversion\n\n// Debugging an array\nprint_r($names);\n\n// Dynamic Looping through an array\n$length = count($names); // Gets total number of elements\nfor ($i = 0; $i < $length; $i++) {\n    echo $names[$i] . \"\\n\";\n}\n\n// Manipulating Arrays\n$numbers = []; // Empty array\narray_push($numbers, 10, 20, 30); // Adds elements to the end\n$lastElement = array_pop($numbers); // Removes and returns 30\n\n// Merging Arrays\n$arrayOne = [\"A\", \"B\"];\n$arrayTwo = [\"C\", \"D\"];\n$merged = array_merge($arrayOne, $arrayTwo);\nprint_r($merged); // Contains A, B, C, D"
+        }
+      ]
+    }
+  ]
+}

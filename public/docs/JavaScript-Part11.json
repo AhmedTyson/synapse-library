@@ -1,0 +1,238 @@
+{
+  "title": "JavaScript Full Course: Part 11",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Elzero Web School curriculum.",
+  "links": [
+    "https://youtu.be/gIGGhFlGgLI?si=h3SzxBzNgsnu5gqD"
+  ],
+  "sections": [
+    {
+      "title": "104. String Methods - Part 1 (دوال النصوص - الجزء الأول)",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "النص (`String`) هو عبارة عن تسلسل من الحروف (`Sequence`)، وكل حرف له رقم فهرس (`Index`) بيبدأ من صفر. عشان نوصل لحرف معين، بنكتب الفهرس بين أقواس مربعة `[index]` أو بنستخدم دالة `charAt(index)`. لمعرفة عدد حروف النص بنستخدم خاصية `length`، ولإن العد بيبدأ من 1 والفهرس بيبدأ من 0، فدايماً الـ `length` بيكون أزيد من آخر فهرس بواحد. دالة `trim()` بتقص المسافات البيضاء من أول وآخر النص (ودي مفيدة لو مستخدم دخل باسورد بالغلط فيها مسافات). ولتغيير حالة الحروف بنستخدم `toUpperCase()` عشان نكبرها، و `toLowerCase()` عشان نصغرها. وأخيراً، نقدر نعمل (`Method Chaining`) ونربط كذا دالة في بعض في سطر واحد عشان نختصر الكود."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Zero-based Indexing`:</strong> The practice of starting array or string indices from `0` instead of `1`.",
+            "<strong>`charAt(index)`:</strong> Returns the character at the specified index in a string.",
+            "<strong>`trim()`:</strong> Removes whitespace from both ends of a string."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let theName = \"  Ahmed  \";\n\n// Indexing and Length\nconsole.log(theName); // \"A\" (ignoring spaces for this example if it was \"Ahmed\")\nconsole.log(theName.charAt(2)); \nconsole.log(theName.length); // 9 (includes spaces)\n\n// Trim and Cases\nconsole.log(theName.trim()); // \"Ahmed\"\nconsole.log(theName.toUpperCase()); // \"  AHMED  \"\nconsole.log(theName.toLowerCase()); // \"  ahmed  \"\n\n// Method Chaining: Trim, pick the 3rd letter of trimmed word, and uppercase it\nconsole.log(theName.trim().charAt(2).toUpperCase()); // \"M\""
+        }
+      ]
+    },
+    {
+      "title": "105. String Methods - Part 2 (دوال النصوص - الجزء الثاني)",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب كمل في دوال النصوص وشرح:\n*   **`indexOf(val, start)`:** بتبحث عن كلمة أو حرف جوه النص وبترجع أول مكان (`Index`) بتلاقيه فيه. لو ملقتهوش بترجع `-1`.\n*   **`lastIndexOf(val, start)`:** نفس الفكرة بس بتبحث من آخر النص للأول، وبتجيبلك آخر مرة ظهرت فيها الكلمة.\n*   **`slice(start, end)`:** بتقطع جزء من النص. الـ `end` مش بيدخل معانا في القطع (`Not included`). الميزة إننا نقدر نستخدم أرقام سالبة عشان نعد ونقطع من آخر النص.\n*   **`repeat(count)`:** بتكرر النص عدد معين من المرات.\n*   **`split(separator, limit)`:** دي من أقوى الدوال؛ بتقطع النص وبتحوله لمصفوفة (`Array`). لو حطيت `\"\"` هتقطع كل حرف لوحده، ولو حطيت مسافة `\" \"` هتقطع الكلمات، وتقدر كمان تحدد (`Limit`) لعدد العناصر اللي هترجع في المصفوفة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`indexOf()` / `lastIndexOf()`:</strong> Methods that return the index of the first/last occurrence of a specified text in a string.",
+            "<strong>`slice(start, end)`:</strong> Extracts a section of a string and returns it as a new string. Accepts negative values to count from the end.",
+            "<strong>`split(separator, limit)`:</strong> Splits a string into an array of substrings based on a specified separator."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let a = \"Elzero Web School\";\n\n// Index searching\nconsole.log(a.indexOf(\"Web\")); // 7\nconsole.log(a.indexOf(\"Web\", 8)); // -1 (starts searching from index 8)\nconsole.log(a.lastIndexOf(\"o\")); // 15\n\n// Slicing (End is exclusive)\nconsole.log(a.slice(2, 6)); // \"zero\"\nconsole.log(a.slice(-5, -3)); // \"ch\"\n\n// Repeating\nconsole.log(a.repeat(2)); // \"Elzero Web SchoolElzero Web School\"\n\n// Splitting string into an Array\nconsole.log(a.split(\" \")); // [\"Elzero\", \"Web\", \"School\"]\nconsole.log(a.split(\"\", 6)); // [\"E\", \"l\", \"z\", \"e\", \"r\", \"o\"]"
+        }
+      ]
+    },
+    {
+      "title": "106. String Methods - Part 3 (دوال النصوص - الجزء الثالث)",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في الجزء التالت من دوال النصوص:\n*   **`substring(start, end)`:** بتقطع النص زي الـ `slice` بالظبط، بس فيها اختلافات: لو حطيت البداية أكبر من النهاية، هتبدلهم ببعض أوتوماتيك (`substring(6, 2)` هتبقى `(2, 6)`). كمان مفيهاش أرقام سالبة؛ لو اديتها رقم سالب هتحسبه كأنه `0`.\n*   **`substr(start, length)`:** (ملحوظة: دي قديمة بس بتتشرح للعلم) بتاخد نقطة البداية، وبعدين عدد الحروف اللي عايز تقطعها، مش نقطة النهاية. ودي بتقبل أرقام سالبة في البداية عشان تعد من ورا.\n*   أخيراً دوال التحقق اللي ظهرت في `ES6` وبترجع `true` أو `false`: دالة `includes()` بتشوف هل النص بيحتوي على الكلمة دي ولا لأ. دالة `startsWith()` بتشوف هل النص بيبدأ بكلمة أو حرف معين. ودالة `endsWith()` بتشوف هل النص بينتهي بكلمة معينة ولا لأ، وبتقبل كمان تمرير الطول (`Length`) اللي عايز تفحص عنده."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`substring(start, end)`:</strong> Extracts characters between two indices. Swaps indices if `start > end`. Treats negative values as `0`.",
+            "<strong>`substr(start, length)`:</strong> Extracts a specified number of characters starting from a specified index. (Considered legacy).",
+            "<strong>`includes(searchString)`:</strong> Determines whether a string contains the characters of a specified string.",
+            "<strong>`startsWith()` / `endsWith()`:</strong> Determines whether a string begins or ends with the characters of a specified string, returning true or false."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let a = \"Elzero Web School\";\n\n// substring vs slice\nconsole.log(a.substring(6, 2)); // \"zero\" (Swapped to 2, 6)\nconsole.log(a.substring(-10, 6)); // \"Elzero\" (Negative becomes 0, so 0, 6)\n\n// substr (Start, Length to extract)\nconsole.log(a.substr(0, 6)); // \"Elzero\"\nconsole.log(a.substr(-6, 6)); // \"School\"\n\n// Boolean search methods (ES6)\nconsole.log(a.includes(\"Web\")); // true\nconsole.log(a.startsWith(\"E\")); // true\nconsole.log(a.startsWith(\"z\", 2)); // true (Starts with \"z\" if we begin at index 2)\nconsole.log(a.endsWith(\"l\")); // true\nconsole.log(a.endsWith(\"o\", 6)); // true (Checks the string \"Elzero\" with length 6)"
+        }
+      ]
+    },
+    {
+      "title": "107. Comparison Operators (معاملات المقارنة)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "معاملات المقارنة بنستخدمها عشان نقارن بين قيمتين، والنتيجة دايماً بترجع قيمة منطقية (`Boolean`) إما `true` أو `false`. المدرب وضح الفرق الجوهري بين نوعين من المساواة: \n*   **المساواة العادية `==` (`Equal`):** بتقارن القيمة (`Value`) بس، بغض النظر عن نوع البيانات. فلو قارنت رقم `10` بنص `\"10\"`، الجافا سكريبت هتعمل تحويل لنوع البيانات (`Type Coercion`) وهترجع `true`.\n*   **المساواة الصارمة `===` (`Identical`/`Strict Equal`):** دي بتقارن القيمة (`Value`) ونوع البيانات (`Type`) مع بعض. فلو قارنت رقم `10` بنص `\"10\"` هترجع `false` لإنه رغم إن القيمة واحدة، لكن النوع مختلف (`Number` مقابل `String`).\nنفس الفكرة بتطبق في عدم المساواة؛ عندنا `!=` (`Not Equal`) بتقارن القيمة بس، وعندنا `!==` (`Strict Not Equal`) بتقارن القيمة والنوع. بالإضافة لمعاملات المقارنة الرياضية العادية زي أكبر من `>`، وأصغر من `<`، وأكبر من أو يساوي `>=`، وأصغر من أو يساوي `<=`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`==` (Equality Operator):</strong> Compares two values for equality after automatically performing type coercion if necessary.",
+            "<strong>`===` (Strict Equality Operator):</strong> Compares two values for equality, checking both their values and their data types without any coercion.",
+            "<strong>`!=` / `!==` (Inequality Operators):</strong> Returns true if the operands are not equal (with `!==` strictly checking against both value and type matching)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Equality (==) vs Strict Equality (===)\nconsole.log(10 == \"10\");  // true (Compares value only)\nconsole.log(10 === \"10\"); // false (Compares value and data type)\n\n// Inequality (!=) vs Strict Inequality (!==)\nconsole.log(10 != \"10\");  // false (Because they ARE equal in value)\nconsole.log(10 !== \"10\"); // true (Because their data types are different)\n\n// Greater than / Less than\nconsole.log(10 > 20);  // false\nconsole.log(10 <= 10); // true (Checks if less than OR equal to)"
+        }
+      ]
+    },
+    {
+      "title": "108. Logical Operators (المعاملات المنطقية `!`, `&&`, `||`)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المعاملات المنطقية بتستخدم لربط أكتر من شرط مع بعض أو للتحكم في النتيجة المنطقية.\n*   **معامل النفي `!` (`Not`):** وظيفته إنه بينفي أو بيعكس القيمة المنطقية؛ يعني بيحول الـ `true` لـ `false` والعكس.\n*   **معامل و `&&` (`And`):** بيشترط إن *كل* الشروط المربوطة بيه تكون متحققة (`True`) عشان النتيجة النهائية تبقى `true`. المدرب شبهها بموظف حكومي بيطلب منك 3 ورقات، لو جبت ورقتين ونسيت التالتة، طلبك هيترفض (يعني `false`).\n*   **معامل أو `||` (`Or`):** بيشترط إن *شرط واحد على الأقل* يكون متحقق عشان النتيجة النهائية تبقى `true`. ده زي موظف متساهل بيقولك هاتلي أي ورقة من التلاتة، فلو جبت ورقة واحدة بس الشرط هيتحقق (يعني `true`)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`!` (Logical NOT):</strong> Reverses the boolean evaluation of the operand.",
+            "<strong>`&&` (Logical AND):</strong> Returns true if and only if all of its operands evaluate to true.",
+            "<strong>`||` (Logical OR):</strong> Returns true if at least one of its operands evaluates to true."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Logical NOT (!)\nconsole.log(!true);  // false\nconsole.log(!(10 == \"10\")); // false (10 == \"10\" is true, so NOT true is false)\n\n// Logical AND (&&) - ALL conditions must be true\nconsole.log(10 == \"10\" && 10 > 8 && 10 >= 10); // true (All 3 are true)\nconsole.log(10 == \"10\" && 10 > 50); // false (Because 10 > 50 is false)\n\n// Logical OR (||) - AT LEAST ONE condition must be true\nconsole.log(10 == 10 || 10 > 50 || 10 > 80); // true (The first condition is true)"
+        }
+      ]
+    },
+    {
+      "title": "109. If Conditions (الجمل الشرطية والتحكم في المسار `Control Flow`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "البرنامج بطبيعته بيمشي وينفذ الأكواد سطر سطر (`Top to bottom`) لحد ما يقابل حاجة اسمها (`Control Flow`) أو التحكم في المسار زي الجمل الشرطية `if`. دي بتخلينا ناخد قرارات وننفذ كود معين بناءً على شرط محدد. بنبدأ بكلمة `if` وبنحط الشرط بين أقواس، لو النتيجة `true`، بينفذ البلوك الخاص بيها. لو عندنا شروط تانية بديلة بنستخدم `else if`، ولو الشرط الأول فشل، المتصفح بيدخل يفحص الشرط التاني. وفي النهاية بنقدر نحط `else` كحالة افتراضية بتتنفذ لو كل الشروط اللي فوق فشلت ومتحققتش إطلاقاً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Control Flow`:</strong> The order in which statements and instructions are executed in a script. Conditional statements allow you to alter this flow.",
+            "<strong>`if` Statement:</strong> Evaluates a specified condition and executes a block of code only if the condition is truthy.",
+            "<strong>`else if` / `else`:</strong> Provides a fallback mechanism to test secondary conditions sequentially (`else if`), and a final default block (`else`) that runs if no prior conditions are met."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let price = 100;\nlet country = \"Egypt\"; // Change to \"Syria\" or \"KSA\" to test other blocks\n\nif (country === \"Egypt\") {\n    // Condition 1\n    price -= 40; \n} else if (country === \"Syria\") {\n    // Condition 2 (Evaluated only if Condition 1 is false)\n    price -= 50; \n} else {\n    // Default fallback if no conditions match\n    price -= 10; \n}\n\nconsole.log(price); // Output: 60"
+        }
+      ]
+    },
+    {
+      "title": "110. Nested If Conditions (الشروط المتداخلة `Nested If`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ `Nested If` هو إننا نكتب جملة `if` بالكامل جوه بلوك كود بتاع جملة `if` تانية. بنلجأ للأسلوب ده لتنظيم الكود ومنع التكرار لما يكون عندنا سيناريوهات معقدة. مثلاً، لو بنعمل نظام خصومات، بدل ما نكتب في سطر واحد \"لو الشخص من مصر && طالب\"، بنعمل شرط رئيسي يتأكد الأول إنه من مصر، ولما ندخل جوه البلوك ده (السكوب بتاع مصر)، نعمل شرط تاني فرعي يشوف هل هو طالب ولا لأ، وممكن جوه الطالب نعمل شرط تالت. الأسلوب ده بيخلي الكود أنظف وأسهل في القراءة (`Readable`) وبيسمح لنا نغطي سيناريوهات كتير بدقة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Nested If`:</strong> An `if-else` statement placed completely inside another `if` or `else` block. It is used to test multiple tiered sub-conditions logically and maintain clean code structure."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let price = 100;\nlet discount = false;\nlet discountAmount = 30; // Base discount\nlet country = \"Egypt\";\nlet student = true;\n\n// Main Condition\nif (country === \"Egypt\") {\n    \n    // Nested Condition\n    if (student === true) {\n        // Additional discount for students in Egypt\n        discountAmount += 20; // discount is now 50\n    } else {\n        // Standard discount for non-students in Egypt\n        discountAmount += 10; // discount is now 40\n    }\n    \n    price -= discountAmount;\n}\n\nconsole.log(`Final Price: ${price}`); // Output: Final Price: 50"
+        }
+      ]
+    },
+    {
+      "title": "111. Ternary Conditional Operator (الشرط المختصر `Ternary Operator`)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المعامل الثلاثي (`Ternary Operator`) هو اختصار قوي جداً لكتابة جملة `if / else` البسيطة. الصيغة بتاعته بتبدأ بكتابة الشرط، بعده علامة استفهام `?`، وبعدها القيمة أو الكود اللي هيتنفذ لو الشرط `true`. بعد كده بنحط نقطتين فوق بعض `:` وبنكتب القيمة اللي هتتنفذ لو الشرط `false`. أكبر ميزة للـ `Ternary Operator` هي إننا نقدر نخزن النتيجة بتاعته مباشرة جوه متغير (`Assign to a variable`)، أو نكتبه مباشرة جوه (`Template Literals`) عشان نظهر بيانات مختلفة في الصفحة (زي إظهار \"`Mr`\" أو \"`Mrs`\" بناءً على نوع المستخدم) من غير ما نحتاج نكتب بلوكات `if` طويلة. المدرب نبه إننا نقدر نستخدمه للشروط المتعددة زي الـ `else if`، بس ساعتها الكود ممكن يبقى صعب القراءة، والأفضل نستعمله مع الشروط المختصرة بس."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Ternary Conditional Operator (`condition ? exprIfTrue`:</strong> exprIfFalse`): A concise inline alternative to `if-else` statements. It is an expression that returns a value based on the boolean evaluation of the condition."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let gender = \"Female\";\nlet name = \"Mona\";\n\n// Standard If-Else\nif (gender === \"Male\") {\n    console.log(\"Mr\");\n} else {\n    console.log(\"Mrs\");\n}\n\n// Ternary Operator assigning a value to a variable\nlet title = gender === \"Male\" ? \"Mr\" : \"Mrs\";\nconsole.log(title); // Output: Mrs\n\n// Using Ternary Operator directly inside Template Literals\nconsole.log(`Hello ${gender === \"Male\" ? \"Mr\" : \"Mrs\"} ${name}`); // Output: Hello Mrs Mona\n\n// Multiple conditions (Else If alternative) - Can become hard to read\nlet age = 30;\nage < 20 \n    ? console.log(\"Young\") \n    : age >= 20 && age < 60 \n    ? console.log(\"Adult\") \n    : console.log(\"Older\");"
+        }
+      ]
+    },
+    {
+      "title": "112. Logical OR (`||`) vs Nullish Coalescing Operator (`??`)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المعاملين دول بنستخدمهم لتقديم قيمة بديلة (`Fallback` / `Default value`) في حالة إن القيمة الأساسية فيها مشكلة.\n*   **معامل أو `||` (`Logical OR`):** بيرجع القيمة البديلة لو المتغير الأساسي كان بيحتوي على أي قيمة تعتبر (`Falsy Value`). القيم دي في الجافا سكريبت بتشمل `null`، `undefined`، `false`، النص الفاضي `\"\"`، وكمان الرقم صفر `0`.\n*   **معامل الـ `??` (`Nullish Coalescing`):** ظهر عشان يعالج مشكلة الـ `||`. أحياناً الصفر أو النص الفاضي بيكونوا قيم مقصودة وصحيحة (مثلاً السعر صفر يعني المنتج مجاني). لو استخدمنا `||`، هيتجاهل الصفر ويعرض القيمة البديلة. لكن الـ `??` بيرجع القيمة البديلة **فقط** لو كان المتغير `null` أو `undefined`، غير كده بيعرض القيمة الأصلية حتى لو كانت صفر."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Falsy Values`:</strong> Values that evaluate to false in boolean contexts. These exactly include: `false`, `0`, `-0`, `0n`, `\"\"`, `null`, `undefined`, and `NaN`.",
+            "<strong>`Logical OR (`||`)`:</strong> Returns the right-hand operand if the left operand is *any* falsy value.",
+            "<strong>`Nullish Coalescing Operator (`??`)`:</strong> Returns the right-hand operand *only* if the left operand is exactly `null` or `undefined` (nullish values)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let price = 0; // The price is intentionally 0 (Free)\n\n// Using Logical OR (||)\n// Since 0 is a falsy value, it ignores it and outputs 200 (Incorrect logic here)\nconsole.log(`The price is ${price || 200}`); // Output: The price is 200\n\n// Using Nullish Coalescing Operator (??)\n// It only cares about null or undefined, so it respects the 0\nconsole.log(`The price is ${price ?? 200}`); // Output: The price is 0\n\n// If price was actually missing (undefined)\nlet missingPrice;\nconsole.log(`The price is ${missingPrice ?? 200}`); // Output: The price is 200"
+        }
+      ]
+    },
+    {
+      "title": "113. Switch Statement (جملة التحكم `Switch`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تُستخدم جملة `switch` كبديل تنظيمي لجمل `if / else if` المتعددة جداً (`Multiple Conditions`)، خصوصاً لو كنا بنختبر قيمة متغير واحد محدد (زي رقم اليوم في الأسبوع). بنحط المتغير جوه أقواس الـ `switch`، وبعدين بنحط الحالات المحتملة (`Cases`). الجافا سكريبت بتقارن المتغير بكل `case` باستخدام المساواة الصارمة `===` (`Identical Match`)، يعني لو المتغير رقمه `2` والـ `case` عبارة عن نص `\"2\"`، مش هيتطابقوا. بمجرد ما يلاقي الـ `case` المتطابق، بينفذ الكود اللي جواه. لازم نحط كلمة `break` بعد كل كود عشان نوقف الـ `switch` وميخليهاش تكمل قراءة وتشغيل باقي الحالات اللي تحتها. وفي النهاية بنستخدم `default` (زي الـ `else`) عشان ننفذ كود افتراضي لو كل الـ `cases` متطابقتش مع المتغير. كمان نقدر ندمج أكتر من حالة `case` مع بعض لو كانوا بينفذوا نفس الكود بالظبط."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`switch` Statement:</strong> A control flow statement that evaluates an expression and executes a block of code associated with the matching `case` label (evaluated using strict equality `===`).",
+            "<strong>`break` Keyword:</strong> Used to terminate the execution of the current `switch` block and exit it, preventing the code from \"falling through\" to execute subsequent cases.",
+            "<strong>`default` Clause:</strong> The block of code that runs if no `case` matches the evaluated expression."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let day = 2; // Testing with a number\n\nswitch (day) {\n    case 0:\n        console.log(\"Saturday\");\n        break; // Stops execution if matched\n    case 1:\n        console.log(\"Sunday\");\n        break;\n    // Combining multiple cases that share the same output\n    case 2:\n    case 3:\n        console.log(\"Monday or Tuesday\"); // Will print this for day 2\n        break;\n    default:\n        // Executes if day is anything other than 0, 1, 2, or 3\n        console.log(\"Unknown Day\");\n        break; \n}"
+        }
+      ]
+    }
+  ]
+}

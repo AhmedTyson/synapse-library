@@ -1,0 +1,268 @@
+{
+  "title": "JavaScript Full Course: Part 3",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "23. Number Guessing Game (لعبة تخمين الأرقام)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب قام بتطبيق عملي لإنشاء لعبة تخمين أرقام بتدمج بين المفاهيم اللي اتعلمناها زي حلقات التكرار والجمل الشرطية والأرقام العشوائية. الفكرة بتبدأ بتحديد حد أدنى (`Minimum`) وحد أقصى (`Maximum`)، وتوليد رقم عشوائي بينهم عشان يكون هو الإجابة الصحيحة (`Answer`). بعدين بنعمل حلقة تكرار باستخدام `while` ونربطها بمتغير منطقي اسمه `running` قيمته المبدئية `true` عشان اللعبة تفضل شغالة لحد ما المستخدم يخمن الرقم الصح. جوه الحلقة، بنستقبل تخمين المستخدم عن طريق `window.prompt`، وبما إن المدخلات دي بتكون نصوص، بنحولها لرقم باستخدام `Number()`. المدرب وضح أهمية التحقق من صحة المدخلات؛ لإن المستخدم ممكن يدخل نص فاضي أو حروف بدل الأرقام، وهنا بنستخدم دالة `isNaN()` عشان نتاكد إن المدخل رقم صحيح، وكمان بنتاكد إنه جوه النطاق المسموح (بين الحد الأدنى والأقصى). لو المدخل صحيح، بنزود عداد المحاولات (`Attempts`) بواحد، ونبدأ نقارن: لو التخمين أصغر من الإجابة بنطبع \"`Too low`\"، ولو أكبر بنطبع \"`Too high`\"، ولو بيساوي الإجابة بنطبع رسالة تهنئة مع عدد المحاولات، وبنحول قيمة `running` لـ `false` عشان نخرج من حلقة التكرار وننهي اللعبة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`isNaN(value)`:</strong> A built-in JavaScript function that determines whether a value is an illegal number (Not-a-Number).",
+            "<strong>`Game Loop`:</strong> A programming pattern, often implemented with a `while` loop and a boolean flag (like `running`), used to keep an application continuously executing until a specific exit condition is met."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const minNum = 1;\nconst maxNum = 100;\nconst answer = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;\n\nlet attempts = 0;\nlet guess;\nlet running = true;\n\nwhile(running) {\n    guess = window.prompt(`Guess a number between ${minNum} and ${maxNum}`);\n    guess = Number(guess);\n    \n    // Validation\n    if(isNaN(guess)){\n        window.alert(\"Please enter a valid number\");\n    } else if(guess < minNum || guess > maxNum){\n        window.alert(\"Please enter a valid number\");\n    } else {\n        attempts++; // Increment attempts if valid\n        \n        // Game Logic\n        if(guess < answer){\n            window.alert(\"TOO LOW! TRY AGAIN!\");\n        } else if(guess > answer){\n            window.alert(\"TOO HIGH! TRY AGAIN!\");\n        } else {\n            window.alert(`CORRECT! The answer was ${answer}. It took you ${attempts} attempts.`);\n            running = false; // Exit the loop\n        }\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "24. Functions (الدوال)",
+      "icon": "fa-solid fa-gears",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر الدوال (`Functions`) عبارة عن بلوك من الكود مصمم عشان ينفذ مهمة معينة، وبنقدر نعيد استخدامه أكتر من مرة في أي مكان في البرنامج. المبدأ ده بيطبق قاعدة برمجية شهيرة اسمها (`DRY` - `Don`'`t Repeat Yourself`) يعني متكررش الكود بتاعك. عشان ننشئ دالة بنستخدم كلمة `function` متبوعة باسم الدالة (ولازم الاسم يكون معبر عن وظيفتها)، وبعدين أقواس، وأخيراً أقواس معقوفة بنكتب جواها الكود. الدالة مش بتشتغل لوحدها؛ لازم نعملها استدعاء (`Call`/`Invoke`) عن طريق كتابة اسمها متبوعاً بالأقواس. المدرب وضح إننا نقدر نمرر بيانات للدالة عشان تشتغل عليها، البيانات دي واحنا بنبعتها وقت الاستدعاء بنسميها (`Arguments`)، ولما الدالة بتستقبلها بتخزنها في متغيرات مؤقتة بنسميها (`Parameters`). الترتيب هنا مهم جداً؛ لازم ترتيب الـ `Arguments` يطابق ترتيب الـ `Parameters`. كمان الدالة ممكن بدل ما تطبع النتيجة مباشرة، ترجعها لينا عشان نقدر نخزنها في متغير ونستخدمها بعدين، وده بيتم عن طريق كلمة `return`. بمجرد ما البرنامج بيشوف كلمة `return`، الدالة بتنتهي فوراً وترجع القيمة، وأي كود مكتوب بعدها جوه الدالة مش بيتنفذ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Function`:</strong> A block of reusable code designed to perform a particular task.",
+            "<strong>`Invoke / Call`:</strong> The act of executing a function by writing its name followed by parentheses.",
+            "<strong>`Arguments`:</strong> The actual values or data passed to a function when it is invoked.",
+            "<strong>`Parameters`:</strong> Temporary variables defined in the function declaration that act as placeholders for the incoming arguments.",
+            "<strong>`return`:</strong> A keyword used to send a value back from a function to the place where it was called, effectively terminating the function's execution."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic Function with Parameters and Arguments\nfunction happyBirthday(username, age) {\n    console.log(\"Happy birthday to you!\");\n    console.log(`Happy birthday dear ${username}!`);\n    console.log(`You are ${age} years old`);\n}\n\nhappyBirthday(\"Bro Code\", 25); // Invoking with arguments\nhappyBirthday(\"SpongeBob\", 30);\n\n\n// Code block 2: Using the 'return' keyword for calculations\nfunction add(x, y) {\n    return x + y; // Returns the sum back to the caller\n}\nlet answer = add(2, 3);\nconsole.log(answer); // Outputs: 5\n\n\n// Code block 3: Advanced function using Ternary Operator\nfunction isValidEmail(email) {\n    return email.includes(\"@\") ? true : false;\n}\nconsole.log(isValidEmail(\"brofake.com\")); // Outputs: false\nconsole.log(isValidEmail(\"elonmusk@com\")); // Outputs: true"
+        }
+      ]
+    },
+    {
+      "title": "25. Variable Scope (نطاق المتغيرات)",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "نطاق المتغيرات (`Variable Scope`) هو المفهوم اللي بيحدد فين نقدر نوصل للمتغير ده ونستخدمه جوه الكود. عندنا نوعين أساسيين: النطاق المحلي (`Local Scope`) والنطاق العام (`Global Scope`). أي متغير بيتم تعريفه جوه دالة (أو جوه أي أقواس معقوفة) بيكون ليه نطاق محلي؛ يعني نقدر نستخدمه بس جوه الدالة دي، وأي كود بره الدالة ملوش أي صلاحية إنه يشوفه أو يتعامل معاه. المدرب شبه الموضوع بالبيوت؛ إنت تقدر تشوف اللي جوه بيتك، لكن متعرفش إيه اللي بيحصل جوه بيت جارك. على الناحية التانية، المتغير اللي بيتعرف بره أي دالة بيكون ليه نطاق عام؛ وده معناه إن أي دالة في البرنامج تقدر تشوفه وتعدل عليه. المدرب أضاف تشبيه تاني للمتغير العام بأنه زي كشاف نور في الشارع، كل البيوت تقدر تشوفه من جوه. من المهم نعرف إن لو عندنا متغيرين بنفس الاسم، واحد محلي والتاني عام، البرنامج دايماً بيدي الأولوية للمتغير المحلي اللي جوه الدالة، ولو ملقاهوش بيبدأ يدور في النطاق العام."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Variable Scope`:</strong> The context or region in a program where a variable is recognized, accessible, and valid.",
+            "<strong>`Local Scope`:</strong> Variables declared inside a function or block are local to that function/block and cannot be accessed from the outside.",
+            "<strong>`Global Scope`:</strong> Variables declared outside of all functions have global scope and can be accessed and modified from anywhere in the program."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let x = 3; // Global Scope Variable\n\nfunction function1() {\n    let x = 1; // Local Scope Variable\n    console.log(x); // Uses local 'x', outputs 1\n}\n\nfunction function2() {\n    let x = 2; // Local Scope Variable (No conflict with function1's 'x')\n    console.log(x); // Uses local 'x', outputs 2\n}\n\nfunction function3() {\n    console.log(x); // No local 'x' found, falls back to Global 'x', outputs 3\n}\n\nfunction1();\nfunction2();\nfunction3();"
+        }
+      ]
+    },
+    {
+      "title": "26. Temperature Conversion Program (برنامج تحويل درجات الحرارة)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب عمل مشروع تطبيقي لبرنامج بيحول درجات الحرارة بين المئوية (`Celsius`) والفهرنهايت (`Fahrenheit`). البرنامج بيتكون من حقل إدخال (`Input Number`) واختيارين (`Radio Buttons`) لتحديد نوع التحويل، وزرار للتنفيذ. في الجافا سكريبت، بنستهدف العناصر دي وبنعمل دالة اسمها `convert` بتشتغل لما نضغط على الزرار. الدالة دي أول حاجة بتعملها إنها بتسحب القيمة من حقل الإدخال وبتحولها لرقم. بعدين بتستخدم الجمل الشرطية عشان تفحص خاصية الـ `checked` الخاصة بأزرار الاختيار. لو اختيار \"للفهرنهايت\" هو اللي متحدد، بنطبق معادلة الضرب في 9 والقسمة على 5 وبعدين نجمع 32. ولو اختيار \"للمئوية\" هو اللي متحدد، بنطرح 32 الأول وبعدين نضرب في 5 ونقسم على 9. عشان نطلع النتيجة بشكل احترافي ومنمنعش ظهور كسور عشرية طويلة جداً، المدرب استخدم دالة `toFixed()` وحدد رقم 1 عشان يقرب النتيجة لخانة عشرية واحدة بس."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Temperature Conversion Program`:</strong> A utility application that applies mathematical formulas to convert numerical temperature values between different scales (Celsius/Fahrenheit).",
+            "<strong>`.toFixed(digits)`:</strong> A number method that formats a number using fixed-point notation, rounding it to a specified number of decimal places and returning it as a string."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- Simplified HTML Setup -->\n<input type=\"number\" id=\"textBox\" value=\"0\">\n<input type=\"radio\" id=\"toFahrenheit\" name=\"unit\" checked>\n<label>Celsius to Fahrenheit</label>\n<input type=\"radio\" id=\"toCelsius\" name=\"unit\">\n<label>Fahrenheit to Celsius</label>\n<button onclick=\"convert()\">Submit</button>\n<p id=\"result\"></p>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// JavaScript Implementation\nconst textBox = document.getElementById(\"textBox\");\nconst toFahrenheit = document.getElementById(\"toFahrenheit\");\nconst toCelsius = document.getElementById(\"toCelsius\");\nconst result = document.getElementById(\"result\");\nlet temp;\n\nfunction convert() {\n    if(toFahrenheit.checked){\n        temp = Number(textBox.value);\n        temp = temp * 9 / 5 + 32;\n        // Using toFixed(1) to limit decimals to 1 place\n        result.textContent = temp.toFixed(1) + \"°F\"; \n    } \n    else if(toCelsius.checked){\n        temp = Number(textBox.value);\n        temp = (temp - 32) * 5 / 9;\n        result.textContent = temp.toFixed(1) + \"°C\";\n    } \n    else {\n        result.textContent = \"Select a unit\";\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "27. Arrays (المصفوفات)",
+      "icon": "fa-solid fa-list-ol",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المصفوفة (`Array`) هي عبارة عن هيكل بيانات بيسمح لنا نخزن أكتر من قيمة جوه متغير واحد بس، بدل ما نعمل متغير منفصل لكل قيمة. بننشئ المصفوفة باستخدام الأقواس المربعة `[]` وبنفصل بين العناصر بفاصلة. زي النصوص بالظبط، عناصر المصفوفة بتترتب بنظام الفهرسة اللي بيبدأ من صفر (`Zero-based indexing`). نقدر نستبدل أي عنصر عن طريق تحديد مكانه بالمؤشر بتاعه وإعطائه قيمة جديدة. الجافا سكريبت بتوفر لنا دوال (`Methods`) جاهزة للتعامل مع المصفوفات: دالة `push` بتضيف عنصر جديد في نهاية المصفوفة، ودالة `pop` بتحذف آخر عنصر. ولو عايزين نضيف في البداية بنستخدم `unshift`، وللحذف من البداية بنستخدم `shift`. كمان نقدر نعرف عدد العناصر باستخدام خاصية `length`. عشان نعرض كل العناصر، بنقدر نستخدم حلقة التكرار العادية `for` ونمشي على المؤشرات من الصفر لحد طول المصفوفة، أو نستخدم النسخة الأحدث والأسهل `for...of` اللي بتسحب عنصر بعنصر بشكل مباشر. أخيراً، لترتيب العناصر أبجدياً بنستخدم دالة `sort`، وعشان نعكس الترتيب بنستخدم دالة `reverse`. كمان، للتأكد إذا كان المتغير مصفوفة ولا لأ بنستخدم `Array.isArray()` لإن استخدام `typeof` بيرجع دايماً `object`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Array`:</strong> A variable-like data structure that can hold more than one value at a time in an ordered list.",
+            "<strong>`push()`:</strong> A method that adds one or more elements to the end of an array.",
+            "<strong>`pop()`:</strong> A method that removes the last element from an array.",
+            "<strong>`unshift()`:</strong> A method that adds one or more elements to the beginning of an array.",
+            "<strong>`shift()`:</strong> A method that removes the first element from an array.",
+            "<strong>`Enhanced For Loop (`for...of`)`:</strong> A simplified loop syntax used specifically to iterate over iterable objects like arrays or strings, returning the value of each element directly.",
+            "<strong>`sort()` / `reverse()`:</strong> Methods used to sort array elements alphabetically, or reverse their current order.",
+            "<strong>`Array.isArray()`:</strong> A static method that determines whether the passed value is an Array."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let fruits = [\"apple\", \"orange\", \"banana\"];\n\n// Accessing and Modifying\nconsole.log(fruits); // \"apple\"\nfruits = \"coconut\"; // Changes \"apple\" to \"coconut\"\n\n// Array Methods for Adding/Removing\nfruits.push(\"mango\"); // Adds to the end\nfruits.pop(); // Removes the last element (\"mango\")\nfruits.unshift(\"mango\"); // Adds to the beginning\nfruits.shift(); // Removes the first element (\"mango\")\n\n// Length and Index searching\nlet numOfFruits = fruits.length;\nlet index = fruits.indexOf(\"banana\"); // Returns 2 (or -1 if not found)\n\n// Sorting\nfruits.sort(); // Alphabetical order\nfruits.sort().reverse(); // Reverse alphabetical order\n\n// Iterating using a standard For Loop\nfor(let i = 0; i < fruits.length; i++) {\n    console.log(fruits[i]);\n}\n\n// Iterating using an Enhanced For Loop (for...of)\nfor(let fruit of fruits) {\n    console.log(fruit);\n}\n\n// Checking if it is an array\nconsole.log(typeof fruits); // Outputs: \"object\"\nconsole.log(Array.isArray(fruits)); // Outputs: true"
+        }
+      ]
+    },
+    {
+      "title": "28. Spread Operator (معامل النشر)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "معامل النشر (`Spread Operator`) بيمثل بتلات نقط `...`، ووظيفته إنه بيفكك أو بينشر العناصر اللي جوه أي كائن قابل للتكرار (زي المصفوفات أو النصوص) ويطلعهم كعناصر منفصلة. المدرب شبه الموضوع بإنك تفتح صندوق وتطلع كل المحتويات اللي جواه. المعامل ده مفيد جداً في حالات كتير؛ مثلاً لو عندنا دالة زي `Math.max()` اللي بتجيب أكبر رقم، الدالة دي مش بتقبل مصفوفة بشكل مباشر، لكن لو استخدمنا معامل النشر قبل المصفوفة، هيفكك الأرقام ويبعتها للدالة عشان تشتغل صح. كمان بنقدر نستخدمه عشان نعمل نسخة سطحية (`Shallow Copy`) من مصفوفة؛ بحيث يكون عندنا مصفوفتين ليهم نفس القيم بس مش متصلين ببعض في الذاكرة. الاستخدام التالت القوي جداً هو دمج مصفوفتين أو أكتر في مصفوفة واحدة جديدة، ونقدر كمان نضيف عناصر منفصلة معاهم في نفس الوقت."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Spread Operator (`...`)`:</strong> A syntax that allows an iterable (such as an array or string) to be expanded or unpacked into individual separate elements.",
+            "<strong>`Shallow Copy`:</strong> Creating a new data structure that contains identical values to the original, but exists independently in memory."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let numbers =;\n\n// Code block 1: Using Spread with Math functions\n// Math.max(numbers) would return NaN because it expects individual numbers, not an array\nlet maximum = Math.max(...numbers); \nconsole.log(maximum); // Outputs: 5\n\n// Code block 2: Using Spread on Strings\nlet username = \"Bro Code\";\nlet letters = [...username].join(\"-\");\nconsole.log(letters); // Outputs: B-r-o- -C-o-d-e\n\n// Code block 3: Copying and Merging Arrays\nlet fruits = [\"apple\", \"orange\", \"banana\"];\nlet vegetables = [\"carrots\", \"celery\", \"potatoes\"];\n\n// Shallow copy of fruits\nlet newFruits = [...fruits]; \n\n// Combining multiple arrays and adding new standalone elements\nlet foods = [...fruits, ...vegetables, \"eggs\", \"milk\"];\nconsole.log(foods); \n// Outputs: [\"apple\", \"orange\", \"banana\", \"carrots\", \"celery\", \"potatoes\", \"eggs\", \"milk\"]"
+        }
+      ]
+    },
+    {
+      "title": "29. Rest Parameters (معاملات الباقي)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "معاملات الباقي (`Rest Parameters`) بتنكتب برضه بتلات نقط `...`، لكنها بتعمل العكس تماماً لمعامل النشر. معامل النشر بيفكك المصفوفة لعناصر، إنما الـ `Rest Parameters` بتجمع مجموعة من العناصر المنفصلة وتدمجهم جوه مصفوفة واحدة. بنستخدم المعامل ده دايماً جوه أقواس تعريف الدوال (`Parameters`). الفائدة الأساسية منه هي إننا نقدر نعمل دالة بتستقبل عدد غير محدد من المدخلات (`Arguments`). فمثلاً لو عايزين نعمل دالة بتجمع أرقام، ومش عارفين المستخدم هيبعت رقمين ولا خمسة ولا عشرة، بنكتب `(...numbers)` في التعريف، فالجافا سكريبت هتاخد كل الأرقام اللي المستخدم بيبعتها وتلمهم كلهم في مصفوفة نقدر نعمل عليها حلقة تكرار (`Loop`) عشان نجمعهم أو نطلع المتوسط بتاعهم. قاعدة مهمة جداً هي إن الـ `Rest Parameter` لازم يكون هو آخر حاجة في المعاملات، ومينفعش نستخدم غير واحد بس في الدالة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Rest Parameters (`...`)`:</strong> A parameter prefix that allows a function to accept an indefinite number of arguments by bundling them into a single array variable."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Using Rest Parameters to accept indefinite arguments\nfunction openFridge(...foods) {\n    console.log(foods); // 'foods' is now an array containing all passed arguments\n}\nopenFridge(\"pizza\", \"hamburger\", \"hotdog\", \"sushi\");\n\n// Code block 2: Mathematical operations using Rest Parameters\nfunction sum(...numbers) {\n    let result = 0;\n    for(let number of numbers) {\n        result += number;\n    }\n    return result;\n}\nconst total = sum(1, 2, 3, 4, 5); \nconsole.log(`Your total is $${total}`); // Outputs: Your total is $15\n\n// Code block 3: Combining Strings using Rest Parameters\nfunction combineStrings(...strings) {\n    return strings.join(\" \");\n}\nconst fullName = combineStrings(\"Mr.\", \"SpongeBob\", \"SquarePants\", \"III\");\nconsole.log(fullName); // Outputs: Mr. SpongeBob SquarePants III"
+        }
+      ]
+    },
+    {
+      "title": "30. Dice Roller Program (برنامج رمي حجر النرد)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب قام بتطبيق عملي متكامل لبرنامج رمي حجر النرد باستخدام الجافا سكريبت والـ `HTML` والـ `CSS`. الفكرة بتعتمد على إن المستخدم بيدخل عدد أحجار النرد اللي عايز يرميها في مربع نص (`Input Number`)، ولما يضغط على زرار \"`Roll`\"، الجافا سكريبت بتسحب الرقم ده. البرنامج بيعمل مصفوفتين فاضيين: واحدة للأرقام (القيم العشوائية)، والتانية لصور أحجار النرد. باستخدام حلقة تكرار `for`، البرنامج بيلف عدد مرات بيساوي عدد أحجار النرد المطلوبة. جوه الحلقة دي، بنولد رقم عشوائي بين 1 و 6 لكل حجر نرد باستخدام `Math.random()` و `Math.floor()`. بعد كده بنضيف الرقم ده لمصفوفة القيم باستخدام دالة `push()`. في نفس الوقت، بننشئ نص برمجي لوسم صورة `<img src=\"...\">` بيشير لمسار الصورة المناسبة للرقم اللي طلع، وبنضيفه لمصفوفة الصور. في النهاية، بنعرض الأرقام كنص مفصول بفاصلة باستخدام دالة `join()`, وبنعرض الصور جوه عنصر في الصفحة باستخدام خاصية `innerHTML` ونربطها ببعض من غير أي فواصل."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Dice Roller Program`:</strong> An interactive application that generates pseudo-random numbers simulating a dice roll and conditionally renders corresponding images to the DOM.",
+            "<strong>`innerHTML`:</strong> A property used to get or set the HTML markup contained within an element, allowing the dynamic rendering of tags like `<img>` from an array of strings.",
+            "<strong>`join(separator)`:</strong> An array method that creates and returns a new string by concatenating all of the elements in an array, separated by commas or a specified separator string."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Function triggered by clicking the 'Roll' button\nfunction rollDice() {\n    const numOfDice = document.getElementById(\"numOfDice\").value;\n    const diceResult = document.getElementById(\"diceResult\");\n    const diceImages = document.getElementById(\"diceImages\");\n    \n    const values = [];\n    const images = [];\n\n    // Loop runs for the amount of dice the user entered\n    for(let i = 0; i < numOfDice; i++) {\n        // Generate random number between 1 and 6\n        const value = Math.floor(Math.random() * 6) + 1;\n        values.push(value);\n        \n        // Push an image tag string dynamically pointing to the correct image file\n        images.push(`<img src=\"dice_images/${value}.png\" alt=\"Dice ${value}\">`);\n    }\n\n    // Display the numbers separated by a comma and a space\n    diceResult.textContent = `dice: ${values.join(\", \")}`;\n    \n    // Render the HTML image tags into the DOM without any separating characters\n    diceImages.innerHTML = images.join(\"\");\n}"
+        }
+      ]
+    },
+    {
+      "title": "31. Random Password Generator (برنامج توليد كلمات المرور)",
+      "icon": "fa-solid fa-sitemap",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في التطبيق العملي ده، المدرب برمج أداة لتوليد كلمات مرور عشوائية وقوية. البرنامج بيعتمد على دالة بتاخد مجموعة من الإعدادات كمعاملات (`Arguments`): طول كلمة المرور (`Length`)، وهل تتضمن حروف صغيرة، حروف كبيرة، أرقام، ورموز (كقيم منطقية `True`/`False`). جوه الدالة، بننشئ ثوابت نصية بتحتوي على كل الحروف الممكنة (أبجدية صغيرة، أبجدية كبيرة، أرقام من 0 لـ 9، ورموز). باستخدام الجمل الشرطية (أو المعامل الثلاثي `Ternary Operator`)، بنشوف إيه الخيارات اللي المستخدم فعلها، وبندمج النصوص دي في متغير واحد كبير اسمه `allowedChars`. قبل ما نولد الكلمة، لازم نتأكد إن الطول أكبر من صفر، وإن المستخدم اختار نوع واحد على الأقل من الحروف؛ وإلا بنرجع رسالة خطأ. لو البيانات صحيحة، بنعمل حلقة تكرار `for` بتشتغل على حسب الطول المطلوب، وجوه الحلقة بنختار حرف عشوائي من `allowedChars` باستخدام الفهرس العشوائي (`Random Index`) وبنضيفه لمتغير كلمة المرور باستخدام الدمج النصي (`+=`)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Password Generator`:</strong> A programmatic utility that concatenates strings of allowed characters based on boolean configurations, then selects random indices to build a randomized output string of a specified length.",
+            "<strong>`Validation Check`:</strong> A conditional block at the beginning of a function that ensures inputs meet necessary requirements before proceeding (e.g., checking if password length is strictly greater than 0)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "function generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {\n    \n    const lowercaseChars = \"abcdefghijklmnopqrstuvwxyz\";\n    const uppercaseChars = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\";\n    const numberChars = \"0123456789\";\n    const symbolChars = \"!@#$%^&*()_+-=\";\n\n    let allowedChars = \"\";\n    let password = \"\";\n\n    // Concatenate chosen character sets using Ternary Operators\n    allowedChars += includeLowercase ? lowercaseChars : \"\";\n    allowedChars += includeUppercase ? uppercaseChars : \"\";\n    allowedChars += includeNumbers ? numberChars : \"\";\n    allowedChars += includeSymbols ? symbolChars : \"\";\n\n    // Validation checks\n    if(length <= 0){\n        return `(password length must be at least 1)`;\n    }\n    if(allowedChars.length === 0){\n        return `(At least one set of characters needs to be selected)`;\n    }\n\n    // Generate the password loop\n    for(let i = 0; i < length; i++){\n        // Generate a random index based on the length of allowed characters\n        const randomIndex = Math.floor(Math.random() * allowedChars.length);\n        password += allowedChars[randomIndex];\n    }\n\n    return password;\n}\n\nconst passwordLength = 12;\nconst includeLowercase = true;\nconst includeUppercase = true;\nconst includeNumbers = true;\nconst includeSymbols = true;\n\nconst password = generatePassword(passwordLength, \n                                 includeLowercase, \n                                 includeUppercase, \n                                 includeNumbers, \n                                 includeSymbols);\n\nconsole.log(`Generated password: ${password}`);"
+        }
+      ]
+    },
+    {
+      "title": "32. Callbacks (الدوال الممررة كمعاملات `Callbacks`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ `Callback` عبارة عن دالة بيتم تمريرها كمعامل (`Argument`) لدالة تانية عشان يتم استدعاؤها وتنفيذها لاحقاً. المدرب وضح إن المفهوم ده بنستخدمه بشكل أساسي للتعامل مع العمليات غير المتزامنة (`Asynchronous Operations`) زي قراءة ملف، أو جلب بيانات من قاعدة بيانات، أو التعامل مع الشبكات. لإن الجافا سكريبت بطبيعتها مش بتستنى عملية تخلص عشان تنفذ اللي بعدها (ممكن تكمل قراءة باقي الكود وتطبع حاجة لسه متحملتش أساساً)، بنستخدم الـ `Callbacks` كطريقة نقول بيها للبرنامج: \"لما تخلص المهمة دي بالكامل، استدعي الدالة دي نفذها\". في الاستخدام، بنمرر اسم الدالة كمعامل من غير الأقواس `()` عشان تتجنب استدعاءها بشكل فوري ومباشر في نفس اللحظة. الدالة المستلمة بتاخد المعامل ده بتسميه (عادة `callback`)، وفي نهاية تنفيذ مهامها، بتكتب `()callback` عشان تشغله وتمرر له القيم المطلوبة زي ناتج عملية حسابية."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Callback`:</strong> A function that is passed as an argument into another function and is invoked after the outer function has completed its task.",
+            "<strong>`Asynchronous Operations`:</strong> Tasks that take an indeterminate amount of time to complete (like network requests or file reading). Callbacks ensure subsequent code only runs *after* these tasks finish."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic Callback Flow\nfunction hello(callback) {\n    console.log(\"Hello!\");\n    callback(); // Invokes the passed function\n}\n\nfunction goodbye() {\n    console.log(\"Goodbye!\");\n}\n\n// Passing the 'goodbye' function as a callback WITHOUT parentheses\nhello(goodbye); \n\n\n// Code block 2: Passing values to a callback\nfunction sum(callback, x, y) {\n    let result = x + y;\n    // Execute the callback and pass the result to it\n    callback(result);\n}\n\nfunction displayConsole(result) {\n    console.log(result);\n}\n\nfunction displayPage(result) {\n    document.getElementById(\"myH1\").textContent = result;\n}\n\n// Invoking sum and deciding what to do with the result via different callbacks\nsum(displayConsole, 1, 2); // Outputs 3 to the console\nsum(displayPage, 1, 2);    // Outputs 3 to the DOM element"
+        }
+      ]
+    },
+    {
+      "title": "33. `forEach()` Method (دالة التكرار `forEach`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر دالة `forEach` أداة مدمجة مع المصفوفات (`Arrays`) وظيفتها إنها بتعمل حلقة تكرار (`Loop`) على كل عناصر المصفوفة، وبتنفذ دالة معينة (`Callback Function`) على كل عنصر بشكل منفصل. وراء الكواليس، الـ `forEach` بتقدم للدالة الممررة تلات حاجات بالترتيب: العنصر الحالي (`Element`)، رقم الفهرس الخاص بيه (`Index`)، والمصفوفة نفسها (`Array`). الفائدة الكبيرة للدالة دي إنها بتوفر علينا كتابة حلقات الـ `for` التقليدية وبتخلي الكود أسهل في القراءة. المدرب وضح إننا نقدر نستخدمها لطباعة العناصر، أو التعديل عليها مباشرة جوه المصفوفة (زي مضاعفة الأرقام، ترفيع الأرقام لأس معين، أو تغيير حالة الحروف لنصوص). مهم جداً نعرف إن `forEach` مش بترجع مصفوفة جديدة، هي بتطبق التغييرات على المصفوفة الحالية الأصلية."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`forEach()`:</strong> An array method used to execute a provided callback function once for each array element.",
+            "<strong>`Implicit Arguments`:</strong> The `forEach` method automatically supplies the callback function with three arguments: the current `element`, the current `index`, and the `array` object being traversed."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let numbers =;\n\n// Code block 1: Doubling elements using forEach\nfunction double(element, index, array) {\n    // Modifies the original array directly\n    array[index] = element * 2; \n}\nnumbers.forEach(double);\nconsole.log(numbers); // Outputs:\n\n\n// Code block 2: String manipulation with forEach\nlet fruits = [\"apple\", \"orange\", \"banana\", \"coconut\"];\n\nfunction capitalize(element, index, array) {\n    // Capitalize the first letter and append the rest of the string\n    array[index] = element.charAt(0).toUpperCase() + element.slice(1);\n}\n\nfruits.forEach(capitalize);\n// To display each element individually\nfruits.forEach(display); \n\nfunction display(element) {\n    console.log(element);\n}\n// Outputs: Apple, Orange, Banana, Coconut"
+        }
+      ]
+    }
+  ]
+}

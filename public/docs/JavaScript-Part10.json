@@ -1,0 +1,240 @@
+{
+  "title": "JavaScript Full Course: Part 10",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Elzero Web School curriculum.",
+  "links": [
+    "https://youtu.be/gIGGhFlGgLI?si=h3SzxBzNgsnu5gqD"
+  ],
+  "sections": [
+    {
+      "title": "94. String Formatting and Escaping (التعامل مع النصوص وتخطي الرموز)",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لما بنيجي نكتب نصوص (`Strings`)، نقدر نستخدم علامات التنصيص المزدوجة `\"\"` أو المفردة `''`. المشكلة بتظهر لو حبينا نكتب علامة تنصيص جوه النص نفسه (زي اسم مميز جوه الجملة)؛ وقتها المتصفح بيتلخبط وبيفتكر إن النص انتهى وبيطلع (`Error`). الحل الأول هو إننا نكتب العلامة المفردة جوه المزدوجة، أو المزدوجة جوه المفردة. الحل التاني والأقوى هو استخدام علامة التخطي (`Escape Character`) وهي الباك سلاش `\\`. العلامة دي بتقول للجافا سكريبت \"تجاهلي الوظيفة البرمجية للحرف اللي جاي، واطبعيه كنص عادي\". كمان الباك سلاش بنستخدمها عشان نعمل سطر جديد (`New Line`) عن طريق `\\n`، أو عشان نكسر السطور الطويلة في الكود نفسه (`Line Continue`) ونكمل على السطر اللي تحته من غير ما نفصل النص عن طريق إننا نحط `\\` في نهاية السطر."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Escape Character (`\\`)`:</strong> A character that invokes an alternative interpretation on subsequent characters in a character sequence, used to insert quotes or special characters literally.",
+            "<strong>`Line Continue (`\\` at end of line)`:</strong> Ignores the newline character in the code editor, allowing long strings to span multiple lines in the source code while rendering as a single line.",
+            "<strong>`New Line (`\\n`)`:</strong> An escape sequence that creates a line break in the actual printed string output."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Mixing quotes\nlet validString = \"Elzero Web 'School'\";\n\n// Escaping quotes using backslash\nlet escapedString = \"Elzero Web \\\"School\\\"\";\n\n// Escaping the backslash itself\nlet path = \"C:\\\\Windows\\\\System32\"; \n\n// Line continuation (Makes editor code readable, outputs on one line)\nlet longString = \"Elzero \\\nWeb \\\nSchool\";\nconsole.log(longString); // Outputs: Elzero Web School\n\n// New Line character (Outputs on multiple lines)\nlet multiLine = \"Elzero\\nWeb\\nSchool\";\n/* Outputs:\nElzero\nWeb\nSchool\n*/"
+        }
+      ]
+    },
+    {
+      "title": "95. Concatenation vs Template Literals (دمج النصوص و `Template Literals`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "في البرمجة، دمج البيانات مع النصوص (`Concatenation`) بيتم عن طريق معامل الجمع `+`. لو عندنا متغيرات عايزين ندمجها مع نصوص، بنكتب النص جوه علامات تنصيص، وبعدين `+`، وبعدين المتغير، وبنضطر نحط مسافات بنفسنا بعلامات تنصيص منفصلة، ولو عايزين نعمل سطر جديد بنضطر نكتب `\\n`. الطريقة دي في الأكواد الطويلة بتبقى معقدة جداً وشكلها مزعج. هنا بتيجي عظمة تحديثات الـ `ES6` اللي قدمت لنا الـ (`Template Literals`). بنستخدم فيها علامة الـ (`Backtick`) `` ` `` بدل علامات التنصيص العادية. الميزة الخرافية هنا إننا بنكتب النص والمسافات والسطور الجديدة كلها زي ما هي كده بإنتر عادي جداً، ولما نحب نحط متغير أو عملية حسابية، بنحطها جوه علامة الدولار وأقواس معقوفة `${`variable`}` من غير ما نكسر النص بعلامات `+`. ده بيخلي الكود أنظف مليون مرة وبيسهل جداً إنشاء عناصر `HTML` ديناميكية."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Concatenation (`+`)`:</strong> The process of appending one string to the end of another string using the addition operator.",
+            "<strong>`Template Literals (`` ` ``)`:</strong> An ES6 feature that allows embedded expressions, multi-line strings, and string interpolation using backticks instead of standard quotes.",
+            "<strong>`String Interpolation (`${expression}`)`:</strong> The syntax used inside template literals to evaluate and inject variables or mathematical expressions directly into the string."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let title = \"Elzero\";\nlet desc = \"Web School\";\n\n// The Old Way (Concatenation using +)\nlet oldWay = \"Title is: \" + title + \"\\n\" + \"Description is: \" + desc;\nconsole.log(oldWay);\n\n// The Modern ES6 Way (Template Literals)\nlet newWay = `Title is: ${title}\nDescription is: ${desc}\nMath inside string: ${100 * 50}`;\nconsole.log(newWay);\n\n// Excellent for generating HTML markup cleanly\nlet htmlMarkup = `\n  <div class=\"card\">\n    <h2>${title}</h2>\n    <p>${desc}</p>\n  </div>\n`;\ndocument.write(htmlMarkup);"
+        }
+      ]
+    },
+    {
+      "title": "96. Arithmetic Operators (العمليات الحسابية)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "العمليات الحسابية في الجافا سكريبت بتشمل الجمع (`+`)، الطرح (`-`)، الضرب (`*`)، والقسمة (`/`). المدرب الزيرو وضح نقطة في غاية الأهمية بخصوص علامة الجمع (`+`)؛ لو حاولت تجمع رقم مع نص (`String`)، الجافا سكريبت هتحول العلامة دي لـ (`Concatenation Operator`) وتلزقهم في بعض كنص بدل ما تجمعهم. لكن في الطرح، لإن مفيش حاجة اسمها تطرح نص من رقم، اللغة بتحاول تحول النص لرقم (`Type Coercion`) وتعمل العملية الحسابية، ولو النص كان عبارة عن حروف مش أرقام، هترجعلك `NaN` (`Not a Number`). من المعلومات الغريبة في اللغة إن `typeof NaN` بيرجع `number`. كمان اتعرفنا على علامة الأس (`**`) اللي بترفع الرقم لقوة معينة زي `2 ** 4` اللي بتساوي 16. وعلامة باقي القسمة (`%` `Modulus`) اللي بتجيب باقي قسمة رقمين، ودي ممتازة جداً لمعرفة هل الرقم زوجي (لو باقي القسمة صفر) ولا فردي."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Arithmetic Operators`:</strong> Symbols used to perform mathematical operations on operands.",
+            "<strong>`Modulus (`%`)`:</strong> Returns the division remainder. Useful for checking if a number is even (`num % 2 === 0`) or odd.",
+            "<strong>`Exponentiation (``)`:</strong> Raises the first operand to the power of the second operand.",
+            "<strong>`NaN` (Not a Number):</strong> A special numeric value representing an undefined or unrepresentable mathematical result. `typeof NaN` returns `\"number\"`."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "console.log(10 + 20); // 30\nconsole.log(10 + \"20\"); // \"1020\" (Concatenation)\nconsole.log(10 - \"20\"); // -10 (Mathematical subtraction)\nconsole.log(10 - \"Osama\"); // NaN\n\nconsole.log(2 ** 4); // 16 (2 * 2 * 2 * 2)\n\nconsole.log(10 % 2); // 0 (Even number)\nconsole.log(11 % 2); // 1 (Odd number)\nconsole.log(typeof NaN); // \"number\""
+        }
+      ]
+    },
+    {
+      "title": "97. Increment and Decrement (الزيادة والنقصان)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "معاملات الزيادة (`++`) والنقصان (`--`) بتزود أو بتنقص المتغير بمقدار واحد. المدرب وضح الفرق الجوهري بين إنك تحط العلامة قبل المتغير (`Pre-increment`) أو بعده (`Post-increment`). لو حطيت العلامة بعد المتغير `num++` (`Post-increment`)، الجافا سكريبت هتطبع أو تستخدم القيمة الحالية للمتغير الأول، وبعدين تزوده في الذاكرة. لكن لو حطيت العلامة قبله `++num` (`Pre-increment`)، الجافا سكريبت هتزود الرقم الأول، وبعدين تطبع القيمة الجديدة. نفس القاعدة بتنطبق على النقصان (`--`)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Post-increment (`var++`)`:</strong> Returns the value, then increments it.",
+            "<strong>`Pre-increment (`++var`)`:</strong> Increments the value, then returns it."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let num1 = 1;\n// Post-increment: prints 1, then becomes 2\nconsole.log(num1++); // 1\nconsole.log(num1);   // 2\n\nlet num2 = 1;\n// Pre-increment: becomes 2, then prints 2\nconsole.log(++num2); // 2\nconsole.log(num2);   // 2"
+        }
+      ]
+    },
+    {
+      "title": "98. Unary Plus and Negation (المعاملات الأحادية `+` و `-`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المعاملات الأحادية (`Unary Operators`) بتشتغل على قيمة واحدة بس. علامة الزائد الأحادية (`+`) بنحطها قبل أي بيانات عشان نرجع منها رقم (لو كانت تقبل التحويل لرقم). مثلاً لو حطيناها قبل نص جواه رقم زي `\"100\"` هترجعه رقم `100`. ولو حطيناها قبل `true` هترجع `1`، وقبل `false` أو نص فاضي `\"\"` هترجع `0`. أما لو حطيناها قبل نص ملوش معنى رياضي زي `\"Osama\"` هترجع `NaN`. علامة السالب الأحادية (`-` `Unary Negation`) بتعمل نفس الوظيفة بالظبط (بتحول القيمة لرقم) بس كمان بتعكس إشارته؛ الموجب تخليه سالب، والسالب تخليه موجب (نفي النفي إثبات)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Unary Plus (`+`)`:</strong> Precedes its operand and evaluates to its operand but attempts to convert it into a number, if it isn't already.",
+            "<strong>`Unary Negation (`-`)`:</strong> Precedes its operand and converts it into a number, then negates its value."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "console.log(+100); // 100\nconsole.log(+\"100\"); // 100 (Converted from string)\nconsole.log(+\"-100\"); // -100\nconsole.log(+\"Osama\"); // NaN\nconsole.log(+true); // 1\nconsole.log(+false); // 0\nconsole.log(+\"\"); // 0\n\nconsole.log(-\"100\"); // -100\nconsole.log(-\"-100\"); // 100 (Negative of a negative is positive)"
+        }
+      ]
+    },
+    {
+      "title": "99. Type Coercion / Type Casting (التحويل القسري للبيانات)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الـ (`Type Coercion`) هي عملية بتحصل في الجافا سكريبت لما اللغة تحاول تحول نوع بيانات لنوع تاني بشكل أوتوماتيكي أثناء تشغيل الكود عشان تناسب العملية المطلوبة. المدرب أظهر أمثلة قوية جداً؛ مثلاً عند جمع رقم مع نص، الجافا سكريبت بتخلي الرقم نص وتدمجهم ببعض. لكن في عمليات الطرح، الجافا سكريبت بتجبر النص إنه يتحول لرقم عشان مفيش طرح نصوص. كمان جربنا عمليات عجيبة زي طرح رقم `2` من نص فاضي `\"\"`؛ لإن النص الفاضي بيترجم لصفر، النتيجة كانت `-2`. وطرح `true` من `false` اللي بيترجم كأنه `0 - 1` فبيرجع `-1`. عشان نحل مشاكل الجمع بين نصوص وأرقام، بنستخدم الـ `Unary Plus` `+` قبل النص عشان نجبره يتحول لرقم قبل ما نجمعه."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Type Coercion`:</strong> The automatic or implicit conversion of values from one data type to another (such as strings to numbers) performed by JavaScript during operations."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let a = \"10\";\nlet b = 20;\n\n// Concatenation due to Coercion\nconsole.log(a + b); // \"1020\"\n\n// Forcing arithmetic addition using Unary Plus\nconsole.log(+a + b); // 30\n\n// Subtraction coerces strings to numbers automatically\nconsole.log(a - b); // -10\n\n// Weird Coercion examples\nconsole.log(\"\" - 2); // -2 (Empty string coerces to 0)\nconsole.log(false - true); // -1 (0 - 1)"
+        }
+      ]
+    },
+    {
+      "title": "100. Assignment Operators (معاملات التعيين)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "معامل التعيين الأساسي هو يساوي `=` واللي بندي بيه قيمة للمتغير. لكن لو عندنا متغير عايزين نزود على قيمته الحالية قيمة تانية، بنستخدم الاختصارات (`Augmented Assignment Operators`). يعني بدل ما نكتب `a = a + 20`، نقدر نكتب `a += 20`. الفكرة دي بتطبق على كل العمليات الحسابية: `+=` للجمع، `-=` للطرح، `/=` للقسمة، و `*=` للضرب."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Assignment Operators`:</strong> Operators used to assign values to variables.",
+            "<strong>`Addition Assignment (`+=`)`:</strong> Adds the value of the right operand to a variable and assigns the result to the variable (e.g., `x += y` is equivalent to `x = x + y`)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let a = 10;\n\na += 20; // Equivalent to: a = a + 20\nconsole.log(a); // 30\n\na -= 10; // Equivalent to: a = a - 10\nconsole.log(a); // 20\n\na /= 2; // Equivalent to: a = a / 2\nconsole.log(a); // 10"
+        }
+      ]
+    },
+    {
+      "title": "101. The Number Data Type (نوع البيانات: الأرقام)",
+      "icon": "fa-solid fa-cube",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "لغة الجافا سكريبت بتعامل كل الأرقام (سواء كانت أعداد صحيحة أو عشرية) كنوع واحد اسمه `Double Precision`. لتسهيل قراءة الأرقام الكبيرة جداً، الجافا سكريبت بتوفرلنا (`Syntactic Sugar`) زي استخدام الشرطة السفلية `_` جوه الرقم (زي `1_000_000` لمليون) والمتصفح بيتجاهلها تماماً وقت التنفيذ. كمان نقدر نستخدم حرف الـ `e` متبوعاً بعدد الأصفار (زي `1e6` اللي بتعني واحد وجنبه 6 أصفار يعني مليون). الكائن المدمج `Number` جواه خصائص مهمة زي `MAX_SAFE_INTEGER` اللي بيجيبلك أقصى رقم آمن تقدر تستخدمه في العمليات الحسابية من غير ما النتائج تبوظ، و `MAX_VALUE` اللي بيجيبلك أقصى رقم اللغة تقدر توصلّه أساساً."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Syntactic Sugar`:</strong> Syntax within a programming language that is designed to make things easier to read or to express without changing how the code functions (e.g., numeric separators `_`).",
+            "<strong>`Number.MAX_SAFE_INTEGER`:</strong> The maximum safe integer in JavaScript ($2^{53} - 1$).",
+            "<strong>`Number.MAX_VALUE`:</strong> The largest positive representable number in JavaScript."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Different ways to write 1 million\nconsole.log(1000000);\nconsole.log(1_000_000); // Syntactic Sugar for readability\nconsole.log(1e6); // e-notation (1 * 10^6)\nconsole.log(10 ** 6); // Exponentiation\n\n// Number limits\nconsole.log(Number.MAX_SAFE_INTEGER); // 9007199254740991\nconsole.log(Number.MAX_VALUE); // 1.7976931348623157e+308"
+        }
+      ]
+    },
+    {
+      "title": "102. Number Methods (دوال الأرقام)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب شرح مجموعة من الدوال للتعامل مع الأرقام:\n*   **`toString()`:** بتحول الرقم لنص (`String`). لو بنكتبها مباشرة بعد الرقم، لازم نكتب نقطتين `..` عشان المتصفح ميفتكرش إن دي علامة عشرية.\n*   **`toFixed()`:** بنستخدمها عشان نتحكم في عدد الخانات العشرية اللي بتظهر بعد الرقم. خلى بالك إنها بتقرب الرقم (`Rounding`) وبترجعه على هيئة \"نص\".\n*   **`parseInt()`:** بتحلل النص وتستخرج منه العدد الصحيح (`Integer`) بس، بشرط إن الرقم يكون في أول النص. لو النص بيبدأ بحروف بترجع `NaN`.\n*   **`parseFloat()`:** زيها بس بتستخرج الرقم بالكسور العشرية بتاعته (`Floating-point`).\n*   **`Number.isInteger()`:** بتختبر هل القيمة دي عدد صحيح ولا لأ وبترجع `true` أو `false`.\n*   **`Number.isNaN()`:** بتختبر هل القيمة الممررة هي `NaN` فعلاً ولا لأ."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`toString()`:</strong> Converts a number to a string.",
+            "<strong>`toFixed(digits)`:</strong> Formats a number using fixed-point notation, returning a string.",
+            "<strong>`parseInt(string)`:</strong> Parses a string argument and returns an integer.",
+            "<strong>`parseFloat(string)`:</strong> Parses a string argument and returns a floating-point number.",
+            "<strong>`Number.isInteger(value)`:</strong> Determines whether the passed value is an integer."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// toString()\nconsole.log((100).toString()); // \"100\"\nconsole.log(100..toString());  // \"100\" (Alternative syntax)\n\n// toFixed() - Rounds the decimal and returns a String\nconsole.log(100.555555.toFixed(2)); // \"100.56\"\n\n// parseInt() vs parseFloat()\nconsole.log(parseInt(\"100.500 Osama\")); // 100 (Extracts integer only)\nconsole.log(parseFloat(\"100.500 Osama\")); // 100.5 (Extracts floats)\nconsole.log(parseInt(\"Osama 100\")); // NaN\n\n// isInteger() and isNaN()\nconsole.log(Number.isInteger(100)); // true\nconsole.log(Number.isInteger(100.5)); // false\nconsole.log(Number.isNaN(\"Osama\" / 20)); // true"
+        }
+      ]
+    },
+    {
+      "title": "103. Math Object (كائن الرياضيات `Math`)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "كائن `Math` بيوفر لنا دوال جاهزة للعمليات الرياضية:\n*   **`Math.round()`:** بيقرب الرقم؛ لو الكسر 0.5 أو أكتر بيقرب للأكبر، لو أقل بيقرب للأصغر.\n*   **`Math.ceil()`:** السقف؛ دايماً بيقرب الرقم لأكبر عدد صحيح مهما كان الكسر صغير.\n*   **`Math.floor()`:** الأرضية؛ دايماً بيقرب الرقم لأصغر عدد صحيح مهما كان الكسر كبير.\n*   **`Math.trunc()`:** بيقطع الرقم العشري وبيرمي الكسور في الزبالة وبيرجع العدد الصحيح بس، من غير ما يعمل أي تقريب.\n*   **`Math.max()` / `Math.min()`:** بيجيبوا أكبر وأصغر رقم من مجموعة أرقام.\n*   **`Math.pow()`:** للأسس (زي معامل `**`).\n*   **`Math.random()`:** بيولد رقم عشوائي بين الصفر والواحد."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Math.round()`:</strong> Rounds to the nearest integer.",
+            "<strong>`Math.ceil()`:</strong> Always rounds up to the next largest integer.",
+            "<strong>`Math.floor()`:</strong> Always rounds down to the largest integer less than or equal to a given number.",
+            "<strong>`Math.trunc()`:</strong> Returns the integer part of a number by removing any fractional digits."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "console.log(Math.round(99.2)); // 99\nconsole.log(Math.round(99.5)); // 100\n\nconsole.log(Math.ceil(99.1)); // 100 (Always up)\nconsole.log(Math.floor(99.9)); // 99 (Always down)\n\nconsole.log(Math.trunc(99.9)); // 99 (Ignores decimals entirely)\n\nconsole.log(Math.min(10, 20, 100, -100, 90)); // -100\nconsole.log(Math.max(10, 20, 100, -100, 90)); // 100\n\nconsole.log(Math.pow(2, 4)); // 16\nconsole.log(Math.random()); // Random decimal between 0 and 1"
+        }
+      ]
+    }
+  ]
+}

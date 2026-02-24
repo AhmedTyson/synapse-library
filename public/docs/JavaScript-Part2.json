@@ -1,0 +1,275 @@
+{
+  "title": "JavaScript Full Course: Part 2",
+  "subtitle": "Made by Tyson • For Beginners",
+  "icon": "fa-brands fa-js",
+  "description": "A comprehensive bilingual guide to JavaScript fundamentals, based on the Bro Code curriculum.",
+  "links": [
+    "https://youtu.be/lfmg-EJ8gm4?si=zUOWAc3ywfL9OUp2"
+  ],
+  "sections": [
+    {
+      "title": "12. If Statements (الجمل الشرطية)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "الجمل الشرطية بتسمح لنا ننفذ بلوك معين من الكود لو تحقق شرط معين (كانت قيمته `true`)، أو ننفذ كود تاني لو الشرط ده متحققش. بنستخدم كلمة `if` متبوعة بأقواس بتحتوي على الشرط. لو حابين ندي أكتر من بديل، بنستخدم `else if` للتحقق من شروط إضافية، وأخيراً بنستخدم `else` كحالة افتراضية لو كل الشروط السابقة فشلت. الترتيب في الشروط دي مهم جداً؛ لإن الجافا سكريبت بتقرأ الشروط من فوق لتحت، وأول شرط بيتحقق، البرنامج بينفذ الكود بتاعه وبيتجاهل باقي الشروط تماماً. يعني لو بنتحقق إن عمر المستخدم أكبر من 100 سنة، لازم الشرط ده يتكتب قبل ما نتحقق إنه أكبر من 18 سنة، وإلا البرنامج هيعتبر الـ 101 سنة أكبر من 18 وينفذ شرط الـ 18 ويتجاهل شرط الـ 100. كمان نقدر نعمل جمل شرطية متداخلة (`Nested If Statements`) يعني جملة `if` جوه جملة `if` تانية عشان نختبر شروط مركبة زي التحقق من سن المستخدم الأول، وبعدين التحقق إذا كان معاه رخصة قيادة أو لأ. القيم المنطقية (`Booleans`) بتشتغل بشكل ممتاز كشروط مباشرة من غير ما نكتب `== true`. وللتحقق من المساواة بنستخدم علامتين يساوي `==` لإن علامة يساوي الواحدة `=` مخصصة لتعيين القيم للمتغيرات."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`If Statement`:</strong> A control flow statement that executes a block of code if a specified condition evaluates to true.",
+            "<strong>`Else If / Else`:</strong> Clauses used to specify new conditions to test if the first condition is false, or a default block of code to run if all conditions are false.",
+            "<strong>`Nested If Statements`:</strong> Placing an if statement inside another if statement to test multiple, dependent conditions.",
+            "<strong>`Comparison Operator (`==`)`:</strong> An operator used to compare two values to see if they are equal."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Basic If / Else If / Else and importance of Order\nlet age = 101;\n\nif (age >= 100) { // Checked first\n    console.log(\"You are too old to enter this site\");\n} else if (age >= 18) {\n    console.log(\"You are old enough to enter this site\");\n} else if (age < 0) {\n    console.log(\"Your age can't be below zero\");\n} else if (age == 0) { // Using == for comparison\n    console.log(\"You can't enter, you were just born\");\n} else {\n    console.log(\"You must be 18+ to enter this site\");\n}\n\n// Nested If Statements and Boolean Conditions\nlet driverAge = 18;\nlet hasLicense = true;\n\nif (driverAge >= 16) {\n    console.log(\"You are old enough to drive\");\n    \n    if (hasLicense) { // Implicitly checks if true\n        console.log(\"You have your license\");\n    } else {\n        console.log(\"You do not have your license yet\");\n    }\n} else {\n    console.log(\"You must be 16+ to have a license\");\n}"
+        }
+      ]
+    },
+    {
+      "title": "13. Checked Property (خاصية التحديد `.checked`)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "خاصية الـ `checked` بنستخدمها عشان نعرف هل المستخدم قام بتحديد عنصر اختيار في الـ `HTML` ولا لأ. الخاصية دي بتشتغل مع عناصر الـ `Checkbox` (اللي بتسمح باختيار أكتر من حاجة) وعناصر الـ `Radio buttons` (اللي بتسمح باختيار حاجة واحدة بس من مجموعة). لما بنستدعي الخاصية دي على العنصر عن طريق الجافا سكريبت، بترجعلنا قيمة منطقية (`Boolean`) إما `true` لو العنصر متحدد، أو `false` لو مش متحدد. عشان نربط مجموعة من الـ `Radio buttons` ببعض بحيث المستخدم ميقدرش يختار غير واحد بس، لازم نديهم كلهم نفس خاصية الـ `name` في الـ `HTML`. في التطبيق العملي، المدرب ربط زرار إرسال (`Submit`) بدالة بتشيك على حالة الـ `Checkbox` الخاص بالاشتراك، وبتشيك باستخدام `if/else if` على انهي `Radio button` تم اختياره لطريقة الدفع (فيزا، ماستركارد، أو بايبال) وبتطبع النتيجة المناسبة في الصفحة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`.checked` Property:</strong> A DOM property that returns `true` if an HTML checkbox or radio button is checked/selected, and `false` if it is not.",
+            "<strong>`Radio Button Grouping`:</strong> Giving multiple `<input type=\"radio\">` elements the exact same `name` attribute so that only one can be selected at a time."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "html",
+          "code": "<!-- HTML Setup -->\n<input type=\"checkbox\" id=\"myCheckbox\">\n<label for=\"myCheckbox\">Subscribe</label>\n\n<!-- Radio Buttons Grouped by 'name=\"card\"' -->\n<input type=\"radio\" id=\"visaBtn\" name=\"card\">\n<label for=\"visaBtn\">Visa</label>\n<input type=\"radio\" id=\"mastercardBtn\" name=\"card\">\n<label for=\"mastercardBtn\">MasterCard</label>\n<input type=\"radio\" id=\"paypalBtn\" name=\"card\">\n<label for=\"paypalBtn\">PayPal</label>\n\n<button id=\"mySubmit\">Submit</button>\n<p id=\"subResult\"></p>\n<p id=\"paymentResult\"></p>"
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// JavaScript Implementation\nconst myCheckbox = document.getElementById(\"myCheckbox\");\nconst visaBtn = document.getElementById(\"visaBtn\");\nconst mastercardBtn = document.getElementById(\"mastercardBtn\");\nconst paypalBtn = document.getElementById(\"paypalBtn\");\nconst mySubmit = document.getElementById(\"mySubmit\");\nconst subResult = document.getElementById(\"subResult\");\nconst paymentResult = document.getElementById(\"paymentResult\");\n\nmySubmit.onclick = function() {\n    // Checking Checkbox State\n    if(myCheckbox.checked){\n        subResult.textContent = \"You are subscribed\";\n    } else {\n        subResult.textContent = \"You are NOT subscribed\";\n    }\n\n    // Checking Radio Button States\n    if(visaBtn.checked){\n        paymentResult.textContent = \"You are paying with Visa\";\n    } else if(mastercardBtn.checked){\n        paymentResult.textContent = \"You are paying with MasterCard\";\n    } else if(paypalBtn.checked){\n        paymentResult.textContent = \"You are paying with PayPal\";\n    } else {\n        paymentResult.textContent = \"You must select a payment type\";\n    }\n}"
+        }
+      ]
+    },
+    {
+      "title": "14. Ternary Operator (المعامل الثلاثي)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المعامل الثلاثي (`Ternary Operator`) بيعتبر اختصار سريع جداً وأكثر كثافة لجملة `if/else`. تركيبة المعامل ده بتتكون من 3 أجزاء: الأول بنكتب الشرط اللي عايزين نختبره، وبعدين بنحط علامة استفهام `?` كأننا بنسأل الجافا سكريبت هل الشرط ده صح؟ بعد علامة الاستفهام بنكتب الكود اللي المفروض يتنفذ لو الإجابة `true`، وبعدين بنحط نقطتين فوق بعض `:` وبنكتب الكود اللي هيتنفذ لو الإجابة `false`. المعامل ده مفيد جداً لإنه بيمنع تكرار الكود وبيخلينا نقدر نعيّن قيمة لمتغير بناءً على شرط معين في سطر واحد بس بدل ما نكتب بلوك كامل من الـ `if/else`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Ternary Operator (`condition ? true`:</strong> false`): A shorthand operator used in place of an `if/else` statement. It takes three operands: a condition followed by a question mark (`?`), an expression to execute if the condition is truthy, followed by a colon (`:`), and an expression to execute if the condition is falsy."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic condition execution\nlet age = 21;\n// condition ? code if true : code if false;\nage >= 18 ? console.log(\"You're an adult\") : console.log(\"You're a minor\");\n\n// Code block 2: Variable assignment using Ternary Operator\nlet time = 16;\nlet greeting = time < 12 ? \"Good morning\" : \"Good afternoon\";\nconsole.log(greeting); // Good afternoon\n\n// Code block 3: Using with boolean variables directly\nlet isStudent = true;\nlet message = isStudent ? \"You are a student\" : \"You are NOT a student\";\nconsole.log(message);\n\n// Code block 4: Mathematical calculation based on condition\nlet purchaseAmount = 125;\n// Apply 10% discount if purchase is over $100\nlet discount = purchaseAmount >= 100 ? 10 : 0;\nconsole.log(`Your total is $${purchaseAmount - purchaseAmount * (discount/100)}`);"
+        }
+      ]
+    },
+    {
+      "title": "15. Switches (جمل الاختيار)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "جملة الـ `switch` بتعتبر بديل أكفأ وأنضف لجمل الـ `else if` الكتيرة والمكررة. الفكرة هنا إننا بنمرر قيمة أو متغير معين بين أقواس الـ `switch`، وبعدين بنحط مجموعة من الحالات `case` جواها عشان نقارن القيمة دي بيهم. لو حصل تطابق (`Match`)، الكود اللي تحت الـ `case` دي بيتنفذ. من الضروري جداً نحط كلمة `break` في نهاية كل حالة، لإننا لو نسيناها، البرنامج هيعمل حاجة اسمها (`Fall-through`)، يعني هينفذ كل الحالات اللي تحت الحالة المطابقة لحد ما يقابل `break` أو السويتش يخلص. كمان بنقدر نضيف حالة افتراضية اسمها `default` في الآخر، ودي بتشتغل لو مفيش أي تطابق حصل في كل الحالات اللي فوق. المدرب كمان شرح طريقة متقدمة شوية، وهي إننا نمرر القيمة `true` للـ `switch`، وبعدين نكتب الشروط كعمليات حسابية أو منطقية جوه كل `case`، وده بيسمح لنا نختبر شروط معقدة زي الأكبر من والأصغر من."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`switch` Statement:</strong> A control flow statement that evaluates an expression and matches its value against a series of `case` clauses to execute corresponding code.",
+            "<strong>`case`:</strong> A specific value or condition to check against the expression provided to the switch statement.",
+            "<strong>`break`:</strong> A keyword used to exit a switch block once a matching case has been executed, preventing fall-through to the next cases.",
+            "<strong>`default`:</strong> An optional fallback case in a switch statement that runs if no other cases match the evaluated expression."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic Switch matching exact values\nlet day = 1;\n\nswitch(day) {\n    case 1:\n        console.log(\"It is Monday\");\n        break; // Prevents executing case 2, 3, etc.\n    case 2:\n        console.log(\"It is Tuesday\");\n        break;\n    case 3:\n        console.log(\"It is Wednesday\");\n        break;\n    case 4:\n        console.log(\"It is Thursday\");\n        break;\n    case 5:\n        console.log(\"It is Friday\");\n        break;\n    case 6:\n        console.log(\"It is Saturday\");\n        break;\n    case 7:\n        console.log(\"It is Sunday\");\n        break;\n    default:\n        console.log(`${day} is not a valid day`);\n}\n\n// Code block 2: Advanced Switch using boolean conditions\nlet testScore = 92;\nlet letterGrade;\n\n// Examines the boolean value 'true' against the conditions in each case\nswitch(true) {\n    case testScore >= 90:\n        letterGrade = \"A\";\n        break;\n    case testScore >= 80:\n        letterGrade = \"B\";\n        break;\n    case testScore >= 70:\n        letterGrade = \"C\";\n        break;\n    case testScore >= 60:\n        letterGrade = \"D\";\n        break;\n    default:\n        letterGrade = \"F\";\n}\nconsole.log(letterGrade); // Outputs: A"
+        }
+      ]
+    },
+    {
+      "title": "16. String Methods (دوال النصوص)",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تعتبر دوال النصوص (`String Methods`) أدوات مدمجة جوه الجافا سكريبت بتسمح لنا نتلاعب ونتعامل مع النصوص بأشكال مختلفة. المدرب شرح مجموعة كبيرة من الدوال دي: دالة `charAt` بتجيب لنا الحرف الموجود في مكان (`Index`) معين، مع العلم إن الترقيم بيبدأ من صفر. دالة `indexOf` بتجيب لنا أول مكان بيظهر فيه حرف أو كلمة معينة، بينما دالة `lastIndexOf` بتجيب لنا آخر مكان بيظهر فيه الحرف ده. بالنسبة لمعرفة طول النص، بنستخدم خاصية اسمها `length` (ودي خاصية `Property` مش دالة `Method`) وبترجعلنا عدد الحروف بالكامل. دالة `trim` مفيدة جداً عشان تشيل أي مسافات بيضاء (`White spaces`) في أول أو آخر النص. لو حابين نغير حالة الحروف، بنستخدم `toUpperCase` عشان نخليها كبيرة (`Capital`)، أو `toLowerCase` عشان نخليها صغيرة. دالة `repeat` بنستخدمها لو عايزين نكرر النص عدد معين من المرات. دوال التحقق زي `startsWith` و `endsWith` و `includes` بترجعلنا قيمة منطقية (`True`/`False`) لو كان النص بيبدأ أو بينتهي أو بيحتوي على مسافة أو حرف معين، ودي بتكون ممتازة جوه الجمل الشرطية (`if`). لو عندنا نص زي رقم تليفون فيه شرطات `-` وعايزين نشيلها، بنستخدم دالة `replaceAll` عشان نستبدل الشرطات دي بأي حاجة تانية أو حتى نص فاضي. أخيراً، دوال الحشو `padStart` و `padEnd` بنستخدمها عشان نكمل طول النص لعدد معين من الحروف عن طريق حشو بدايته أو نهايته بحرف أو رقم معين زي الصفر."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`charAt(index)`:</strong> A string method that returns the character at a specified index.",
+            "<strong>`indexOf(char)` / `lastIndexOf(char)`:</strong> Methods that return the index of the first or last occurrence of a specified character in a string.",
+            "<strong>`.length`:</strong> A property (not a method) that returns the total number of characters in a string.",
+            "<strong>`trim()`:</strong> A method that removes whitespace from both ends of a string.",
+            "<strong>`toUpperCase()` / `toLowerCase()`:</strong> Methods that convert all characters in a string to uppercase or lowercase.",
+            "<strong>`repeat(count)`:</strong> A method that returns a new string containing the specified number of copies of the original string.",
+            "<strong>`startsWith(char)` / `endsWith(char)` / `includes(char)`:</strong> Methods that return a boolean indicating whether a string starts with, ends with, or contains a specific character or sequence.",
+            "<strong>`replaceAll(search, replacement)`:</strong> A method that replaces all occurrences of a specified character or string with another character or string.",
+            "<strong>`padStart(length, char)` / `padEnd(length, char)`:</strong> Methods that pad the current string with another string (multiple times, if needed) until the resulting string reaches the given length."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "let userName = \"Bro Code \";\n\n// Accessing characters and length\nconsole.log(userName.charAt(0)); // \"B\"\nconsole.log(userName.indexOf(\"o\")); // 2\nconsole.log(userName.lastIndexOf(\"o\")); // 5\nconsole.log(userName.length); // 9\n\n// Formatting strings\nuserName = userName.trim(); // \"Bro Code\"\nuserName = userName.toUpperCase(); // \"BRO CODE\"\nuserName = userName.toLowerCase(); // \"bro code\"\nuserName = userName.repeat(3); // \"bro codebro codebro code\"\n\n// Checking string contents (Booleans)\nlet resultStart = userName.startsWith(\" \"); // false\nlet resultEnd = userName.endsWith(\" \"); // false\nlet resultInclude = userName.includes(\" \"); // true\n\n// Replacing characters\nlet phoneNumber = \"123-456-7890\";\nphoneNumber = phoneNumber.replaceAll(\"-\", \"\"); // \"1234567890\"\n\n// Padding strings\nlet paddedStart = phoneNumber.padStart(15, \"0\"); // \"000001234567890\"\nlet paddedEnd = phoneNumber.padEnd(15, \"0\"); // \"123456789000000\""
+        }
+      ]
+    },
+    {
+      "title": "17. String Slicing (اقتطاع النصوص)",
+      "icon": "fa-solid fa-font",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "عملية اقتطاع النصوص (`String Slicing`) هي إنشاء نص فرعي (`Substring`) من جزء من نص تاني أصلي من غير ما نغير في النص الأصلي نفسه. المدرب وضح إننا بنستخدم دالة `slice()` وبنمرر ليها نقطة البداية (`Starting Index`) ونقطة النهاية (`Ending Index`). القاعدة المهمة جداً هنا هي إن الـ (`Ending Index`) بيكون (`Exclusive`)، يعني الحرف اللي عند نقطة النهاية مش بيدخل معانا في النص المقطوع؛ فلازم نزود عليه 1 عشان ناخده معانا. لو محددناش نقطة نهاية، الجافا سكريبت هتقطع من نقطة البداية لحد آخر النص. بنقدر كمان نستخدم أرقام سالبة (`Negative Indices`) عشان نبدأ العد من آخر النص للبداية، يعني `-1` بيمثل آخر حرف. عشان نخلي البرنامج بتاعنا ديناميكي (`Dynamic`) وميشتغلش على اسم واحد بس، المدرب دمج الـ `slice` مع دالة `indexOf`؛ بحيث البرنامج يدور على أول مسافة (`Space`) ويقطع من البداية لحد المسافة عشان يجيب الاسم الأول، وبعدين يقطع من بعد المسافة (بإضافة +1 للاندكس) لحد الآخر عشان يجيب الاسم الأخير."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`String Slicing`:</strong> The process of creating a substring from a portion of another string without altering the original string.",
+            "<strong>`slice(startIndex, endIndex)`:</strong> A built-in method used to extract a section of a string and return it as a new string. The `endIndex` is exclusive."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic Slicing with Hardcoded Indices\nconst fullName = \"Bro Code\";\nlet firstName = fullName.slice(0, 3); // \"Bro\" (End index 3 is exclusive)\nlet lastName = fullName.slice(4, 8); // \"Code\"\n\n// Negative indices\nlet lastChar = fullName.slice(-1); // \"e\"\n\n// Code block 2: Dynamic Slicing using indexOf()\nlet dynamicFirstName = fullName.slice(0, fullName.indexOf(\" \"));\n// Start after the space by adding +1 to the index\nlet dynamicLastName = fullName.slice(fullName.indexOf(\" \") + 1);\n\nconsole.log(dynamicFirstName); // \"Bro\"\nconsole.log(dynamicLastName); // \"Code\"\n\n// Code block 3: Extracting Email Username and Extension\nconst email = \"bro1@gmail.com\";\nlet username = email.slice(0, email.indexOf(\"@\"));\nlet extension = email.slice(email.indexOf(\"@\") + 1);\n\nconsole.log(username); // \"bro1\"\nconsole.log(extension); // \"gmail.com\""
+        }
+      ]
+    },
+    {
+      "title": "18. Method Chaining (تسلسل الدوال)",
+      "icon": "fa-brands fa-js",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "تسلسل الدوال (`Method Chaining`) هو أسلوب أو تقنية في البرمجة بنقدر من خلالها نستدعي أكتر من دالة ورا بعض في سطر كود واحد مستمر. المدرب شبه الموضوع بضربات الكومبو (`Combo`) في ألعاب الفيديو؛ بدل ما نعمل كل خطوة في متغير منفصل لوحده. في المثال، المدرب كان عايز ياخد اسم المستخدم، يشيل منه المسافات الزيادة، ياخد أول حرف يخليه كابيتال، وياخد باقي الحروف يخليها سمول، وبعدين يدمجهم تاني. الطريقة العادية من غير الـ (`Chaining`) بتاخد سطور كتير وبتحتاج نعمل متغيرات ملهاش لازمة زي (`letter`) و (`extraChars`). لكن باستخدام تسلسل الدوال، بنقدر نربط الدوال ببعض عن طريق النقطة (`Dot`) بدل ما ننهي السطر بـ (`Semicolon`)، وده بيوفر في الكود وبيخليه أنضف، بس المدرب حذر إن السلسلة لو بقت طويلة جداً ممكن قراءة الكود تبقى صعبة."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Method Chaining`:</strong> A programming technique where multiple methods are called one after another on the same object in one continuous line of code, eliminating the need for intermediate variables."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Without Method Chaining (Longer, creates unnecessary variables)\nlet username1 = \"   bro CODE   \";\nusername1 = username1.trim();\n\nlet letter = username1.charAt(0);\nletter = letter.toUpperCase();\n\nlet extraChars = username1.slice(1);\nextraChars = extraChars.toLowerCase();\n\nusername1 = letter + extraChars;\nconsole.log(username1); // \"Bro code\"\n\n\n// Code block 2: With Method Chaining (Concise, single line)\nlet username2 = \"   bro CODE   \";\n\n// Chaining trim(), charAt(), and toUpperCase() in one go, then concatenating\nusername2 = username2.trim().charAt(0).toUpperCase() + username2.trim().slice(1).toLowerCase();\n\nconsole.log(username2); // \"Bro code\""
+        }
+      ]
+    },
+    {
+      "title": "19. Logical Operators (المعاملات المنطقية)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المعاملات المنطقية (`Logical Operators`) بنستخدمها عشان ندمج أو نتلاعب بالقيم المنطقية (`Boolean values`). عندنا تلات معاملات أساسية: معامل و (`AND`) وبنكتبه بعلامتين `&&`، وده بيتطلب إن كل الشروط المرتبطة بيه لازم تكون `true` عشان ينفذ الكود؛ لو شرط واحد بس فيهم كان `false`، الكود كله هيتم تجاهله. معامل أو (`OR`) وبنكتبه بعلامتين `||`، وده بيتطلب إن شرط واحد بس على الأقل يكون `true` عشان ينفذ الكود. المعامل التالت هو النفي (`NOT`) وبنكتبه بعلامة تعجب `!`، وده بيعكس القيمة المنطقية؛ يعني بيحول الـ `true` لـ `false` والـ `false` لـ `true`، وبيكون مفيد جداً لو عايزين نتأكد إن حالة معينة مش بتحصل (زي إن الجو مش مشمس)."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Logical Operators`:</strong> Symbols used to combine or manipulate boolean values.",
+            "<strong>`AND (`&&`)`:</strong> Requires at least two conditions to all be true to execute the code.",
+            "<strong>`OR (`||`)`:</strong> Requires at least one of the provided conditions to be true to execute the code.",
+            "<strong>`NOT (`!`)`:</strong> Reverses the boolean value of a condition (true becomes false, false becomes true)."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Example 1: Using AND (&&)\nconst tempAnd = 25;\n// Both conditions must be true\nif(tempAnd > 0 && tempAnd <= 30){\n    console.log(\"The weather is good\");\n} else {\n    console.log(\"The weather is bad\");\n}\n\n// Example 2: Using OR (||)\nconst tempOr = 250;\n// Only one condition needs to be true\nif(tempOr <= 0 || tempOr > 30){\n    console.log(\"The weather is bad\");\n} else {\n    console.log(\"The weather is good\");\n}\n\n// Example 3: Using NOT (!)\nconst isSunny = true;\n// Reverses the boolean value\nif(!isSunny){\n    console.log(\"It is cloudy\");\n} else {\n    console.log(\"It is sunny\");\n}"
+        }
+      ]
+    },
+    {
+      "title": "20. Strict Equality Operator (معامل التطابق التام)",
+      "icon": "fa-solid fa-calculator",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "المدرب وضح الفروق الجوهرية بين علامات اليساوي في الجافا سكريبت. علامة يساوي الواحدة `=` دي للتعيين (`Assignment`) بنستخدمها عشان ندي قيمة لمتغير. علامتين يساوي `==` ده معامل المقارنة العادي (`Comparison Operator`)، وده بيقارن القيمتين ببعض بس من غير ما يهتم بنوع البيانات (`Data Type`)؛ يعني لو قارنا رقم `3.14` مع نص `\"3.14\"` هيقولنا إنهم متساويين. التلات علامات يساوي `===` ده معامل التطابق التام (`Strict Equality Operator`)، وده بيقارن القيمة وكمان نوع البيانات مع بعض، وفي نفس المثال اللي فات هيقولنا إنهم مش متساويين لإن الأنواع مختلفة. المدرب نصح بضرورة استخدام الـ `===` دايماً لمنع أي أخطاء، خصوصاً لما بناخد مدخلات من المستخدم لإنها دايماً بتكون نصوص. كمان وضح معاملات عدم المساواة: `!=` للتحقق من عدم المساواة العادية، و `!==` للتحقق من عدم التطابق التام."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`Assignment Operator (`=`)`:</strong> Used to assign a value to a variable.",
+            "<strong>`Comparison Operator (`==`)`:</strong> Compares two values to see if they are equal, ignoring their data types.",
+            "<strong>`Strict Equality Operator (`===`)`:</strong> Compares two values to see if both their values and their data types are exactly equal.",
+            "<strong>`Inequality Operator (`!=`)`:</strong> Returns true if two values are not equal (ignoring data types).",
+            "<strong>`Strict Inequality Operator (`!==`)`:</strong> Returns true if the values or the data types are different."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "const PI = 3.14; // Number data type\n\n// Code block 1: Comparison Operator (==)\nif (PI == \"3.14\") {\n    console.log(\"That is PI\"); // This will execute because values match\n} else {\n    console.log(\"That is NOT PI\");\n}\n\n// Code block 2: Strict Equality Operator (===)\nif (PI === \"3.14\") {\n    console.log(\"That is PI\");\n} else {\n    // This will execute because data types differ (Number vs String)\n    console.log(\"That is NOT PI\"); \n}\n\n// Code block 3: Inequality Operators\nif (PI != \"3.14\") {\n    console.log(\"That is NOT PI\");\n} else {\n    console.log(\"That is PI\"); // Executes\n}\n\nif (PI !== \"3.14\") {\n    console.log(\"That is NOT PI\"); // Executes because data types differ\n} else {\n    console.log(\"That is PI\"); \n}"
+        }
+      ]
+    },
+    {
+      "title": "21. While and Do-While Loops (حلقات التكرار `while` و `do...while`)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "حلقة الـ `while` بتكرر تنفيذ كود معين لعدد غير محدد من المرات طالما إن الشرط اللي ادناهولها بيفضل `true`. مهم جداً إننا نوفر طريقة تخلي الشرط ده يتحول لـ `false` جوه الحلقة عشان نخرج منها، وإلا هنقع في فخ الـ (`Infinite Loop`) أو الحلقة اللانهائية اللي ممكن تخلي المتصفح يعلق. أما حلقة الـ `do...while` فهي نسخة تانية من الـ `while`، بس الفرق الجوهري إنها بتنفذ الكود الأول مرة واحدة على الأقل (حتى لو الشرط كان `false` من البداية)، وبعدين بتختبر الشرط في النهاية؛ لو كان `true` بترجع تنفذ الكود تاني، ولو `false` بتخرج. المدرب عمل مثال لنظام تسجيل دخول بسيط بيطلب اسم مستخدم وباسورد، وبيفضل يكرر الطلب باستخدام `while loop` لحد ما المستخدم يدخل بيانات صحيحة وتتغير حالة المتغير `loggedIn` لـ `true`."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`While Loop`:</strong> A loop that repeats a block of code continuously as long as a specified condition evaluates to true. It checks the condition before executing the code.",
+            "<strong>`Infinite Loop`:</strong> A loop that never ends because its condition never becomes false, often causing the program to crash.",
+            "<strong>`Do-While Loop`:</strong> A variation of the while loop that executes the block of code at least once before checking the condition at the end."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Standard While Loop\nlet username = \"\";\n\n// Will continuously prompt until user enters something or hits cancel (null)\nwhile (username === \"\" || username === null) {\n    username = window.prompt(\"Enter your name\");\n}\nconsole.log(`Hello ${username}`);\n\n// Code block 2: Do-While Loop (Executes the prompt first, then checks condition)\nlet loggedIn = false;\nlet user;\nlet password;\n\ndo {\n    user = window.prompt(\"Enter username\");\n    password = window.prompt(\"Enter password\");\n\n    if (user === \"myUsername\" && password === \"myPassword\") {\n        loggedIn = true;\n        console.log(\"You are logged in\");\n    } else {\n        console.log(\"Invalid credentials! Please try again\");\n    }\n} while (!loggedIn);"
+        }
+      ]
+    },
+    {
+      "title": "22. For Loops (حلقات التكرار `for`)",
+      "icon": "fa-solid fa-rotate",
+      "blocks": [
+        {
+          "type": "arabic",
+          "content": "حلقة الـ `for` بنستخدمها لما نكون عايزين نكرر كود عدد محدود ومحدد من المرات، عكس الـ `while` اللي بتكرر لحد ما شرط يتغير. جملة الـ `for` بتتكون من 3 أجزاء جوه الأقواس: الجزء الأول هو إنشاء عداد مؤقت (`Temporary Counter`) بنسميه عادة `i` وبنديله قيمة بداية (`Initialization`). الجزء التاني هو الشرط (`Condition`) اللي طول ما هو `true` الحلقة بتستمر. الجزء التالت هو مقدار الزيادة أو النقصان للعداد (`Increment`/`Decrement`). بنقدر نعد لقدام أو نعد بالعكس، وبنقدر نزود العداد بواحد أو بأرقام تانية زي 2 أو 3. كمان المدرب شرح كلمتين مهمين جداً جوه الحلقات: كلمة `continue` بتخلينا نتخطى الدورة (`Iteration`) الحالية وننط للي بعدها مباشرة (زي استبعاد الرقم 13)، وكلمة `break` بتكسر الحلقة وتخرجنا منها تماماً حتى لو لسه مخلصتش الشروط بتاعتها."
+        },
+        {
+          "type": "list",
+          "items": [
+            "<strong>`For Loop`:</strong> A loop that repeats a block of code a limited, specific number of times. It contains an initialization, a condition, and an increment/decrement statement.",
+            "<strong>`Counter (e.g., `let i`)`:</strong> A temporary variable declared within a loop to keep track of the number of iterations.",
+            "<strong>`continue`:</strong> A keyword used to skip the current iteration of a loop and immediately proceed to the next iteration.",
+            "<strong>`break`:</strong> A keyword used to break out of a loop completely, terminating its execution."
+          ]
+        },
+        {
+          "type": "code",
+          "language": "javascript",
+          "code": "// Code block 1: Basic For Loop (Counting up by 1)\nfor (let i = 1; i <= 10; i++) {\n    console.log(i);\n}\n\n// Code block 2: Counting down by 2\nfor (let i = 10; i > 0; i -= 2) {\n    console.log(i);\n}\nconsole.log(\"Happy New Year!\");\n\n// Code block 3: Using 'continue' to skip an iteration\nfor (let i = 1; i <= 20; i++) {\n    if (i === 13) {\n        continue; // Skips printing 13\n    }\n    console.log(i);\n}\n\n// Code block 4: Using 'break' to exit the loop entirely\nfor (let i = 1; i <= 20; i++) {\n    if (i === 13) {\n        break; // Loop stops completely when it reaches 13\n    }\n    console.log(i);\n}"
+        }
+      ]
+    }
+  ]
+}
